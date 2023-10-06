@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ebebeb;
+    font-family: 'Ubuntu', sans-serif;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    background-color: #b4001d;
+    padding: 15px;
+    color: #ffffff;
+}
+
+img{
+    align-items: center;
+}
+
+#userForm {
+    text-align: center;
+    background-color: #b4001d;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    padding: 30px;
+    margin: 30px;
+    align-items: center;
+}
+
+h2 {
+    color: #ffffff;
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-control label {
+    color: #ebebeb;
+    display: block;
+    margin-bottom: 5px;
+    font-size: large;
+    text-align: left;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-control input:focus {
+    outline: 0;
+    border-color: #f7a500;
+}
+
+.form-control button{
+    cursor: pointer;
+    background-color: #f7a500;
+    border: 2px solid #f7a500;
+    color: #000000;
+    border-radius: 4px;
+    display: block;
+    font-size: 16px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.errorMessage {
+    color: #ffffff;
+    background-color: #ff0000;
+    padding: 5px;
+    margin: 5px;
+    font-size: large;
+}
+
+.successMessage {
+    color: #ffffff;
+    background-color: #008000;
+    margin: 10px;
+    font-size: 20px;
+}
