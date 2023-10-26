@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+
+body {
+    font-family: Ubuntu !important;
+}
+
+button {
+    background-color: #F7A500 !important;
+}
+
+.material-symbols-outlined.md-18 { font-size: 18px; }
