@@ -16,10 +16,10 @@
                 <a class="navbar-brand" href="./index.html">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
-                <form class="d-flex">
-                    <button class="btn me-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button>
-                    <button class="btn ms-1" type="submit"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button>
-                </form>
+                <i class="d-flex">
+                    <a href="#" class="text-dark"><button class="btn ms-1"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">help</span>Help</button></a>
+                    <a href="./registration.html" class="text-dark"><button class="btn ms-1"><span class="material-symbols-outlined md-18 m-1" style="vertical-align: middle;">account_circle</span>Sign in</button></a>
+                </i>
             </div>
         </nav>
         <nav class="navbar navbar-expand-lg" style="background-color: #B4001D;">
@@ -65,46 +65,71 @@
     <main>
         <div id="formRegister">
             <form action="">
+                <h2><b>Registration form</b></h2>
                 <div id="labelInput">
                     <label for="name">Name: </label>
-                    <p><input type="text" name="name"></p>
+                    <p><input type="text" name="name" id="textInput" placeholder="Name..."></p>
                 </div>
                 <div id="labelInput">
                     <label for="username">Username: </label>
-                    <p><input type="text" name="username"></p>
+                    <p><input type="text" name="username" id="textInput" placeholder="Username..."></p>
                 </div>
                 <div id="labelInput">
                     <label for="email">Email: </label>
-                    <p><input type="email" name="email"></p>
+                    <p><input type="email" name="email" id="textInput" placeholder="Email..."></p>
                 </div>
                 <div id="labelInput">
                     <label for="password">Password: </label>
-                    <p><input type="password" name="password"></p>
+                    <p><input type="password" name="password" id="textInput" placeholder="Password..."></p>
                 </div>
                 <div id="labelInput">
                     <label for="confirmPassword">Confirm password: </label>
-                    <p><input type="password" name="confirmPassword"></p>
+                    <p><input type="password" name="confirmPassword" id="textInput" placeholder="Confirm password..."></p>
                 </div>
                 <div id="labelInput">
                     <label for="avatar">Select an avatar: </label>
-                    <input type="checkbox" name="" id="">
+                    <ul>
+                        <li>
+                            <input type="checkbox" id="avatarCheckbox1">
+                            <label for="avatarCheckbox1" id="labelCheck"><img src="./img/ahri.png" alt="Ahri_avatar"></label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="avatarCheckbox2">
+                            <label for="avatarCheckbox2" id="labelCheck"><img src="./img/akali.png" alt="Ahri_avatar"></label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="avatarCheckbox3">
+                            <label for="avatarCheckbox3" id="labelCheck"><img src="./img/kaisa.png" alt="Ahri_avatar"></label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="avatarCheckbox4">
+                            <label for="avatarCheckbox4" id="labelCheck"><img src="./img/evelynn.png" alt="Ahri_avatar"></label>
+                        </li>
+                    </ul>
                 </div>
                 <div id="labelInput">
-                    <button type="submit">Register</button>
-                    <button type="reset">Reset</button>
+                    <div id="buttonForm">
+                        <button type="submit"><span class="material-symbols-outlined">app_registration</span>Register</button>
+                    </div>
+                    <div id="buttonForm">
+                        <button type="reset"><span class="material-symbols-outlined">restart_alt</span>Reset</button>
+                    </div>
                 </div>
             </form>
+        </div>
+        <div id="formRegister">
+            Background image: CHJ 560-700 prototype in flight (CHN5607A)
         </div>
     </main>
     <footer style="background-color: #B4001D;">
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                 <p class="col-md-4 mb-0 text-light">© 2023 AviaTalk.com</p>
-                <a href="#" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <a href="./index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
                 <ul class="nav col-md-4 justify-content-end">
-                  <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Home</a></li>
+                  <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-light">Home</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Latest Articles</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Comercial</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Military</a></li>
