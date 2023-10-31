@@ -1,10 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap'); */
 
 body {
-    font-family: Ubuntu !important;
+    font-family: Ubuntu-Light;
     background-image: url(./../img/CHN5607A_C567.png);
     background-repeat: no-repeat;
     background-position: center;
+}
+
+@font-face {
+    font-family: Ubuntu-Light;
+    src: url(./Ubuntu-Light.ttf);
 }
 
 button {
@@ -55,8 +60,6 @@ input[type="checkbox"][id^="avatarCheck"] {
     display: none;
 }
 
-
-  
 #labelCheck {
     padding: 10px;
     display: block;
@@ -103,6 +106,8 @@ footer{
 .material-symbols-outlined.md-18 {
     font-size: 18px;
 }
+
+/* RGB all over the place ☆*: .｡. o(≧▽≦)o .｡.:*☆*/
 
 /* #textInput:hover{
     -webkit-animation: bgcolorchange 5s infinite;
