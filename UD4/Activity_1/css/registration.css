@@ -52,13 +52,6 @@ button {
     transform: scale(1.1);
 }
 
-#submit:hover{
-    background-color: #008000 !important;
-}
-#reset:hover{
-    background-color: #FF0000 !important;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
