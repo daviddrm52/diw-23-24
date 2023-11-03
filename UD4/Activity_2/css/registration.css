@@ -10,6 +10,7 @@ body {
     background-image: url(./../img/CHN5607A_C567.png);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: cover;
 }
 
 /* For the buttons in the header and footer*/
@@ -39,7 +40,7 @@ body {
     background-image: linear-gradient(to bottom right, rgba(235, 235, 235, 0.30), #ffffff) !important;
     border-radius: 10px;
     width: 520px;
-    text-shadow: 2px 2px 2px #FFFFFF;
+    text-shadow: 1px 1px 1px #EBEBEB;
 }
 
 #formTitle {
@@ -70,13 +71,13 @@ body {
     transform: scale(1.1);
 }
 
-ul {
+#labelInput ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-li {
+#labelInput li {
     display: inline-block;
 }
 
@@ -129,7 +130,7 @@ input[type="radio"][id^="avatarCheck"] {
 }
 
 #buttonForm button {
-    transition-duration: 0.5s;
+    transition-duration: 0.25s;
     background-image: linear-gradient(to bottom right, #F7A500, #ffffff) !important;
 }
 
@@ -149,8 +150,8 @@ footer{
 
 /* Animation for the boxes where the inputs are */
 .animation:hover{
-    -webkit-animation: bgcolorchange 15s;
-    animation: 15s infinite bgcolorchange;
+    -webkit-animation: bgcolorchange 10s;
+    animation: 10s bgcolorchange;
   }
   @keyframes bgcolorchange {
     0% {
@@ -187,7 +188,7 @@ footer{
     }
 }
 
-/* Testing purposes, remember, no withnesses*/
+/* Testing purposes */
 
 /* html {
     -webkit-animation:spin 4s linear infinite;

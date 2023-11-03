@@ -4,8 +4,10 @@ body {
     font-family: Ubuntu !important;
 }
 
-button {
+.btn, .navbar-toggler {
     background-color: #F7A500 !important;
 }
 
-.material-symbols-outlined.md-18 { font-size: 18px; }
+.material-symbols-outlined.md-18 {
+    font-size: 18px;
+}
