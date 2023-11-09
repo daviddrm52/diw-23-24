@@ -1,0 +1,11 @@
+//Variables before the import!
+
+$primary: #B4001D;
+$secondary: #F7A500;
+
+$theme-colors: (
+    primary: $primary,
+    secondary: $secondary,
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";

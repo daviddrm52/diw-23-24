@@ -1,0 +1,106 @@
+$primary-color: #B4001D;
+$secondary-color: #F7A500;
+$background-primary-color: rgb(179, 0, 30, 0.30);
+$background-secondary-color: #EBEBEB;
+$principal-font: Ubuntu-Light;
+$secondary-font: OpenSans;
+$margin-padding-default: 20px;
+
+@font-face {
+    font-family: Ubuntu-Light;
+    src: url(./../Ubuntu-Light.ttf);
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(./../OpenSans.ttf);
+}
+
+body {
+    font-family: $principal-font;
+    background-color: $background-primary-color;
+}
+
+header {
+    background-color: $primary-color;
+
+    .btn, .navbar-toggler{
+        background-color: $secondary-color !important;
+    }
+}
+
+#topArticle {
+    padding: $margin-padding-default - 10;
+    margin: auto;
+    margin-top: $margin-padding-default;
+    margin-bottom: $margin-padding-default;
+    background-color: $background-secondary-color;
+    border-radius: 10px;
+    width: 90%;
+    #bread{
+        button {
+            background-color: $secondary-color;
+            border: transparent;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+}
+
+#mainArticle{
+    font-family: $secondary-font;
+    padding: $margin-padding-default;
+    margin: auto;
+    margin-top: $margin-padding-default;
+    margin-bottom: $margin-padding-default;
+    text-align: center;
+    background-color: $background-secondary-color;
+    border-radius: 10px;
+    width: 90%;
+    #headerSection {
+        #articleTitle {
+            text-shadow: 4px 4px 4px #FFFFFF;
+        }
+        #headerImage{
+            margin-top: $margin-padding-default;
+            margin-bottom: $margin-padding-default;
+            img{
+                width: 75%;
+                border-radius: 10px;
+            }
+        }
+    }
+    #mainSection{
+        margin: auto;
+        width: 90%;
+        text-align: justify;
+        font-size: medium;
+        #articleImage{
+            text-align: center;
+            margin-top: $margin-padding-default;
+            margin-bottom: $margin-padding-default;    
+            img{
+                width: 50%;
+                border-radius: 10px;
+            }
+        }
+    }
+    #bottomSection{
+        button{
+            background-color: $secondary-color;
+            border: transparent;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+}
+
+footer{
+    background-color: $primary-color;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.material-symbols-outlined.md-18 {
+    font-size: 18px;
+}
