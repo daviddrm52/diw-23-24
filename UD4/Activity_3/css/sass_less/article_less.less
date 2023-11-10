@@ -1,0 +1,143 @@
+/*Variables*/
+@primary-color: #B4001D;
+@secondary-color: #F7A500;
+@background-primary-color: fade(@primary-color, 30%);
+@background-secondary-color: #EBEBEB;
+@text-color: #000000;
+@principal-font: Ubuntu-Light;
+@secondary-font: OpenSans;
+@margin-padding-default: 20px;
+@standard-width: 90%;
+@border-radius-default: 10px;
+@margin-auto-center: auto;
+@default-text-align: center;
+@border-buttons: transparent;
+
+@font-face {
+    font-family: Ubuntu-Light;
+    src: url(./../Ubuntu-Light.ttf);
+}
+@font-face {
+    font-family: OpenSans;
+    src: url(./../OpenSans.ttf);
+}
+
+.material-symbols-outlined.md-18 {
+    font-size: 18px;
+}
+
+body {
+    font-family: @principal-font;
+    background-color: @background-primary-color;
+}
+
+header {
+    background-color: @primary-color;
+    .btn, .navbar-toggler{
+        background-color: @secondary-color !important;
+    }
+}
+
+#topArticle {
+    padding: @margin-padding-default - 10;
+    margin: @margin-auto-center;
+    margin-top: @margin-padding-default;
+    margin-bottom: @margin-padding-default;
+    background-color: @background-secondary-color;
+    border-radius: @border-radius-default;
+    width: @standard-width;
+    #bread{
+        a {
+            color: @text-color;
+            text-decoration: none;
+        }
+        a:hover{
+            color: @secondary-color;
+        }
+        button {
+            background-color: @secondary-color;
+            border: @border-buttons;
+            border-radius: @border-radius-default - 5;
+            padding: @margin-padding-default - 10;
+        }
+    }
+}
+
+#mainArticle{
+    font-family: @secondary-font;
+    padding: @margin-padding-default;
+    margin: @margin-auto-center;
+    margin-top: @margin-padding-default;
+    margin-bottom: @margin-padding-default;
+    text-align: @default-text-align;
+    background-color: @background-secondary-color;
+    border-radius: @border-radius-default;
+    width: @standard-width;
+    #headerSection {
+        #articleTitle {
+            text-shadow: 4px 4px 4px #FFFFFF;
+        }
+        #headerImage{
+            margin-top: @margin-padding-default;
+            margin-bottom: @margin-padding-default;
+            img{
+                width: 75%;
+                border-radius: @border-radius-default;
+            }
+        }
+        #tags{
+            text-align: @default-text-align;
+            a {
+                color: @text-color;
+                text-decoration: none;
+            }
+        }
+    }
+    #mainSection{
+        margin: @margin-auto-center;
+        width: @standard-width;
+        text-align: justify;
+        font-size: medium;
+        #articleImage{
+            text-align: @default-text-align;
+            margin-top: @margin-padding-default;
+            margin-bottom: @margin-padding-default;    
+            img{
+                width: 50%;
+                border-radius: @border-radius-default;
+            }
+        }
+    }
+}
+
+#bottomArticle {
+    padding: @margin-padding-default;
+    margin: @margin-auto-center;
+    margin-top: @margin-padding-default;
+    margin-bottom: @margin-padding-default;
+    text-align: @default-text-align;
+    background-color: @background-secondary-color;
+    border-radius: @border-radius-default;
+    width: @standard-width;
+    #crumb{
+        button {
+            background-color: @secondary-color;
+            border: @border-buttons;
+            border-radius: @border-radius-default - 5;
+            padding: @margin-padding-default - 10;
+        }
+    }
+}
+
+footer{
+    background-color: @primary-color;
+    left: 0;
+    bottom: 0;
+    width: @standard-width + 10%;
+}
+
+//This is for manu, blast radius: yes
+#hat{
+    text-decoration: none;
+    color: #000000;
+}

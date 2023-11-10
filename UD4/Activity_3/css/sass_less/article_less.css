@@ -1,28 +1,26 @@
 /*Variables*/
 @font-face {
   font-family: Ubuntu-Light;
-  src: url(./../Ubuntu-Light.ttf);
+  src: url(../Ubuntu-Light.ttf);
 }
 @font-face {
   font-family: OpenSans;
-  src: url(./../OpenSans.ttf);
+  src: url(../OpenSans.ttf);
 }
 .material-symbols-outlined.md-18 {
   font-size: 18px;
 }
-
 body {
   font-family: Ubuntu-Light;
-  background-color: rgba(179, 0, 30, 0.3);
+  background-color: rgba(180, 0, 29, 0.3);
 }
-
 header {
   background-color: #B4001D;
 }
-header .btn, header .navbar-toggler {
+header .btn,
+header .navbar-toggler {
   background-color: #F7A500 !important;
 }
-
 #topArticle {
   padding: 10px;
   margin: auto;
@@ -45,7 +43,6 @@ header .btn, header .navbar-toggler {
   border-radius: 5px;
   padding: 10px;
 }
-
 #mainArticle {
   font-family: OpenSans;
   padding: 20px;
@@ -90,7 +87,6 @@ header .btn, header .navbar-toggler {
   width: 50%;
   border-radius: 10px;
 }
-
 #bottomArticle {
   padding: 20px;
   margin: auto;
@@ -107,15 +103,13 @@ header .btn, header .navbar-toggler {
   border-radius: 5px;
   padding: 10px;
 }
-
 footer {
   background-color: #B4001D;
   left: 0;
   bottom: 0;
   width: 100%;
 }
-
 #hat {
   text-decoration: none;
   color: #000000;
-}/*# sourceMappingURL=article_sass.css.map */
+}
