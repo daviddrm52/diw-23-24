@@ -2,10 +2,17 @@
 
 $primary: #B4001D;
 $secondary: #F7A500;
+$danger: red;
+$text-light: #FFFFFF;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+
+$font-family-base: 'Ubuntu', sans-serif;
 
 $theme-colors: (
     primary: $primary,
     secondary: $secondary,
+    text-light: $text-light,
 );
 
 @import "../node_modules/bootstrap/scss/bootstrap";
