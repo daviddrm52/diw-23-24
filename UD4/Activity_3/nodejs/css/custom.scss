@@ -2,17 +2,26 @@
 
 $primary: #B4001D;
 $secondary: #F7A500;
-$danger: red;
+$info: #EBEBEB;
+$success: #008000;
+$danger: #B4001D;
 $text-light: #FFFFFF;
+$text-dark: #000000;
 
+//Import for our font family
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
 
 $font-family-base: 'Ubuntu', sans-serif;
 
+//Color theme of AviaTalk.com
 $theme-colors: (
     primary: $primary,
     secondary: $secondary,
-    text-light: $text-light,
+    success: $success,
+    info: $info,
+    danger: $danger,
+    light: $text-light,
+    dark: $text-dark,
 );
 
 @import "../node_modules/bootstrap/scss/bootstrap";
