@@ -4,7 +4,7 @@
 }
 
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 header{
@@ -36,12 +36,8 @@ ul {
 }
 
 .menu div{
-    /* display: inline-block; */
-    /* float: right; */
     position: absolute;
     right: 0;
-    /* left: -500px; */
-
 }
 
 ul li{
@@ -126,6 +122,7 @@ article img {
 
 #load-more-products{
     text-align: center;
+    margin: 30px;
 }
 
 #back-to-top{
@@ -144,4 +141,20 @@ button {
 footer {
     background-color: rgb(211, 211, 211);
     text-align: center;
+}
+
+/* Mobile version with max width of 800px */
+@media (max-width: 800px) {
+    aside {
+        position: static;
+    }
+
+    section {
+        margin-left: 0px;
+    }
+
+    .menu div{
+        position: relative;
+        display: block;   
+    }
 }
