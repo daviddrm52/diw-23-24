@@ -139,37 +139,31 @@ article .item-details .product-name {
     height: 100%;
     justify-content: flex-start;
     width: 100%;
-    
 }
 
+#load-more-products{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0 10px 0;
+}
 
-
-
-
-
-
-
-/* Avanzar viernes 17 para entrega el domingo 19 a las 22:59 UTC */
+#back-to-top{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+    margin: 10px 0 10px 0;
+}
 
 /*Footer area*/
-footer{
+.footer{
     background-color: rgb(211, 211, 211);
+    display: flex;
+    flex-direction: column;
 }
 
-/* @media (min-width: 576px) {
-    /* Apply styles for screens wider than 600px *//*
-    main {
-      flex-direction: row;
-    }
-  
-    aside {
-      order: 1; /* Move the sidebar to the end of the main container *//*
-      width: 200px;    
-    }
-  
-    section {
-      flex: 1;
-      overflow: auto;
-      padding: 20px;
-    }
-  } */
+@media (min-width: 576px) {
+    /* Changes to make desktop version goes here*/
+
+    /* Awaiting desktop version ¯\_(ツ)_/¯ */
+}
