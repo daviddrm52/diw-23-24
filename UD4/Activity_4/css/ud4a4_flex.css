@@ -162,8 +162,101 @@ article .item-details .product-name {
     flex-direction: column;
 }
 
-@media (min-width: 576px) {
-    /* Changes to make desktop version goes here*/
+@media (min-width: 577px) {
+        /* Changes to make desktop version goes here*/
+    
+    /* Header area*/
+    .menu{
+        flex-wrap: wrap;
+    }
+
+    /* Main area */
+    main {
+        display: flex;
+        flex-grow: 1;
+    }
+    aside {
+        order: 1;
+        flex: 1;
+        justify-content: flex-start;
+    }
+    
+    li.list-group{
+        justify-content: flex-start;
+        align-items:flex-start;
+    }
+    
+    li.list-group strong{
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+    
+    li.list-group ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 20px 20px 20px 40px;
+        
+    }
+    
+    section ul#product-listing{
+        display: flex;
+    }
+
+    /*Section area*/
+    section {
+        order: 2;
+        flex: 2;
+    }
+
+    section div h1{
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    section div#products-filter{
+        background-color: rgb(211, 211, 211);
+        padding: 20px;
+    }
+
+    section ul#product-listing li{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    article {
+        display: flex;
+        flex-direction: column;
+    }
+
+    article .item-details {
+        flex: 1 1 auto;
+    }
+
+    article .item-details .product-name {
+        font-weight: bold;
+        display: flex;   
+        height: 100%;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #load-more-products{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 10px 0 10px 0;
+    }
+
+    #back-to-top{
+        display: flex;
+        justify-content: center;
+        width: 10%;
+        margin: 10px 0 10px 0;
+    }
 
     /* Awaiting desktop version ¯\_(ツ)_/¯ */
 }
