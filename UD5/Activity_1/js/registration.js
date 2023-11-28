@@ -62,12 +62,24 @@ function testing(db){
 
 //addUserForm
 function addUserForm(db) {
+    var errorDetected = false;
     var name = document.getElementById("name");
     var username = document.getElementById("username");
     var email = document.getElementById("email");
     var password = document.getElementById("password");
+    var confirmPassword = document.getElementById("confirmPassword");
 
-    var object = {name: name.value, username: username.value, email: email.value, password: password.value};
+    if(password.value !== confirmPassword.value) {
+        console.log("Passwords doesn't match, exiting...");
+        return;
+    } else {
+        console.log("Passwords matches, going foward");
+    };
+
+    //To encrypt the good password 
+    var hash = CryptoJS.MD5(password.value);
+
+    var object = {name: name.value, username: username.value, email: email.value, password: hash.toString()};
 
     //Start transaction
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
@@ -100,6 +112,11 @@ function addUserForm(db) {
     };
 };
 
+//Awaiting further use
+// function isEmailValid(email){
+//     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLocaleLowerCase()); //Will return true o false
+// }
 
 //eventListener for when the form is send
 window.addEventListener('load', (event) =>{
