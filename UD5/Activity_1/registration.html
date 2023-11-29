@@ -70,22 +70,29 @@
                 <div id="labelInput" class="animation">
                     <label for="name">Name: </label>
                     <p><input type="text" name="name" id="name" class="textInput" placeholder="Name..."></p>
+                    <small id="nameError"></small>
                 </div>
                 <div id="labelInput" class="animation">
                     <label for="username">Username: </label>
                     <p><input type="text" name="username" id="username" class="textInput" placeholder="Username..."></p>
+                    <small id="usernameError"></small>
                 </div>
                 <div id="labelInput" class="animation">
                     <label for="email">Email: </label>
                     <p><input type="email" name="email" id="email" class="textInput" placeholder="Email..."></p>
+                    <small id="emailError"></small>
                 </div>
                 <div id="labelInput" class="animation">
                     <label for="password">Password: </label>
                     <p><input type="password" name="password" id="password" class="textInput" placeholder="Password..."></p>
+                    <small id="passwordError"></small>
+                    <small id="passwordEqualError"></small>
                 </div>
                 <div id="labelInput" class="animation">
                     <label for="confirmPassword">Confirm password: </label>
                     <p><input type="password" name="confirmPassword" id="confirmPassword" class="textInput" placeholder="Confirm password..."></p>
+                    <small id="confirmPasswordError"></small>
+                    <small id="confirmPasswordEqualError"></small>
                 </div>
                 <div id="labelInput" class="animation">
                     <label for="avatar">Select an avatar: </label>
@@ -93,7 +100,7 @@
                         <ul>
                             <li>
                                 <input type="radio" name="avatar" id="avatarCheckbox1">
-                                <label for="avatarCheckbox1" id="labelCheck"><img src="./img/ahri.png" alt="Ahri_avatar"></label>
+                                <label for="avatarCheckbox1" id="labelCheck"><img ruta="./img/ahri.png" src="./img/ahri.png" alt="Ahri_avatar"></label>
                             </li>
                             <li>
                                 <input type="radio" name="avatar" id="avatarCheckbox2">
@@ -107,8 +114,9 @@
                     </div>
                 </div>
                 <div id="labelInput" class="animation">
-                    <label for="confirmPassword">Want to be an administrator? </label>
-                    <p><input type="checkbox"> Yes</p>
+                    <label for="adminConfirmation">Want to be an administrator? </label>
+                    <p><input type="radio" id="adminConfirmation" name="adminConfirmation"> Yes! </p>
+                    <p><input checked type="radio" id="adminConfirmation" name="adminConfirmation"> No! </p>
                 </div>
                 <div id="labelInput">
                     <div id="buttonForm">
