@@ -4,7 +4,10 @@ const DB_STORE_NAME = 'users';
 const DB_VERSION = 1;
 var db
 var opened = false;
+//When the user clicks on "Register"
 var sendData = document.querySelector("#sendDataForm");
+//When the user clicks on "Reset"
+var resetData = document.querySelector('#resetDataForm')
 
 function openCreateDatabase(onDBCompleted) {
     if(opened){
@@ -236,6 +239,9 @@ window.addEventListener('load', (event) =>{
     sendData.addEventListener('click', (event) => {
         sendDataForm();
     });
+    resetData.addEventListener('click', (event) => {
+        // resetDataForm();
+    })
 });
 
 //Awaiting avatar and admin from the form, and everything will be working, also
