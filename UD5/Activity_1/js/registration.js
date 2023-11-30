@@ -1,5 +1,5 @@
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-var database = "usersDB";
+var database = "usersDB-David-Rueda-Madrid";
 const DB_STORE_NAME = 'users';
 const DB_VERSION = 1;
 var db
@@ -43,10 +43,10 @@ function openCreateDatabase(onDBCompleted) {
         console.log("openCreateDatabase: Index created on email");
         objectStore.createIndex("password", "password", {unique: false});
         console.log("openCreateDatabase: Index created on password");
-        objectStore.createIndex("avatar", "avatar", {unique: false});
-        console.log("openCreateDatabase: Index created on password");
+        // objectStore.createIndex("avatar", "avatar", {unique: false});
+        // console.log("openCreateDatabase: Index created on avatar");
         objectStore.createIndex("admin", "admin", {unique: false});
-        console.log("openCreateDatabase: Index created on password");
+        console.log("openCreateDatabase: Index created on admin");
     };
 
     //onError handler
@@ -78,7 +78,7 @@ function addUserForm(db) {
     var password = document.getElementById("password");
     var confirmPassword = document.getElementById("confirmPassword");
     //var avatar = ???
-    //var admin = document.getElementById("adminConfirmation");
+    var admincheck;
 
     //error messages in case something goes wrong
     var nameError = document.getElementById("nameError");
@@ -92,7 +92,7 @@ function addUserForm(db) {
 
     //Validation of the form (more like hell)
     //Validating name
-    if(name.value === ''){
+    if(name.value.trim() === ''){
         nameError.innerText = "The name input is empty!";
         nameError.style.display = "block";
         errorDetected = true;
@@ -103,7 +103,7 @@ function addUserForm(db) {
         errorDetected = false;
     };
     //Validating username
-    if(username.value === ''){
+    if(username.value.trim() === ''){
         usernameError.innerText = "The username input is empty!";
         usernameError.style.display = "block";
         errorDetected = true;
@@ -127,6 +127,20 @@ function addUserForm(db) {
     } else{
         console.log("Email is correct");
         emailError.style.display = "none";
+        errorDetected = false;
+    };
+    //Validating if the password are the same
+    if(password.value !== confirmPassword.value) {
+        passwordEqualError.innerText = "Passwords do not match!";
+        confirmPasswordEqualError.innerText = "Password do not match!";
+        passwordEqualError.style.display = "block";
+        confirmPasswordEqualError.style.display = "block";
+        errorDetected = true;
+        console.log("Passwords do not match, not good...");
+    } else {
+        console.log("The passwords match");
+        passwordEqualError.style.display = "none";
+        confirmPasswordEqualError.style.display = "none";
         errorDetected = false;
     };
     //Validating password
@@ -161,20 +175,17 @@ function addUserForm(db) {
         confirmPasswordError.style.display = "none";
         errorDetected = false;
     };
-    //Validating if the password are the same
-    if(password.value !== confirmPassword.value && password.value === '' || confirmPassword.value === '') {
-        passwordEqualError.innerText = "Passwords do not match!";
-        confirmPasswordEqualError.innerText = "Password do not match!";
-        passwordEqualError.style.display = "block";
-        confirmPasswordEqualError.style.display = "block";
-        errorDetected = true;
-        console.log("Passwords do not match, not good...");
+    //Validating if an avatar has been checked
+    //Jokes on you, you have to do it
+
+    //Validating if the checkbox has been selected
+    if(document.getElementById('adminConfirmation').checked) {
+        admincheck = true;
+        console.log("Admin status for the user: "+admincheck);
     } else {
-        console.log("The passwords match");
-        passwordEqualError.style.display = "none";
-        confirmPasswordEqualError.style.display = "none";
-        errorDetected = false;
-    };
+        admincheck = false;
+        console.log("Admin status for the user: "+admincheck);
+    }
 
     //In case an error is detected in the inputs
     if (errorDetected){
@@ -184,12 +195,12 @@ function addUserForm(db) {
         return;
     } else {
         console.log("All good");
-    }
+    };
 
     //To encrypt the good password 
     var hash = CryptoJS.MD5(password.value);
     //Grab the values for the database
-    var object = {name: name.value, username: username.value, email: email.value, password: hash.toString()};
+    var object = {name: name.value, username: username.value, email: email.value, password: hash.toString(), /*avatar: avatar.value, */admin: admincheck};
 
     //Start transaction
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
@@ -208,6 +219,14 @@ function addUserForm(db) {
         //Operations we want to do after inserting data
         /* Clean inputs from the form */
 
+        //Check if the new user is an admin or not
+        if(admincheck == true){
+            //Redirect to the admin page
+            console.log("Skill issue");
+        } else {
+            //Redirect to the index (is a normal user)
+            window.location.replace("./index.html")
+        }
     };
 
     request.onerror = (event) => {
@@ -228,7 +247,7 @@ function isEmailValid(input){
     return re.test(String(input).toLocaleLowerCase()); //Will return true or false
 };
 
-//To validate the password (good luck with this)
+//To validate the password (good luck getting a good password with this)
 function isPasswordValid(input){
     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
     return re.test(String(input)); //Will return true or false
@@ -244,7 +263,15 @@ window.addEventListener('load', (event) =>{
     })
 });
 
-//Awaiting avatar and admin from the form, and everything will be working, also
-//start working on the login area with inmmediate effect
-var admin = document.getElementById("adminConfirmation");
-console.log(admin.value);
+//Awaiting avatar and everything will be working, also
+//login page done, but doesn't work, and reworked sign in button in all headers
+//fix the password matching if the other fields are wrong
+
+// let amongus1 = "amongus";
+// let amongus2 = "amongus";
+
+// var dicksmith = CryptoJS.MD5(amongus1);
+// var craig = CryptoJS.MD5(amongus2);
+
+// console.log(dicksmith.toString());
+// console.log(craig.toString());
