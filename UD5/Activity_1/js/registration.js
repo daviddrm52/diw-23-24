@@ -2,7 +2,7 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedD
 var database = "usersDB-David-Rueda-Madrid";
 const DB_STORE_NAME = 'users';
 const DB_VERSION = 1;
-var db
+var db;
 var opened = false;
 //When the user clicks on "Register"
 var sendData = document.querySelector("#sendDataForm");
@@ -222,7 +222,7 @@ function addUserForm(db) {
         //Check if the new user is an admin or not
         if(admincheck == true){
             //Redirect to the admin page
-            console.log("Skill issue");
+            window.location.replace("./index_admin.html");
         } else {
             //Redirect to the index (is a normal user)
             window.location.replace("./index.html")

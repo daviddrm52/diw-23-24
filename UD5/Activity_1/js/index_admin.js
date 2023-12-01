@@ -33,7 +33,7 @@ function openCreateDatabase(onDBCompleted) {
 };
   
 //sendDataForm
-function signInForm(){
+function adminData(){
     openCreateDatabase(function(db){
         getUserData(db);
 
@@ -41,9 +41,6 @@ function signInForm(){
 };
 
 function getUserData(db){
-    console.log("entrada");
-    console.log(DB_STORE_NAME);
-    console.log(db);
     var tx = db.transaction(DB_STORE_NAME, "readonly");
     var store = tx.objectStore(DB_STORE_NAME);
     
@@ -61,7 +58,7 @@ function getUserData(db){
             console.log("EOF");
             console.log(result);
             //Operations to do afrer reading all the records
-            // compareLoginData(result);
+            addUsersToHTML(result);
         };
 
         request.onerror = function (event) {
@@ -76,11 +73,18 @@ function getUserData(db){
     };
 };
    
-//Function to compare the data 
+//Function to add the users to the HTML
+function addUsersToHTML(users){
+    var ul = document.getElementById("users-ul");
+    
+    ul.innerHTML = "";
+
+    for (let i = 0; i < users.length; i++){
+        ul.innerHTML += "<li> <ul> <li> <b> Name: </b>"+users[i].name+" </li><li><b> Username: </b>"+users[i].username+" </li><li><b> Email: </b>"+users[i].email+" </li><li><b> Admin privilegies: </b>"+users[i].admin+" </li> <li> <button> 1 </button> <button> 2 </button> <button> 3 </button> </li> </ul> </li>";
+    }
+};
 
 //eventListener for when the form is send
 window.addEventListener('load', (event) =>{
-    singInData.addEventListener('click', (event) => {
-        signInForm();
-    });
+    adminData();
 });
