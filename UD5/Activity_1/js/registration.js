@@ -73,7 +73,7 @@ function sendDataForm(){
 
 function addUserForm(db) {
     //In case something wrong occurs
-    var errorDetected = false;
+    var errorDetected = true;
     //Inputs of the form
     var name = document.getElementById("name");
     var username = document.getElementById("username");
@@ -90,49 +90,12 @@ function addUserForm(db) {
     var emailError = document.getElementById("emailError");
     var passwordError = document.getElementById("passwordError");
     var confirmPasswordError = document.getElementById("confirmPasswordError");
+    var avatarError = document.getElementById("avatarError");
     //For validating the passwords in case they don't match
     var passwordEqualError = document.getElementById("passwordEqualError");
     var confirmPasswordEqualError = document.getElementById("confirmPasswordEqualError");
 
     //Validation of the form (more like hell)
-    //Validating name
-    if(name.value.trim() === ''){
-        nameError.innerText = "The name input is empty!";
-        nameError.style.display = "block";
-        errorDetected = true;
-        console.log("Name is empty, not good...");
-    } else {
-        console.log("Name is correct");
-        nameError.style.display = "none";
-        errorDetected = false;
-    };
-    //Validating username
-    if(username.value.trim() === ''){
-        usernameError.innerText = "The username input is empty!";
-        usernameError.style.display = "block";
-        errorDetected = true;
-        console.log("Username is empty, not good...");
-    } else {
-        console.log("Username is correct");
-        usernameError.style.display = "none";
-        errorDetected = false;
-    };
-    //Validating email
-    if(email.value === ''){
-        emailError.innerText = "The email input is empty!";
-        emailError.style.display = "block";
-        errorDetected = true;
-        console.log("Email is empty, not good...");   
-    } else if(!isEmailValid(email.value)){
-        emailError.innerText = "The email is not valid!";
-        emailError.style.display = "block";
-        errorDetected = true;
-        console.log("Email is not valid, not good..."); 
-    } else{
-        console.log("Email is correct");
-        emailError.style.display = "none";
-        errorDetected = false;
-    };
     //Validating if the password are the same
     if(password.value !== confirmPassword.value) {
         passwordEqualError.innerText = "Passwords do not match!";
@@ -184,16 +147,61 @@ function addUserForm(db) {
     if(document.getElementById("avatarCheckbox1").checked){
         imageSelector = document.querySelector("#ahri");
         avatar = imageSelector.getAttribute("src");
-    };
-    if(document.getElementById("avatarCheckbox2").checked){
+        avatarError.style.display = "none";
+        errorDetected = false;
+    } else if(document.getElementById("avatarCheckbox2").checked){
         imageSelector = document.querySelector("#kaisa");
         avatar = imageSelector.getAttribute("src");
-    };
-    if(document.getElementById("avatarCheckbox3").checked){
+        avatarError.style.display = "none";
+        errorDetected = false;
+    } else if(document.getElementById("avatarCheckbox3").checked){
         imageSelector = document.querySelector("#evelynn");
         avatar = imageSelector.getAttribute("src");
+        avatarError.style.display = "none";
+        errorDetected = false;
+    } else {
+        avatarError.innerText = "You have to select an avatar!";
+        avatarError.style.display = "block";
+        errorDetected = true;
     };
-
+    //Validating name
+    if(name.value.trim() === ''){
+        nameError.innerText = "The name input is empty!";
+        nameError.style.display = "block";
+        errorDetected = true;
+        console.log("Name is empty, not good...");
+    } else {
+        console.log("Name is correct");
+        nameError.style.display = "none";
+        errorDetected = false;
+    };
+    //Validating username
+    if(username.value.trim() === ''){
+        usernameError.innerText = "The username input is empty!";
+        usernameError.style.display = "block";
+        errorDetected = true;
+        console.log("Username is empty, not good...");
+    } else {
+        console.log("Username is correct");
+        usernameError.style.display = "none";
+        errorDetected = false;
+    };
+    //Validating email
+    if(email.value === ''){
+        emailError.innerText = "The email input is empty!";
+        emailError.style.display = "block";
+        errorDetected = true;
+        console.log("Email is empty, not good...");   
+    } else if(!isEmailValid(email.value)){
+        emailError.innerText = "The email is not valid!";
+        emailError.style.display = "block";
+        errorDetected = true;
+        console.log("Email is not valid, not good..."); 
+    } else{
+        console.log("Email is correct");
+        emailError.style.display = "none";
+        errorDetected = false;
+    };
     //Validating if the checkbox has been selected
     if(document.getElementById('adminConfirmation').checked) {
         admincheck = true;
@@ -202,7 +210,6 @@ function addUserForm(db) {
         admincheck = false;
         console.log("Admin status for the user: "+admincheck);
     };
-
     //In case an error is detected in the inputs
     if (errorDetected){
         console.log("Errors detected, exiting function");
@@ -233,7 +240,6 @@ function addUserForm(db) {
         console.log("addUserForm: Data insertion successfully done. ID: " + event.target.result);
 
         //Operations we want to do after inserting data
-        /* Clean inputs from the form */
         sessionStorage.setItem('username', username.value);
         sessionStorage.setItem('avatar', avatar);
 
@@ -243,7 +249,7 @@ function addUserForm(db) {
             window.location.replace("./index_admin.html");
         } else {
             //Redirect to the index (is a normal user)
-            window.location.replace("./index.html")
+            window.location.replace("./index.html");
         }
     };
 
@@ -359,9 +365,9 @@ function signInVerification(user){
         passwordError.style.display = "none";
         errorDetected = false;
     };
-}
+};
 
-/* Event Listeners */
+/* Event Listeners (with try catch because of use in diferent pages) */
 
 window.addEventListener('load', (event) =>{
     try {
@@ -380,7 +386,9 @@ window.addEventListener('load', (event) =>{
     };
 });
 
-//Login when user is registered working (All registration things work (finally))
-//Admin index working 
-//User logged will show up in the header with their image
-//Working in when the session is up, change the link to the user page
+//Registration page: fully working (patched some errors that were founded)
+//Header of all pages: if user is logged, will be displayed (avatar, username)
+//Login page: not functional (there has been no time because of the other stuff) > for part 2
+//Administration index page: shows users for the moment, awaiting functional things for part 2
+
+/* I hope everything is up to standard */

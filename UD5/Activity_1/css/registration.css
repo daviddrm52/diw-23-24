@@ -193,6 +193,6 @@ footer{
     display: none;
 }
 
-#nameError, #usernameError, #emailError, #passwordError, #confirmPasswordError {
+#nameError, #usernameError, #emailError, #passwordError, #confirmPasswordError, #avatarError{
     display: none;
 }
