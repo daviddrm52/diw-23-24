@@ -57,7 +57,7 @@ body {
     border: transparent;
     border-radius: 5px;
     padding: 10px;
-    width: 250px;
+    width: 125px;
     transition-duration: 0.25s;
     background-color: #F7A500;
 }
@@ -69,6 +69,13 @@ body {
 
 .users-container button:hover{
     transform: scale(1.1);
+}
+
+.users-container img {
+    width: 100px;
+    margin: 5px;
+    border-radius: 5px;
+
 }
 
 footer{

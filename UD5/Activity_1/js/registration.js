@@ -1,13 +1,17 @@
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
 var database = "usersDB-David-Rueda-Madrid";
 const DB_STORE_NAME = 'users';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 var db;
 var opened = false;
 //When the user clicks on "Register"
 var sendData = document.querySelector("#sendDataForm");
 //When the user clicks on "Reset"
-var resetData = document.querySelector('#resetDataForm')
+var resetData = document.querySelector('#resetDataForm');
+//When the user clicks on "Sign in"
+var signInData = document.querySelector("#signInForm");
+
+/* Creation of the data base & opening */
 
 function openCreateDatabase(onDBCompleted) {
     if(opened){
@@ -43,8 +47,8 @@ function openCreateDatabase(onDBCompleted) {
         console.log("openCreateDatabase: Index created on email");
         objectStore.createIndex("password", "password", {unique: false});
         console.log("openCreateDatabase: Index created on password");
-        // objectStore.createIndex("avatar", "avatar", {unique: false});
-        // console.log("openCreateDatabase: Index created on avatar");
+        objectStore.createIndex("avatar", "avatar", {unique: false});
+        console.log("openCreateDatabase: Index created on avatar");
         objectStore.createIndex("admin", "admin", {unique: false});
         console.log("openCreateDatabase: Index created on admin");
     };
@@ -55,19 +59,18 @@ function openCreateDatabase(onDBCompleted) {
     };
 };
   
-//sendDataForm
+/* Registration area */
+
 function sendDataForm(){
-    openCreateDatabase(testing);
+    openCreateDatabase(function(db){
+        var hiddenId = document.getElementById("hiddenId").value;
+        if(hiddenId == 0){
+            addUserForm(db);
+        };
+    });
 };
 
-function testing(db){
-    var hiddenId = document.getElementById("hiddenId").value;
-    if(hiddenId == 0){
-        addUserForm(db);
-    };
-};
 
-//addUserForm
 function addUserForm(db) {
     //In case something wrong occurs
     var errorDetected = false;
@@ -77,7 +80,8 @@ function addUserForm(db) {
     var email = document.getElementById("email");
     var password = document.getElementById("password");
     var confirmPassword = document.getElementById("confirmPassword");
-    //var avatar = ???
+    var avatar;
+    var imageSelector;
     var admincheck;
 
     //error messages in case something goes wrong
@@ -176,7 +180,19 @@ function addUserForm(db) {
         errorDetected = false;
     };
     //Validating if an avatar has been checked
-    //Jokes on you, you have to do it
+    //Checking what image is selected
+    if(document.getElementById("avatarCheckbox1").checked){
+        imageSelector = document.querySelector("#ahri");
+        avatar = imageSelector.getAttribute("src");
+    };
+    if(document.getElementById("avatarCheckbox2").checked){
+        imageSelector = document.querySelector("#kaisa");
+        avatar = imageSelector.getAttribute("src");
+    };
+    if(document.getElementById("avatarCheckbox3").checked){
+        imageSelector = document.querySelector("#evelynn");
+        avatar = imageSelector.getAttribute("src");
+    };
 
     //Validating if the checkbox has been selected
     if(document.getElementById('adminConfirmation').checked) {
@@ -185,7 +201,7 @@ function addUserForm(db) {
     } else {
         admincheck = false;
         console.log("Admin status for the user: "+admincheck);
-    }
+    };
 
     //In case an error is detected in the inputs
     if (errorDetected){
@@ -200,7 +216,7 @@ function addUserForm(db) {
     //To encrypt the good password 
     var hash = CryptoJS.MD5(password.value);
     //Grab the values for the database
-    var object = {name: name.value, username: username.value, email: email.value, password: hash.toString(), /*avatar: avatar.value, */admin: admincheck};
+    var object = {name: name.value, username: username.value, email: email.value, password: hash.toString(), avatar: avatar, admin: admincheck};
 
     //Start transaction
     var tx = db.transaction(DB_STORE_NAME, "readwrite");
@@ -241,6 +257,8 @@ function addUserForm(db) {
     };
 };
 
+/* Validation functions for the registration area */
+
 //To validate the email
 function isEmailValid(input){
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -253,25 +271,69 @@ function isPasswordValid(input){
     return re.test(String(input)); //Will return true or false
 };
 
+/* Sign in area */
+
+//signInForm function
+function signInForm(){
+    openCreateDatabase(function(db){
+        getUserData(db);
+    });
+};
+
+function getUserData(db){
+    console.log("entrada");
+    console.log(DB_STORE_NAME);
+    console.log(db);
+    var tx = db.transaction(DB_STORE_NAME, "readonly");
+    var store = tx.objectStore(DB_STORE_NAME);
+    
+    var result = [];
+    var request = store.openCursor();
+
+    request.onsuccess = function (event) {
+        var cursor = event.target.result;
+
+        if(cursor) {
+            result.push(cursor.value);
+            console.log(cursor.value);
+            cursor.continue();
+        } else {
+            console.log("EOF");
+            console.log(result);
+            //Operations to do afrer reading all the records
+            // compareLoginData(result);
+        };
+
+        request.onerror = function (event) {
+            console.error("getUserData: error reading data:", event.target.errorCode);
+        };
+
+        tx.oncomplete = function() {
+            console.log("getUserData: tx completed");
+            db.close();
+            opened = false;
+        };
+    };
+};
+
 //eventListener for when the form is send
 window.addEventListener('load', (event) =>{
-    sendData.addEventListener('click', (event) => {
-        sendDataForm();
-    });
-    resetData.addEventListener('click', (event) => {
-        // resetDataForm();
-    })
+    try {
+        sendData.addEventListener('click', (event) => {
+            sendDataForm();
+        });
+    } catch (error) {
+       console.log("Not avaliable in sign in page");
+    };
+    try {
+        signInData.addEventListener('click', (event) => {
+            signInForm();
+        });
+    } catch (error) {
+        console.log("Not avaliable in registration page");
+    };
 });
 
-//Awaiting avatar and everything will be working, also
-//login page done, but doesn't work, and reworked sign in button in all headers
-//fix the password matching if the other fields are wrong
-
-// let amongus1 = "amongus";
-// let amongus2 = "amongus";
-
-// var dicksmith = CryptoJS.MD5(amongus1);
-// var craig = CryptoJS.MD5(amongus2);
-
-// console.log(dicksmith.toString());
-// console.log(craig.toString());
+//Registration form all working, except sign in when registred
+//Sign in form the same
+//Admin index working
