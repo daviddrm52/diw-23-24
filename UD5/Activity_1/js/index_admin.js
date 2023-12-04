@@ -80,7 +80,7 @@ function addUsersToHTML(users){
     ul.innerHTML = "";
 
     for (let i = 0; i < users.length; i++){
-        ul.innerHTML += "<li> <ul> <li> <b> Name: </b>"+users[i].name+" </li><li><b> Username: </b>"+users[i].username+" </li><li><b> Email: </b>"+users[i].email+" </li><li><b> Admin privilegies: </b>"+users[i].admin+" </li> <li> <img src="+users[i].avatar +"> </li> <li> <button> Edit user </button> <button> Delete user </button> </li> </ul> </li>";
+        ul.innerHTML += "<li> <ul> <li> <b> Id: </b>"+users[i].id+" </li> <li> <b> Name: </b>"+users[i].name+" </li><li><b> Username: </b>"+users[i].username+" </li><li><b> Email: </b>"+users[i].email+" </li><li><b> Admin privilegies: </b>"+users[i].admin+" </li> <li> <img src="+users[i].avatar +"> </li> <li> <button> Edit user </button> <button> Delete user </button> </li> </ul> </li>";
     }
 };
 

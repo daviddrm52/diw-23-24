@@ -234,6 +234,8 @@ function addUserForm(db) {
 
         //Operations we want to do after inserting data
         /* Clean inputs from the form */
+        sessionStorage.setItem('username', username.value);
+        sessionStorage.setItem('avatar', avatar);
 
         //Check if the new user is an admin or not
         if(admincheck == true){
@@ -301,7 +303,7 @@ function getUserData(db){
             console.log("EOF");
             console.log(result);
             //Operations to do afrer reading all the records
-            // compareLoginData(result);
+            signInVerification(result);
         };
 
         request.onerror = function (event) {
@@ -316,7 +318,51 @@ function getUserData(db){
     };
 };
 
-//eventListener for when the form is send
+//function to compare data
+function signInVerification(user){
+    console.log("entered function")
+    var errorDetected = false;
+
+    // var usernameLogin = document.getElementById("usernameLogin");
+    var usernameLogin = "daviddrm52"
+    var passwordLogin = document.getElementById("passwordLogin");
+
+    var usernameDB = user.username[usernameLogin];
+    console.log(usernameDB);
+
+    //To encrypt the password for verification 
+    var passwordSecure = CryptoJS.MD5(passwordLogin.value);
+    passwordSecure.toString();
+
+    var usernameLoginError = document.getElementById("usernameLoginError");
+    var passwordLoginError = document.getElementById("passwordLoginError");
+
+    //Validating username
+    if(usernameLogin.value.trim() === ''){
+        usernameLoginError.innerText = "The username input is empty!";
+        usernameLoginError.style.display = "block";
+        errorDetected = true;
+        console.log("Username is empty, not good...");
+    } else if (usernameLogin.value.trim() === user.username){
+        console.log("Username is correct");
+        usernameError.style.display = "none";
+        errorDetected = false;
+    };
+    //Validating password
+    if(passwordLogin.value === ''){
+        passwordLoginError.innerText = "The password input is empty!";
+        passwordLoginError.style.display = "block";
+        errorDetected = true;
+        console.log("Password is empty, not good...");
+    } else if(passwordSecure === user.password){
+        console.log("Password is correct");
+        passwordError.style.display = "none";
+        errorDetected = false;
+    };
+}
+
+/* Event Listeners */
+
 window.addEventListener('load', (event) =>{
     try {
         sendData.addEventListener('click', (event) => {
@@ -334,6 +380,7 @@ window.addEventListener('load', (event) =>{
     };
 });
 
-//Registration form all working, except sign in when registred
-//Sign in form the same
-//Admin index working
+//Login when user is registered working (All registration things work (finally))
+//Admin index working 
+//User logged will show up in the header with their image
+//Working in when the session is up, change the link to the user page
