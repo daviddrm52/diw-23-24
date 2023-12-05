@@ -1,0 +1,116 @@
+/*Variables*/
+@font-face {
+  font-family: Ubuntu-Light;
+  src: url(../Ubuntu-Light.ttf);
+}
+@font-face {
+  font-family: OpenSans;
+  src: url(../OpenSans.ttf);
+}
+.material-symbols-outlined.md-18 {
+  font-size: 18px;
+}
+body {
+  font-family: Ubuntu-Light;
+  background-color: rgba(180, 0, 29, 0.3);
+}
+header {
+  background-color: #B4001D;
+}
+header .btn,
+header .navbar-toggler {
+  background-color: #F7A500 !important;
+}
+#topArticle {
+  padding: 10px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  width: 90%;
+}
+#topArticle #bread a {
+  color: #000000;
+  text-decoration: none;
+}
+#topArticle #bread a:hover {
+  color: #F7A500;
+}
+#topArticle #bread button {
+  background-color: #F7A500;
+  border: transparent;
+  border-radius: 5px;
+  padding: 10px;
+}
+#mainArticle {
+  font-family: OpenSans;
+  padding: 20px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  width: 90%;
+}
+#mainArticle #headerSection #articleTitle {
+  text-shadow: 4px 4px 4px #FFFFFF;
+}
+#mainArticle #headerSection #headerImage {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#mainArticle #headerSection #headerImage img {
+  width: 75%;
+  border-radius: 10px;
+}
+#mainArticle #headerSection #tags {
+  text-align: center;
+}
+#mainArticle #headerSection #tags a {
+  color: #000000;
+  text-decoration: none;
+}
+#mainArticle #mainSection {
+  margin: auto;
+  width: 90%;
+  text-align: justify;
+  font-size: medium;
+}
+#mainArticle #mainSection #articleImage {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#mainArticle #mainSection #articleImage img {
+  width: 50%;
+  border-radius: 10px;
+}
+#bottomArticle {
+  padding: 20px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #EBEBEB;
+  border-radius: 10px;
+  width: 90%;
+}
+#bottomArticle #crumb button {
+  background-color: #F7A500;
+  border: transparent;
+  border-radius: 5px;
+  padding: 10px;
+}
+footer {
+  background-color: #B4001D;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+#hat {
+  text-decoration: none;
+  color: #000000;
+  cursor: text;
+}

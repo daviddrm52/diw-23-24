@@ -1,0 +1,89 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap'); */
+
+@font-face {
+    font-family: Ubuntu-Light;
+    src: url(./Ubuntu-Light.ttf);
+}
+
+body {
+    font-family: Ubuntu-Light;
+    background-image: url(./../img/CHN100CH_C569_CH.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* For the buttons in the header and footer*/
+.btn, .navbar-toggler{
+    background-color: #F7A500 !important;
+}
+
+#infoBackgroundImage{
+    padding: 30px;
+    margin: auto;
+    margin-top: 55px;
+    margin-bottom: 55px;
+    width: 50%;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.75);
+    border-radius: 10px;
+    width: 520px;
+}
+
+.users-container{
+    padding: 30px;
+    margin: auto;
+    margin-top: 55px;
+    margin-bottom: 55px;
+    width: 700px;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.75);
+    border-radius: 10px;
+    width: 520px;
+}
+
+.users-container ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.users-container ul li ul {
+    padding: 5px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+.users-container button {
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    width: 125px;
+    transition-duration: 0.25s;
+    background-color: #F7A500;
+}
+
+.users-container button span {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.users-container button:hover{
+    transform: scale(1.1);
+}
+
+.users-container img {
+    width: 100px;
+    margin: 5px;
+    border-radius: 5px;
+
+}
+
+footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.material-symbols-outlined.md-18 {
+    font-size: 18px;
+}
