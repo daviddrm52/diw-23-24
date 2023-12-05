@@ -240,6 +240,7 @@ function addUserForm(db) {
         console.log("addUserForm: Data insertion successfully done. ID: " + event.target.result);
 
         //Operations we want to do after inserting data
+        sessionStorage.setItem('id', event.target.result);
         sessionStorage.setItem('username', username.value);
         sessionStorage.setItem('avatar', avatar);
         sessionStorage.setItem("admin", admincheck);

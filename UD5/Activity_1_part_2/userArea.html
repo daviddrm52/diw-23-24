@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - AviaTalk.com</title>
+    <title>User area - AviaTalk.com</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="shortcut icon" href="./img/base_logo_mobile.png" type="image/x-icon">
@@ -65,7 +65,29 @@
     <main>
         <div id="userInformation">
             <h2>Information about you</h2>
-            
+            <div>
+                <ul>
+                    <li><img id="avatar" src="" alt="user avatar"></li>
+                    <li><b>Name: </b> <span id="name"></span></li>
+                    <li><b>Username:</b> <span id="username"></span></li>
+                    <li><b>Email:</b> <span id="email"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div id="userInformation">
+            <h2>User options</h2>
+            <div>
+                <ul>
+                    <li><button disabled id="editUser">Edit personal data</button></li>
+                    <li><button disabled id="changeTheme">Change page theme</button></li>
+                </ul>
+                <ul>
+                    <li><button disabled id="deleteUser">Delete account</button></li>
+                </ul>
+                <ul>
+                    <li><button id="logOutUser">Log out</button></li>
+                </ul>
+            </div>
         </div>
         <div id="infoBackgroundImage">
             Background image: Air Chiquin CHJ 100-50 in their final days (CHN576AC)
@@ -91,5 +113,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/md5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./js/userArea.js" defer></script>
+    <script src="./js/logInInfo.js"></script>
 </body>
 </html>
