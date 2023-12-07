@@ -74,15 +74,38 @@
                 </ul>
             </div>
         </div>
+        <div id="changePasswordContainer">
+            <div id="userInformation">
+                <h2>Change your account password</h2>
+                <div class="labelInput">
+                    <label for="password">Password: </label>
+                    <p><input type="password" name="password" id="password" class="textInput" placeholder="Password..."></p>
+                    <small id="passwordError"></small>
+                    <small id="passwordEqualError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="confirmPassword">Confirm password: </label>
+                    <p><input type="password" name="confirmPassword" id="confirmPassword" class="textInput" placeholder="Confirm password..."></p>
+                    <small id="confirmPasswordError"></small>
+                    <small id="confirmPasswordEqualError"></small>
+                </div>
+                <div class="labelInput">
+                    <div id="buttonForm">
+                        <button id="changePassword">Change password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="userInformation">
             <h2>User options</h2>
             <div>
                 <ul>
                     <li><button disabled id="editUser">Edit personal data</button></li>
+                    <li><button id="showChangePasswordForm">Change password</button></li>
                     <li><button disabled id="changeTheme">Change page theme</button></li>
                 </ul>
                 <ul>
-                    <li><button disabled id="deleteUser">Delete account</button></li>
+                    <li><button id="deleteUser">Delete account</button></li>
                 </ul>
                 <ul>
                     <li><button id="logOutUser">Log out</button></li>

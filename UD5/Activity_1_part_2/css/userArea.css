@@ -63,7 +63,28 @@ body {
     transform: scale(1);
 }
 
+.labelInput{
+    width: 100%;
+    background-color: rgba(180, 0, 29, 0.90);
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 4px #FFF;
+}
 
+.labelInput input[class="textInput"]{
+    border: transparent;
+    border-radius: 5px;
+    width: 80%;
+    padding: 5px;
+}
+
+#changePasswordContainer{
+    display: none;
+}
 
 #deleteUser {
     background-color: #B4001D !important;

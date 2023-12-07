@@ -311,7 +311,7 @@ function getUserData(db){
             console.log("EOF");
             console.log(result);
             //Operations to do afrer reading all the records
-            signInVerification(result);
+            // signInVerification(result);
         };
 
         request.onerror = function (event) {
@@ -327,47 +327,47 @@ function getUserData(db){
 };
 
 //function to compare data
-function signInVerification(user){
-    console.log("entered function")
-    var errorDetected = false;
+// function signInVerification(user){
+//     console.log("entered function")
+//     var errorDetected = false;
 
-    // var usernameLogin = document.getElementById("usernameLogin");
-    var usernameLogin = "daviddrm52"
-    var passwordLogin = document.getElementById("passwordLogin");
+//     // var usernameLogin = document.getElementById("usernameLogin");
+//     var usernameLogin = "daviddrm52"
+//     var passwordLogin = document.getElementById("passwordLogin");
 
-    var usernameDB = user.username[usernameLogin];
-    console.log(usernameDB);
+//     var usernameDB = user.username[usernameLogin];
+//     console.log(usernameDB);
 
-    //To encrypt the password for verification 
-    var passwordSecure = CryptoJS.MD5(passwordLogin.value);
-    passwordSecure.toString();
+//     //To encrypt the password for verification 
+//     var passwordSecure = CryptoJS.MD5(passwordLogin.value);
+//     passwordSecure.toString();
 
-    var usernameLoginError = document.getElementById("usernameLoginError");
-    var passwordLoginError = document.getElementById("passwordLoginError");
+//     var usernameLoginError = document.getElementById("usernameLoginError");
+//     var passwordLoginError = document.getElementById("passwordLoginError");
 
-    //Validating username
-    if(usernameLogin.value.trim() === ''){
-        usernameLoginError.innerText = "The username input is empty!";
-        usernameLoginError.style.display = "block";
-        errorDetected = true;
-        console.log("Username is empty, not good...");
-    } else if (usernameLogin.value.trim() === user.username){
-        console.log("Username is correct");
-        usernameError.style.display = "none";
-        errorDetected = false;
-    };
-    //Validating password
-    if(passwordLogin.value === ''){
-        passwordLoginError.innerText = "The password input is empty!";
-        passwordLoginError.style.display = "block";
-        errorDetected = true;
-        console.log("Password is empty, not good...");
-    } else if(passwordSecure === user.password){
-        console.log("Password is correct");
-        passwordError.style.display = "none";
-        errorDetected = false;
-    };
-};
+//     //Validating username
+//     if(usernameLogin.value.trim() === ''){
+//         usernameLoginError.innerText = "The username input is empty!";
+//         usernameLoginError.style.display = "block";
+//         errorDetected = true;
+//         console.log("Username is empty, not good...");
+//     } else if (usernameLogin.value.trim() === user.username){
+//         console.log("Username is correct");
+//         usernameError.style.display = "none";
+//         errorDetected = false;
+//     };
+//     //Validating password
+//     if(passwordLogin.value === ''){
+//         passwordLoginError.innerText = "The password input is empty!";
+//         passwordLoginError.style.display = "block";
+//         errorDetected = true;
+//         console.log("Password is empty, not good...");
+//     } else if(passwordSecure === user.password){
+//         console.log("Password is correct");
+//         passwordError.style.display = "none";
+//         errorDetected = false;
+//     };
+// };
 
 /* Event Listeners (with try catch because of use in diferent pages) */
 
