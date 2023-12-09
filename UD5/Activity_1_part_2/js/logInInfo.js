@@ -8,17 +8,26 @@ var signInButton = document.querySelector("#loginButton");
 var userIcon = document.querySelector("#userIcon");
 var avatarImg = document.querySelector("#avatarImg");
 var signInLink = document.querySelector("#signInLink");
+var indexLink = document.querySelector('#indexLink');
 
-if(sessionStorage.getItem('username') == null){
+if(usernameSession == null){
     signInButton.innerText = "Sign In";
 } else {
     signInButton.innerText = usernameSession;
     signInLink.href = "./userArea.html";
 };
 
-if(sessionStorage.getItem('avatar') == null){
+if(adminSession == true) {
+    indexLink.href = "./index_admin.html";
+} else {
+    indexLink.href = "./index.html";
+};
+
+if(avatarSession == null){
     userIcon.style.display = "inline-block";
 } else {
     userIcon.style.display = "none";
     avatarImg.src = avatarSession;
 };
+
+//All working

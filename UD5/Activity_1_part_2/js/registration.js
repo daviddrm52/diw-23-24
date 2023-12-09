@@ -70,7 +70,6 @@ function sendDataForm(){
     });
 };
 
-
 function addUserForm(db) {
     //In case something wrong occurs
     var errorDetected = true;
@@ -281,116 +280,17 @@ function isPasswordValid(input){
     return re.test(String(input)); //Will return true or false
 };
 
-/* Sign in area */
-
-//signInForm function
-function signInForm(){
-    openCreateDatabase(function(db){
-        getUserData(db);
-    });
-};
-
-function getUserData(db){
-    console.log("entrada");
-    console.log(DB_STORE_NAME);
-    console.log(db);
-    var tx = db.transaction(DB_STORE_NAME, "readonly");
-    var store = tx.objectStore(DB_STORE_NAME);
-    
-    var result = [];
-    var request = store.openCursor();
-
-    request.onsuccess = function (event) {
-        var cursor = event.target.result;
-
-        if(cursor) {
-            result.push(cursor.value);
-            console.log(cursor.value);
-            cursor.continue();
-        } else {
-            console.log("EOF");
-            console.log(result);
-            //Operations to do afrer reading all the records
-            // signInVerification(result);
-        };
-
-        request.onerror = function (event) {
-            console.error("getUserData: error reading data:", event.target.errorCode);
-        };
-
-        tx.oncomplete = function() {
-            console.log("getUserData: tx completed");
-            db.close();
-            opened = false;
-        };
-    };
-};
-
-//function to compare data
-// function signInVerification(user){
-//     console.log("entered function")
-//     var errorDetected = false;
-
-//     // var usernameLogin = document.getElementById("usernameLogin");
-//     var usernameLogin = "daviddrm52"
-//     var passwordLogin = document.getElementById("passwordLogin");
-
-//     var usernameDB = user.username[usernameLogin];
-//     console.log(usernameDB);
-
-//     //To encrypt the password for verification 
-//     var passwordSecure = CryptoJS.MD5(passwordLogin.value);
-//     passwordSecure.toString();
-
-//     var usernameLoginError = document.getElementById("usernameLoginError");
-//     var passwordLoginError = document.getElementById("passwordLoginError");
-
-//     //Validating username
-//     if(usernameLogin.value.trim() === ''){
-//         usernameLoginError.innerText = "The username input is empty!";
-//         usernameLoginError.style.display = "block";
-//         errorDetected = true;
-//         console.log("Username is empty, not good...");
-//     } else if (usernameLogin.value.trim() === user.username){
-//         console.log("Username is correct");
-//         usernameError.style.display = "none";
-//         errorDetected = false;
-//     };
-//     //Validating password
-//     if(passwordLogin.value === ''){
-//         passwordLoginError.innerText = "The password input is empty!";
-//         passwordLoginError.style.display = "block";
-//         errorDetected = true;
-//         console.log("Password is empty, not good...");
-//     } else if(passwordSecure === user.password){
-//         console.log("Password is correct");
-//         passwordError.style.display = "none";
-//         errorDetected = false;
-//     };
-// };
-
 /* Event Listeners (with try catch because of use in diferent pages) */
 
 window.addEventListener('load', (event) =>{
-    try {
-        sendData.addEventListener('click', (event) => {
-            sendDataForm();
-        });
-    } catch (error) {
-       console.log("Not avaliable in sign in page");
-    };
-    try {
-        signInData.addEventListener('click', (event) => {
-            signInForm();
-        });
-    } catch (error) {
-        console.log("Not avaliable in registration page");
-    };
+    sendData.addEventListener('click', (event) => {
+        sendDataForm();
+    });
 });
 
 //Registration page: fully working (patched some errors that were founded)
 //Header of all pages: if user is logged, will be displayed (avatar, username)
-//Login page: not functional (there has been no time because of the other stuff) > for part 2
-//Administration index page: shows users for the moment, awaiting functional things for part 2
+//Login page: fully functional
+//Administration index page: shows users for the moment, working in the rest
 
 /* I hope everything is up to standard */

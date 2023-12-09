@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar" style="background-color: #B4001D;">
             <div class="container">
-                <a class="navbar-brand" href="./index.html">
+                <a class="navbar-brand" id="indexLink" href="./index.html">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
                 <i class="d-flex">
@@ -69,11 +69,11 @@
                 <input type="text" name="hiddenId" id="hiddenId" value="0">
                 <div id="labelInput" class="animation">
                     <label for="username">Username: </label>
-                    <p><input type="text" name="username" id="usernameLogin" class="textInput" placeholder="Username..."></p>
-                    <small id="usernameLoginError"></small>
+                    <p><input type="text" name="username" id="usernameSignIn" class="textInput" placeholder="Username..."></p>
+                    <small id="usernameSignInError"></small>
                     <label for="password">Password: </label>
-                    <p><input type="password" name="password" id="passwordLogin" class="textInput" placeholder="Password..."></p>
-                    <small id="passwordLoginError"></small>
+                    <p><input type="password" name="password" id="passwordSignIn" class="textInput" placeholder="Password..."></p>
+                    <small id="passwordSignInError"></small>
                     <div id="buttonForm">
                         <button id="signInForm"><span class="material-symbols-outlined">app_registration</span>Sign In</button>
                     </div>
@@ -114,7 +114,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/md5.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="./js/registration.js" defer></script>
+    <script src="./js/signIn.js" defer></script>
     <script src="./js/logInInfo.js"></script>
 </body>
 </html>

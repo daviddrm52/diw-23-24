@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar" style="background-color: #B4001D;">
             <div class="container">
-                <a class="navbar-brand" href="./index.html">
+                <a class="navbar-brand" id="indexLink" href="./index.html">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
                 <i class="d-flex">
@@ -67,10 +67,10 @@
             <h2>Information about you</h2>
             <div>
                 <ul>
-                    <li><img id="avatar" src="" alt="user avatar"></li>
-                    <li><b>Name: </b> <span id="name"></span></li>
-                    <li><b>Username:</b> <span id="username"></span></li>
-                    <li><b>Email:</b> <span id="email"></span></li>
+                    <li><img id="avatar-displayed" src="" class="user_avatar"></li>
+                    <li><b>Name: </b> <span id="name-displayed"></span></li>
+                    <li><b>Username:</b> <span id="username-displayed"></span></li>
+                    <li><b>Email:</b> <span id="email-displayed"></span></li>
                 </ul>
             </div>
         </div>
@@ -96,11 +96,56 @@
                 </div>
             </div>
         </div>
+        <div id="editPersonalDataContainer">
+            <div id="userInformation">
+                <h2>Change your personal data</h2>
+                <div class="labelInput">
+                    <label for="name">Name: </label>
+                    <p><input type="text" name="name" id="name" class="textInput" placeholder="Name..."></p>
+                    <small id="nameError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="username">Username: </label>
+                    <p><input type="text" name="username" id="username" class="textInput" placeholder="Username..."></p>
+                    <small id="usernameError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="email">Email: </label>
+                    <p><input type="email" name="email" id="email" class="textInput" placeholder="Email..."></p>
+                    <small id="emailError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="avatar">Select an avatar: </label>
+                    <div id="avatars">
+                        <ul>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox1">
+                                <label for="avatarCheckbox1" id="labelCheck"><img id="ahri" src="./img/form/ahri.png" alt="Ahri_avatar"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox2">
+                                <label for="avatarCheckbox2" id="labelCheck"><img id="kaisa" src="./img/form/kaisa.png" alt="Ahri_avatar"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox3">
+                                <label for="avatarCheckbox3" id="labelCheck"><img id="evelynn" src="./img/form/evelynn.png" alt="Ahri_avatar"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <small id="avatarError"></small>
+                </div>
+                <div class="labelInput">
+                    <div id="buttonForm">
+                        <button id="editPersonalData">Edit personal data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="userInformation">
             <h2>User options</h2>
             <div>
                 <ul>
-                    <li><button disabled id="editUser">Edit personal data</button></li>
+                    <li><button id="showEditPersonalDataForm">Edit personal data</button></li>
                     <li><button id="showChangePasswordForm">Change password</button></li>
                     <li><button disabled id="changeTheme">Change page theme</button></li>
                 </ul>

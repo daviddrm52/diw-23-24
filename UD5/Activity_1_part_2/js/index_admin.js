@@ -4,8 +4,6 @@ const DB_STORE_NAME = 'users';
 const DB_VERSION = 2;
 var db;
 var opened = false;
-//When the user clicks on "Sign in"
-var singInData = document.querySelector("#signInForm");
 
 function openCreateDatabase(onDBCompleted) {
     if(opened){
@@ -86,5 +84,13 @@ function addUsersToHTML(users){
 
 //eventListener for when the form is send
 window.addEventListener('load', (event) =>{
+    verifyAdmin();
     adminData();
 });
+
+//Verify if the user logged is an admin
+function verifyAdmin() {
+    if(sessionStorage.getItem('admin') != true){
+        window.location.replace("./index.html");
+    };
+}
