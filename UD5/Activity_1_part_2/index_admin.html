@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar" style="background-color: #B4001D;">
             <div class="container">
-                <a class="navbar-brand" id="indexLink" href="./index.html">
+                <a class="navbar-brand" id="indexLogoHeaderLink" href="./index.html">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
                 <i class="d-flex">
@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active text-light" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-link active text-light" aria-current="page" id="indexHeaderLink" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="#">Latest articles</a>
@@ -70,6 +70,15 @@
                 <p>User id: <span id="id_deleting"></span> username: <span id="username_deleting"></span></p>
                 <button id="delete_selected_user"> Delete user</button>
                 <button id="cancel_delete_selected_user">Cancel deletion</button>
+            </div>
+        </div>
+        <div id="reset-user-password-container" class="users-container">
+            <div>
+                <h3><span class="material-symbols-outlined">warning</span></h3>
+                <h4>Are you sure that you want to reset the password for this user?</h4>
+                <p>User id: <span id="id_reseting"></span> username: <span id="username_reseting"></span></p>
+                <button id="reset_user_password"> Reset password</button>
+                <button id="cancel_reset_user_password">Cancel reset</button>
             </div>
         </div>
         <div id="edit-user-data-container" class="users-container">
@@ -138,11 +147,11 @@
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
                 <p class="col-md-4 mb-0 text-light">© 2023 AviaTalk.com</p>
-                <a href="./index.html" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <a href="./index.html" id="indexLogoFooterLink" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img src="./img/base_logo.png" alt="AviaTalk.com" width="130px">
                 </a>
                 <ul class="nav col-md-4 justify-content-end">
-                  <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-light">Home</a></li>
+                  <li class="nav-item"><a href="./index.html" id="indexFooterLink" class="nav-link px-2 text-light">Home</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Latest Articles</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Comercial</a></li>
                   <li class="nav-item"><a href="#" class="nav-link px-2 text-light">Airlines</a></li>

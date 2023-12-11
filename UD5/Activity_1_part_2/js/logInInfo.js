@@ -8,7 +8,12 @@ var signInButton = document.querySelector("#loginButton");
 var userIcon = document.querySelector("#userIcon");
 var avatarImg = document.querySelector("#avatarImg");
 var signInLink = document.querySelector("#signInLink");
-var indexLink = document.querySelector('#indexLink');
+
+//For all the "Home" access points in the page
+var indexLogoHeaderLink = document.querySelector('#indexLogoHeaderLink');
+var indexHeaderLink = document.querySelector('#indexHeaderLink');
+var indexLogoFooterLink = document.querySelector('#indexLogoFooterLink');
+var indexFooterLink = document.querySelector('#indexFooterLink');
 
 if(usernameSession == null){
     signInButton.innerText = "Sign In";
@@ -17,11 +22,18 @@ if(usernameSession == null){
     signInLink.href = "./userArea.html";
 };
 
-if(!adminSession) {
-    indexLink.href = "./index.html";
-} else {
-    indexLink.href = "./index_admin.html";
-};
+if(adminSession == 'false') {
+    indexLogoHeaderLink.href = "./index.html";
+    indexHeaderLink.href = "./index.html";
+    indexLogoFooterLink.href = "./index.html";
+    indexFooterLink.href = "./index.html";
+}
+if(adminSession == 'true') {
+    indexLogoHeaderLink.href = "./index_admin.html";
+    indexHeaderLink.href = "./index_admin.html";
+    indexLogoFooterLink.href = "./index_admin.html";
+    indexFooterLink.href = "./index_admin.html";
+}
 
 if(avatarSession == null){
     userIcon.style.display = "inline-block";

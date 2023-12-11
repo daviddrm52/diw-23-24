@@ -444,7 +444,8 @@ function changeUserPassword(db) {
         passwordUpdate.value = "";
         confirmPasswordUpdate.value = "";
         changePasswordContainer.style.display = "none";
-        userArea();
+        window.location.reload();
+
     };
 
     request.onerror = function (event) {

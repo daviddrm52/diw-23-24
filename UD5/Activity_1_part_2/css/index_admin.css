@@ -101,6 +101,10 @@ footer{
     display: none;
 }
 
+#reset-user-password-container {
+    display: none;
+}
+
 .labelInput{
     width: 100%;
     background-color: rgba(180, 0, 29, 0.90);
