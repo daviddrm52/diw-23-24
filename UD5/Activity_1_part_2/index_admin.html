@@ -72,6 +72,54 @@
                 <button id="cancel_delete_selected_user">Cancel deletion</button>
             </div>
         </div>
+        <div id="edit-user-data-container" class="users-container">
+            <div id="userInformation">
+                <h2>Change user personal data</h2>
+                <div class="labelInput">
+                    <label for="name">Name: </label>
+                    <p><input type="text" name="name" id="name" class="textInput" placeholder="Name..."></p>
+                    <small id="nameError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="username">Username: </label>
+                    <p><input type="text" name="username" id="username" class="textInput" placeholder="Username..."></p>
+                    <small id="usernameError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="email">Email: </label>
+                    <p><input type="email" name="email" id="email" class="textInput" placeholder="Email..."></p>
+                    <small id="emailError"></small>
+                </div>
+                <div class="labelInput">
+                    <label for="avatar">Select an avatar: </label>
+                    <div id="avatars">
+                        <ul>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox1">
+                                <label for="avatarCheckbox1" id="labelCheck"><img id="ahri" src="./img/form/ahri.png" alt="Ahri_avatar"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox2">
+                                <label for="avatarCheckbox2" id="labelCheck"><img id="kaisa" src="./img/form/kaisa.png" alt="Ahri_avatar"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="avatar" id="avatarCheckbox3">
+                                <label for="avatarCheckbox3" id="labelCheck"><img id="evelynn" src="./img/form/evelynn.png" alt="Ahri_avatar"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <small id="avatarError"></small>
+                </div>
+                <div class="labelInput">
+                    <div id="buttonForm">
+                        <button id="edit_selected_user_data">Edit personal data</button>
+                    </div>
+                    <div id="buttonForm">
+                        <button id="cancel-edit-selected-user-data">Cancel operation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="users-container" class="users-container">
             <h2>Users in the webpage registred</h2>
             <ul id="users-ul">

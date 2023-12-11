@@ -5,6 +5,20 @@ const DB_VERSION = 2;
 var db;
 var opened = false;
 
+//
+var deleteSelectedUserButton = document.getElementById("delete_selected_user");
+var cancelDeleteSelectedUserButton = document.getElementById("cancel_delete_selected_user");
+var editSelectedUserDataButton = document.getElementById("edit_selected_user_data");
+var cancelEditSelectedUserDataButton = document.getElementById("cancel-edit-selected-user-data");
+
+//Variable to store the user data because the change password, kills everything
+var goodName;
+var goodUsername;
+var goodEmail;
+var goodPassword;
+var goodAvatar;
+var goodAdmin;
+
 function openCreateDatabase(onDBCompleted) {
     if(opened){
         db.close();
@@ -83,21 +97,25 @@ function addUsersToHTML(users){
 
     for (let i = 0; i < users.length; i++){
         document.getElementById("edit_"+users[i].id).addEventListener('click', (event) => {
-            console.log("entrada")
+            document.getElementById("edit-user-data-container").style.display = "block";
+            document.getElementById("name").value = users[i].name;
+            document.getElementById("username").value = users[i].username;
+            document.getElementById("email").value = users[i].email;
+            goodPassword = users[i].password;
+            goodAvatar = users[i].avatar;
+            goodAdmin = users[i].admin;
+            editSelectedUserDataButton.setAttribute("user_id", users[i].id);
         });
         document.getElementById("delete_"+users[i].id).addEventListener('click', (event) => {
             document.getElementById("delete-selected-user-container").style.display = "block";
             document.getElementById("id_deleting").innerHTML = users[i].id;
             document.getElementById("username_deleting").innerHTML = users[i].username;
+            deleteSelectedUserButton.setAttribute("user_id", users[i].id);
         });
     }
 };
 
 /* Delete specific user area */
-
-var deleteSelectedUserButton = document.getElementById("delete_selected_user");
-var cancelDeleteSelectedUserButton = document.getElementById("cancel_delete_selected_user");
-
 deleteSelectedUserButton.addEventListener('click', (event) => {
     deleteSelectedUser();
 });
@@ -108,36 +126,170 @@ cancelDeleteSelectedUserButton.addEventListener('click', (event) => {
 
 function deleteSelectedUser(event){
     console.log("deleteSelectedUser");
-    var button_id = event.target.id;
-    var user_id = document.getElementById(button_id).getAttribute("user_id");
-    console.log(user_id)
+    var user_id = document.getElementById("delete_selected_user").getAttribute("user_id");
+    console.log(user_id);
 
-    // openCreateDatabase(function(db){
-    //     console.log(user_id);
-    //     var tx = db.transaction(DB_STORE_NAME, "readwrite");
-    //     var store = tx.objectStore(DB_STORE_NAME);
+    openCreateDatabase(function(db){
+        console.log(user_id);
+        var tx = db.transaction(DB_STORE_NAME, "readwrite");
+        var store = tx.objectStore(DB_STORE_NAME);
 
-    //     //Deleting data in the ObjectStore
-    //     var request = store.delete(parseInt(user_id));
+        //Deleting data in the ObjectStore
+        var request = store.delete(parseInt(user_id));
 
-    //     request.onsuccess = function (event){
-    //         console.log("deleteLoggedUser: User deleted successfully " + user_id);
+        request.onsuccess = function (event){
+            console.log("deleteLoggedUser: User deleted successfully " + user_id);
 
-    //         //Operations that we want to do after deleting the user
-    //         sessionStorage.clear();
-    //         window.location.replace("./index.html");            
-    //     };
+            //Operations that we want to do after deleting the user
+            window.location.reload();
+        };
 
-    //     request.onerror = function (event) {
-    //         console.error("deleteLoggedUser: error removing the user: ", event.target.errorCode);
-    //     };
+        request.onerror = function (event) {
+            console.error("deleteLoggedUser: error removing the user: ", event.target.errorCode);
+        };
 
-    //     tx.oncomplete = function(){
-    //         console.log("deleteLoggedUser: tx completed");
-    //         db.close();
-    //         opened = false;
-    //     };
-    // });
+        tx.oncomplete = function(){
+            console.log("deleteLoggedUser: tx completed");
+            db.close();
+            opened = false;
+        };
+    });
+};
+
+/* Edit specific user data area  */
+editSelectedUserDataButton.addEventListener('click', (event) => {
+    editSelectedUserData();
+});
+
+cancelEditSelectedUserDataButton.addEventListener('click', (event) => {
+    document.getElementById("edit-user-data-container").style.display = "none";
+});
+
+function editSelectedUserData() {
+    openCreateDatabase(function(db){
+        editUserData(db);
+    });
+};
+
+function editUserData(db) {
+    //In case something is not good
+    var errorDetected = true;
+    //Inputs of the form
+    var user_id = document.getElementById("edit_selected_user_data").getAttribute("user_id");
+    console.log(user_id);
+    // var nameUpdate = document.getElementById("name");
+    // var usernameUpdate = document.getElementById("username");
+    // var emailUpdate = document.getElementById("email");
+    // var avatarUpdate;
+    // //Error messages if something is not validated
+    // var nameError = document.getElementById("nameError");
+    // var usernameError = document.getElementById("usernameError");
+    // var emailError = document.getElementById("emailError");
+    // var avatarError = document.getElementById("avatarError");
+
+    // //Validation of the new data
+    // //Checking what image is selected
+    // if(document.getElementById("avatarCheckbox1").checked){
+    //     imageSelector = document.querySelector("#ahri");
+    //     avatarUpdate = imageSelector.getAttribute("src");
+    //     avatarError.style.display = "none";
+    //     errorDetected = false;
+    // } else if(document.getElementById("avatarCheckbox2").checked){
+    //     imageSelector = document.querySelector("#kaisa");
+    //     avatarUpdate = imageSelector.getAttribute("src");
+    //     avatarError.style.display = "none";
+    //     errorDetected = false;
+    // } else if(document.getElementById("avatarCheckbox3").checked){
+    //     imageSelector = document.querySelector("#evelynn");
+    //     avatarUpdate = imageSelector.getAttribute("src");
+    //     avatarError.style.display = "none";
+    //     errorDetected = false;
+    // } else {
+    //     avatarError.innerText = "You have to select an avatar!";
+    //     avatarError.style.display = "block";
+    //     errorDetected = true;
+    // };
+    // //Validating name
+    // if(nameUpdate.value.trim() === ''){
+    //     nameError.innerText = "The name input is empty!";
+    //     nameError.style.display = "block";
+    //     errorDetected = true;
+    //     console.log("Name is empty, not good...");
+    // } else {
+    //     console.log("Name is correct");
+    //     nameError.style.display = "none";
+    //     errorDetected = false;
+    // };
+    // //Validating username
+    // if(usernameUpdate.value.trim() === ''){
+    //     usernameError.innerText = "The username input is empty!";
+    //     usernameError.style.display = "block";
+    //     errorDetected = true;
+    //     console.log("Username is empty, not good...");
+    // } else {
+    //     console.log("Username is correct");
+    //     usernameError.style.display = "none";
+    //     errorDetected = false;
+    // };
+    // //Validating email
+    // if(emailUpdate.value === ''){
+    //     emailError.innerText = "The email input is empty!";
+    //     emailError.style.display = "block";
+    //     errorDetected = true;
+    //     console.log("Email is empty, not good...");   
+    // } else if(!isEmailValid(emailUpdate.value)){
+    //     emailError.innerText = "The email is not valid!";
+    //     emailError.style.display = "block";
+    //     errorDetected = true;
+    //     console.log("Email is not valid, not good..."); 
+    // } else{
+    //     console.log("Email is correct");
+    //     emailError.style.display = "none";
+    //     errorDetected = false;
+    // };
+
+    // //In case an error is detected in the inputs
+    // if (errorDetected){
+    //     console.log("Errors detected, exiting function");
+    //     db.close();
+    //     opened = false;
+    //     return;
+    // } else {
+    //     console.log("All good");
+    // };
+
+    // var object = {id: parseInt(user_id), name: nameUpdate.value, username: usernameUpdate.value, email: emailUpdate.value, password: goodPassword, avatar: avatarUpdate, admin: goodAdmin};
+
+    // var tx = db.transaction(DB_STORE_NAME, "readwrite");
+    // var store = tx.objectStore(DB_STORE_NAME);
+
+    // //Updates the user personal data in the ObjectStore
+    // request = store.put(object);
+
+    // request.onsuccess = function (event) {
+    //     console.log("User personal data successfully updated!");
+
+    //     //Operations to do after updating the user data
+    //     sessionStorage.removeItem('username');
+    //     sessionStorage.setItem('username', usernameUpdate.value);
+    //     sessionStorage.removeItem('avatar');
+    //     sessionStorage.setItem('avatar', avatarUpdate);
+    //     nameUpdate.value = "";
+    //     usernameUpdate.value = "";
+    //     emailUpdate.value = "";
+    //     editPersonalDataContainer.style.display = "none";
+    //     window.location.reload();
+    // };
+
+    // request.onerror = function (event) {
+    //     console.error("editUserData: Error updating data ", this.error)
+    // };
+
+    // tx.oncomplete = function () {
+    //     console.log("editUserData: tx completed");
+    //     db.close();
+    //     opened = false;
+    // };
 };
 
 
@@ -153,3 +305,7 @@ function verifyAdmin() {
         window.location.replace("./index.html");
     };
 }
+
+//What works: delete user
+//What's on the making: edit user.
+//What's left: reset password and fix index issues with non admin users.
