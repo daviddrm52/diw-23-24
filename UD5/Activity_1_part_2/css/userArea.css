@@ -132,7 +132,7 @@ input[type="radio"][id^="avatarCheck"] {
     display: none;
 }
 
-#deleteUser {
+#deleteUser, #showDeleteUser {
     background-color: #B4001D !important;
     color: #FFFFFF;
 }
@@ -145,4 +145,12 @@ footer{
 
 .material-symbols-outlined.md-18 {
     font-size: 18px;
+}
+
+#delete-selected-user-container {
+    display: none;
+}
+
+#buttonForm{
+    margin: 5px;
 }

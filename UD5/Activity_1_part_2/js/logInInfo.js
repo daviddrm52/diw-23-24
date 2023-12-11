@@ -17,10 +17,10 @@ if(usernameSession == null){
     signInLink.href = "./userArea.html";
 };
 
-if(adminSession == true) {
-    indexLink.href = "./index_admin.html";
-} else {
+if(!adminSession) {
     indexLink.href = "./index.html";
+} else {
+    indexLink.href = "./index_admin.html";
 };
 
 if(avatarSession == null){

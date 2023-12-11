@@ -63,14 +63,26 @@
         </nav>
     </header>
     <main>
-        <div id="userInformation">
-            <h2>Information about you</h2>
-            <div>
+        <div id="userBasicDisplay">
+            <div id="userInformation">
+                <h2>Information about you</h2>
+                <div>
+                    <ul>
+                        <li><img id="avatar-displayed" src="" class="user_avatar"></li>
+                        <li><b>Name: </b> <span id="name-displayed"></span></li>
+                        <li><b>Username:</b> <span id="username-displayed"></span></li>
+                        <li><b>Email:</b> <span id="email-displayed"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="delete-selected-user-container">
+            <div id="userInformation">
+                <h3><span class="material-symbols-outlined">warning</span></h3>
+                <h4>Are you sure that you want to delete your account?</h4>
                 <ul>
-                    <li><img id="avatar-displayed" src="" class="user_avatar"></li>
-                    <li><b>Name: </b> <span id="name-displayed"></span></li>
-                    <li><b>Username:</b> <span id="username-displayed"></span></li>
-                    <li><b>Email:</b> <span id="email-displayed"></span></li>
+                    <li><button id="deleteUser"> Delete account</button></li>
+                    <li><button id="cancelDeleteUser">Cancel deletion</button></li>
                 </ul>
             </div>
         </div>
@@ -92,6 +104,9 @@
                 <div class="labelInput">
                     <div id="buttonForm">
                         <button id="changePassword">Change password</button>
+                    </div>
+                    <div id="buttonForm">
+                        <button id="cancelChangePassword">Cancel operation</button>
                     </div>
                 </div>
             </div>
@@ -138,23 +153,28 @@
                     <div id="buttonForm">
                         <button id="editPersonalData">Edit personal data</button>
                     </div>
+                    <div id="buttonForm">
+                        <button id="cancelEditPersonalData">Cancel operation</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="userInformation">
-            <h2>User options</h2>
-            <div>
-                <ul>
-                    <li><button id="showEditPersonalDataForm">Edit personal data</button></li>
-                    <li><button id="showChangePasswordForm">Change password</button></li>
-                    <li><button disabled id="changeTheme">Change page theme</button></li>
-                </ul>
-                <ul>
-                    <li><button id="deleteUser">Delete account</button></li>
-                </ul>
-                <ul>
-                    <li><button id="logOutUser">Log out</button></li>
-                </ul>
+        <div id="userOptions">
+            <div id="userInformation">
+                <h2>User options</h2>
+                <div>
+                    <ul>
+                        <li><button id="showEditPersonalDataForm">Edit personal data</button></li>
+                        <li><button id="showChangePasswordForm">Change password</button></li>
+                        <li><button disabled id="changeTheme">Change page theme (not available)</button></li>
+                    </ul>
+                    <ul>
+                        <li><button id="showDeleteUser">Delete account</button></li>
+                    </ul>
+                    <ul>
+                        <li><button id="logOutUser">Log out</button></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="infoBackgroundImage">

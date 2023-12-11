@@ -63,6 +63,15 @@
         </nav>
     </header>
     <main>
+        <div id="delete-selected-user-container" class="users-container">
+            <div>
+                <h3><span class="material-symbols-outlined">warning</span></h3>
+                <h4>Are you sure that you want to delete this user?</h4>
+                <p>User id: <span id="id_deleting"></span> username: <span id="username_deleting"></span></p>
+                <button id="delete_selected_user"> Delete user</button>
+                <button id="cancel_delete_selected_user">Cancel deletion</button>
+            </div>
+        </div>
         <div id="users-container" class="users-container">
             <h2>Users in the webpage registred</h2>
             <ul id="users-ul">

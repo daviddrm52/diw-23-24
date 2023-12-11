@@ -14,11 +14,19 @@ var goodAvatar;
 var goodAdmin;
 
 //Variables for the buttons
+var showDeleteUser = document.getElementById("showDeleteUser");
 var delUserButton = document.getElementById("deleteUser");
+var cancelDeleteUser = document.getElementById("cancelDeleteUser");
 var showChangePasswordForm = document.getElementById("showChangePasswordForm")
 var changePasswordButton = document.getElementById("changePassword");
+var cancelChangePasswordButton = document.getElementById("cancelChangePassword");
 var showEditPersonalDataButton = document.getElementById("showEditPersonalDataForm");
 var editPersonalDataButton = document.getElementById("editPersonalData");
+var cancelEditPersonalDataButton = document.getElementById("cancelEditPersonalData");
+
+//Variables for the special containers (user info displayed and options)
+var userBasicDisplay = document.getElementById("userBasicDisplay");
+var userOptions = document.getElementById("userOptions");
 
 function openCreateDatabase(onDBCompleted) {
     if(opened){
@@ -118,6 +126,20 @@ function verifyUser() {
 
 /* Delete User area */
 
+showDeleteUser.addEventListener('click', (event) => {
+    var deleteUserContainer = document.getElementById("delete-selected-user-container");
+    deleteUserContainer.style.display = "block";
+    userBasicDisplay.style.display = "none";
+    userOptions.style.display = "none";
+})
+
+cancelDeleteUser.addEventListener('click', (event) => {
+    var deleteUserContainer = document.getElementById("delete-selected-user-container");
+    deleteUserContainer.style.display = "none";
+    userBasicDisplay.style.display = "block";
+    userOptions.style.display = "block";
+})
+
 delUserButton.addEventListener('click', (event) => {
     deleteUser();
 });
@@ -165,9 +187,18 @@ function deleteLoggedUser(event){
 showEditPersonalDataButton.addEventListener('click', (event) => {
     var editPersonalDataContainer = document.getElementById("editPersonalDataContainer");
     editPersonalDataContainer.style.display = "block";
+    userBasicDisplay.style.display = "none";
+    userOptions.style.display = "none";
     document.getElementById("name").value = goodName;
     document.getElementById("username").value = goodUsername;
     document.getElementById("email").value = goodEmail;
+});
+
+cancelEditPersonalDataButton.addEventListener('click', (event) => {
+    var editPersonalDataContainer = document.getElementById("editPersonalDataContainer");
+    editPersonalDataContainer.style.display = "none";
+    userBasicDisplay.style.display = "block";
+    userOptions.style.display = "block";
 });
 
 editPersonalDataButton.addEventListener('click', (event) => {
@@ -305,7 +336,16 @@ function editUserData(db) {
 showChangePasswordForm.addEventListener('click', (event) => {
     var changePasswordContainer = document.getElementById("changePasswordContainer");
     changePasswordContainer.style.display = "block";
+    userBasicDisplay.style.display = "none";
+    userOptions.style.display = "none";
 });
+
+cancelChangePasswordButton.addEventListener('click', (event) => {
+    var changePasswordContainer = document.getElementById("changePasswordContainer");
+    changePasswordContainer.style.display = "none";
+    userBasicDisplay.style.display = "block";
+    userOptions.style.display = "block";
+})
 
 changePasswordButton.addEventListener('click', (event) => {
     changePassword();
