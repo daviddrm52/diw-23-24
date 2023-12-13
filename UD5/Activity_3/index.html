@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 3 - UD5 - David Rueda Madrid</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main>
+        <audio id="boing" src="./audio/jews_harp_boing-7111.mp3"></audio>
+        <canvas width="800" height="600" id="2d-animation-canvas"></canvas>
+        <div>
+            <h1>GAME!</h1>
+            <div class="game-space">
+                <b>Axis X: </b><input type="number" name="axis-X" id="axis-X" value="3">
+                <b>Axis Y: </b><input type="number" name="axis-Y" id="axis-Y" value="3">
+            </div>
+            <div class="game-space">
+                <button id="startPingPong">Start</button>
+                <button id="stopPingPong">Stop</button>
+            </div>
+            <div>
+                <b>Status of the ping pong: <span id="statusGame">Inactive</span></b>
+            </div>
+        </div>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>

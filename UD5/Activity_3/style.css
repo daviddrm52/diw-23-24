@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+
+body {
+    font-family: Ubuntu;
+    background-color: #ffc0cb;
+}
+
+main {
+    text-align: center;
+}
+
+canvas {
+    border: 2px solid #800080;
+    background-color: #FFFFFF;
+}
+
+.game-space {
+    margin: 10px;
+}
+
+button {
+    padding: 10px;
+    border: transparent;
+    background-color: #800080;
+    color: #FFFFFF;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="number"]{
+    padding: 10px;
+    border: transparent;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
