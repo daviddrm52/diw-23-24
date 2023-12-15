@@ -86,3 +86,6 @@ stopButton.addEventListener('click', (event) => {
     statusGame.innerHTML = "Inactive";
     console.log("Ball inactive");
 });
+
+//Sorry for the vine boom sound effect, it goes perfect with the Moyai image.
+//The background = ad for AC
