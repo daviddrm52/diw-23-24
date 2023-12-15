@@ -3,8 +3,7 @@ let canvas;
 let context;
 let sound = document.querySelector("#boing");
 //The change of color is funny
-let color = ["red", "yellow", "green", "blue", "orange", "purple"];
-let randomColor;
+// let color = ["red", "yellow", "green", "blue", "orange", "purple"];
 let dingus;
 let startButton = document.getElementById("startPingPong");
 let stopButton = document.getElementById("stopPingPong");
@@ -20,7 +19,7 @@ var directionY;
 
 //For the image
 var image = new Image();
-image.src = './img/kaisa.jpg';
+image.src = './img/moai.png';
 
 //Starting the canvas
 canvas = document.getElementById('2d-animation-canvas');
@@ -41,15 +40,13 @@ function clearCanvas() {
 };
 
 function movement(){
-    if (ballX > 800 || ballX < 0){
+    if (ballX > 1240 || ballX < 0){
         directionX *= -1;
         sound.play();
-        randomColor = color[Math.floor(Math.random()*color.length)];
     };
-    if (ballY < 0 || ballY > 600){
+    if (ballY < 0 || ballY > 680){
         directionY *= -1;
         sound.play();
-        randomColor = color[Math.floor(Math.random()*color.length)];
     };
     ballX += directionX;
     ballY += directionY;

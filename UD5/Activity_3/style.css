@@ -11,11 +11,14 @@ main {
 
 canvas {
     border: 2px solid #800080;
-    background-color: #FFFFFF;
+    background-image: URL(./img/CHN860AC_C608_AC.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .game-space {
-    margin: 10px;
+    margin: 5px;
 }
 
 button {
@@ -44,4 +47,8 @@ input[type="number"]{
     width: 30px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+h1 {
+    margin: 5px
 }
