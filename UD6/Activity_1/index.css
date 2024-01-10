@@ -6,7 +6,7 @@
     margin: 0;
 }
 
-main {
+body {
     background-color: #ae86d3;
 }
 
@@ -18,17 +18,28 @@ main {
 }
 
 .input{
-    border: 1px solid pink;
+    border: 1px solid #ffc0cb;
     padding: 10px;
     margin: 10px;
+    border-radius: 10px;
+    background-color: #ffc0cb;
 }
 
-button {
+input[type="button"] {
     width: 100px;
-    background-color: blueviolet;
+    background-color: #8a2be2;
     color: #FFFFFF;
     border: transparent;
     padding: 15px;
     border-radius: 5px;
     font-size: 15px;
+    cursor: pointer;
+}
+
+input[type="text"]{
+    width: 350px;
+    border: transparent;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
 }
