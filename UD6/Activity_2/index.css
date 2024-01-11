@@ -6,10 +6,14 @@
     margin: 0;
 }
 
-#board {
+main h1{
+    text-align: center;
+    padding: 20px;
+}
+
+.board {
     width: 600px;
     margin: 0 auto;
-    margin-top: 100px;
     padding: 30px;
     border: 5px solid purple;
     border-radius: 15px;
@@ -25,9 +29,21 @@
     text-align: center;
     margin: 10px;
     display: inline-block;
-    color: #FFFFFF;
+    color: purple;
+    font-size: 80px;
+}
+
+.message-area{
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 30px;
+    border: 5px solid purple;
+    border-radius: 15px;
+    background-color: #ffc0cb;
 }
 
 .inactive {
-    background-color: aqua;
+    background-color: #FFFFFF;
+    color: #000000;
 }
