@@ -6,9 +6,17 @@
     margin: 0;
 }
 
+body {
+    background-image: url("./img/Japan_Airlines_Boeing_777_\(JA8979\)_at_Tokyo_Haneda_Airport.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
 main h1{
     text-align: center;
     padding: 20px;
+    color: #FFFFFF;
 }
 
 .board {
@@ -20,7 +28,7 @@ main h1{
     background-color: #ffc0cb;
 }
 
-.card {
+.card-first, .card-second {
     width: 100px;
     height: 100px;
     background-color: purple;
@@ -34,6 +42,7 @@ main h1{
 }
 
 .message-area{
+    text-align: center;
     width: 600px;
     margin: 0 auto;
     margin-top: 10px;
@@ -41,9 +50,15 @@ main h1{
     border: 5px solid purple;
     border-radius: 15px;
     background-color: #ffc0cb;
+    margin-bottom: 100px;
 }
 
 .inactive {
     background-color: #FFFFFF;
     color: #000000;
+}
+
+.pair-correct {
+    background-color: lightgreen;
+    cursor: not-allowed;
 }
