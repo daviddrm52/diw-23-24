@@ -16,10 +16,10 @@ $(document).ready (function(){
 
     //To print the randomized array into the page
     for(i = 0; i < firstPair.length; i++){
-        $(".board").append("<div class='card-first' value='"+firstPair[i]+"' id='card-first-"+firstPair[i]+"'>"+firstPair[i]+"</div>");
+        $(".board").append("<div class='card-first' value='"+firstPair[i]+"' id='card-first-"+firstPair[i]+"'></div>");
     }
     for(i = 0; i < secondPair.length; i++){
-        $(".board").append("<div class='card-second' value='"+secondPair[i]+"' id='card-second-"+secondPair[i]+"'>"+secondPair[i]+"</div>");
+        $(".board").append("<div class='card-second' value='"+secondPair[i]+"' id='card-second-"+secondPair[i]+"'></div>");
     }
 
     //When the user clicks in the top set of cards
@@ -30,6 +30,7 @@ $(document).ready (function(){
             firstCardID = $(this).attr("id");
             console.log(firstCardID);
             firstPairSelected = cardValue;
+            $(this).html("<span>"+cardValue+"</span>");
             $(this).toggleClass("inactive");
             $("#message-first-card").text("最初のカードからの番号： "+ cardValue);
             checkCard(cardValue);
@@ -38,7 +39,8 @@ $(document).ready (function(){
             };
             setTimeout(() => {
                 if(!$(this).hasClass("pair-correct")) {
-                    $(this).toggleClass("inactive"); 
+                    $(this).toggleClass("inactive");
+                    $(this).text("");
                 }
                 firstPairSelected = null;
             }, 750);
@@ -52,6 +54,7 @@ $(document).ready (function(){
             var cardValue = $(this).attr("value");
             secondPairSelected = cardValue;
             secondCardID = $(this).attr("id");
+            $(this).text(cardValue);
             $(this).toggleClass("inactive");
             $("#message-second-card").text("枚目のカードの番号："+ cardValue);
             checkCard(cardValue);
@@ -60,7 +63,8 @@ $(document).ready (function(){
             };
             setTimeout(() => {
                 if(!$(this).hasClass("pair-correct")) {
-                    $(this).toggleClass("inactive"); 
+                    $(this).toggleClass("inactive");
+                    $(this).text("");
                 }
                 secondPairSelected = null;
             }, 750);
