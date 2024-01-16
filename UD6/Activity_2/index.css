@@ -9,7 +9,6 @@
 body {
     background-image: url("./img/Japan_Airlines_Boeing_777_\(JA8979\)_at_Tokyo_Haneda_Airport.jpg");
     background-repeat: no-repeat;
-    background-position: center;
     background-size: cover;
 }
 
@@ -50,7 +49,6 @@ main h1{
     border: 5px solid purple;
     border-radius: 15px;
     background-color: #ffc0cb;
-    margin-bottom: 100px;
 }
 
 .inactive {
