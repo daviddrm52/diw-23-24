@@ -112,7 +112,7 @@ function checkPair(first, idFirst, second, idSecond) {
 
 //TODO
 /*
-    Waiting to put extras to the game (finally kek)
+    Waiting to put extras to the game 
 */
 
 /**
