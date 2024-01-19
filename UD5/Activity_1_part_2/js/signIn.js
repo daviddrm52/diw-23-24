@@ -28,6 +28,27 @@ function openCreateDatabase(onDBCompleted) {
         onDBCompleted(db);
     };
 
+    //This has been a source of problems, now is also in the signIn to prevent malfunction in the registration.js
+    request.onupgradeneeded = () => {
+        db = request.result;
+        console.log("openCreateDatabase: upgrade is needed "+ db);
+        var objectStore = db.createObjectStore(DB_STORE_NAME, {keyPath: "id", autoIncrement: true});
+        console.log("openCreateDatabase: Objct store created succesfully");
+        console.log(DB_STORE_NAME);
+        objectStore.createIndex("name", "name", {unique: false});
+        console.log("openCreateDatabase: Index created on name");
+        objectStore.createIndex("username", "username", {unique: true});
+        console.log("openCreateDatabase: Index created on username");
+        objectStore.createIndex("email", "email", {unique: true});
+        console.log("openCreateDatabase: Index created on email");
+        objectStore.createIndex("password", "password", {unique: false});
+        console.log("openCreateDatabase: Index created on password");
+        objectStore.createIndex("avatar", "avatar", {unique: false});
+        console.log("openCreateDatabase: Index created on avatar");
+        objectStore.createIndex("admin", "admin", {unique: false});
+        console.log("openCreateDatabase: Index created on admin");
+    };
+
     //onError handler
     request.onerror = (event) => {
         console.error("Error opening or creating a database, this error hits hard: ", event.target.errorCode);
