@@ -36,7 +36,18 @@ header button {
 }
 
 #orange-droppable {
-    width: 200px;
+    width: 50%;
     height: 200px;
     background-color: #ff5e00;
+    display: inline-block;
+}
+
+#purple-droppable {
+    width: 50%;
+    height: 200px;
+    background-color: #c528c5;
+    display: inline-block
+}
+
+.drop-zone {
 }
