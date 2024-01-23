@@ -12,42 +12,47 @@ header {
     width: 100%;
 }
 
-header h2 {
-    text-align: center;
+header div{
+    display: inline-flex;
 }
 
-header button {
+header div h2 {
+    margin: 0 auto;
+}
+
+#post-it-generator {
     margin: 5px;
+    border: transparent;
+    padding: 5px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
 }
 
-#post-it-orange {
+.post-it-orange {
     width: 100px;
-    height: 100px;
+    height: 50px;
     border: 1px solid #000000;
-    background-color: #ffa500;
+    background-color: #F7A500;
 }
 
-#post-it-purple {
+.post-it-purple {
     width: 100px;
-    height: 100px;
+    height: 50px;
     border: 1px solid #000000;
     background-color: #800080;
     color: #FFFFFF;
 }
 
 #orange-droppable {
-    width: 50%;
-    height: 200px;
-    background-color: #ff5e00;
-    display: inline-block;
+    width: 200px;
+    height: 800px;
+    background-color: rgba(247, 165, 0, 0.50);
+    float: right;
 }
 
 #purple-droppable {
-    width: 50%;
-    height: 200px;
-    background-color: #c528c5;
-    display: inline-block
-}
-
-.drop-zone {
+    width: 200px;
+    height: 800px;
+    background-color: rgba(128, 0, 128, 0.50);
+    float: right;
 }

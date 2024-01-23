@@ -11,28 +11,27 @@
 <body>
     <header>
         <div>
-            <h2>Post-it!</h2>
-            <button>Generate post-it</button>
+            <button id="post-it-generator">Generate post-it</button>
         </div>
     </header>
     <main>
         <div class="drop-zone">
-            <div id="orange-droppable" class="ui-widget-header">
-                <p>Awaiting AC data</p>
+            <div id="orange-droppable">
+                <h4>Awaiting orange post-its</h4>
+                <p>...</p>
             </div>
-            <div id="purple-droppable" class="ui-widget-header">
-                <p>Awaiting AL data</p>
+            <div id="purple-droppable">
+                <h4>Awaiting purple post-its</h4>
+                <p>...</p>
             </div>
         </div>
-        <div id="post-it-orange" class="ui-widget-content">
-            <p>Air Chiquin</p>
+        <div class="post-it-orange">
+            <p></p>
         </div>
-        <div id="post-it-purple" class="ui-widget-content">
-            <p>Air Lian</p>
+        <div class="post-it-purple">
+            <p></p>
         </div>
-
     </main>
     <script src="./index.js"></script>
-
 </body>
 </html>
