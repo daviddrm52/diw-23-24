@@ -6,6 +6,14 @@
     margin: 0;
 }
 
+body {
+    background-image: url(./img/nier_replicant.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
 header {
     background-color: #B4001D;
     color: #FFFFFF;
@@ -35,6 +43,14 @@ header div h2 {
     background-color: #F7A500;
 }
 
+.post-it-purple {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #000000;
+    background-color: #800080;
+    color: #FFFFFF;
+}
+
 .post-it-orange textarea{
     width: 90%;
     height: 80%;
@@ -45,34 +61,46 @@ header div h2 {
     background-color: rgba(255,255,255,0.50);
 }
 
-.post-it-orange p {
-    float: right;
+.post-it-purple textarea{
+    width: 90%;
+    height: 80%;
+    resize: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0,0.50);
+    color: #FFFFFF;
 }
 
-.post-it-orange p button {
-    border: transparent;
-    padding-left: 5px;
+.post-it-orange p, .post-it-purple p {
+    float: right;
     padding-right: 5px;
 }
 
-.post-it-purple {
-    width: 100px;
-    height: 50px;
-    border: 1px solid #000000;
-    background-color: #800080;
+.post-it-orange p button, .post-it-purple p button {
+    border: transparent;
+    width: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.delete-post-it-button {
+    background-color: #B4001D;
     color: #FFFFFF;
 }
 
 #orange-droppable {
     width: 200px;
-    height: 800px;
+    height: 96vh;
     background-color: rgba(247, 165, 0, 0.50);
     float: right;
 }
 
 #purple-droppable {
     width: 200px;
-    height: 800px;
+    height: 96vh;
     background-color: rgba(128, 0, 128, 0.50);
     float: right;
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity 4 - UD6 - David Rueda Madrid</title>
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 </head>
@@ -25,12 +26,16 @@
                 <p>...</p>
             </div>
         </div>
+        <div id="delete-post-it-dialog" title="Delete this post-it?">
+            <p>Are you sure that you want to delete this post-it?</p>
+        </div>
         <div class="post-it-orange" id="orange-1">
-            <p><button>_</button> <button>X</button></p>
+            <p><button class="minimize-post-it">_</button> <button class="maximize-post-it">※</button> <button class="delete-post-it-button">X</button></p>
             <textarea>Ir a visitar a Popola a ver si tiene trabajo</textarea>
         </div>
         <div class="post-it-purple" id="purple-1">
-            <p></p>
+            <p><button class="minimize-post-it">_</button> <button class="maximize-post-it">※</button> <button class="delete-post-it-button">X</button></p>
+            <textarea>Visitar a Yonah para ver como esta</textarea>
         </div>
     </main>
     <script src="./index.js"></script>

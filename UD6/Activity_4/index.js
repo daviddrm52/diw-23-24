@@ -48,18 +48,50 @@ $(document).ready( function() {
         }
       }
     });
-});
 
-$("#post-it-generator").on("click", function() {
-  randomPostIt = Math.floor((Math.random() * 2) + 1);
-  if(randomPostIt === 1) {
-    orangeID++;
-    orangePost = "<div class='post-it-orange' id='orange-"+orangeID+"'><p></p></div>"
-    $("main").append(orangePost);
-    $(".post-it-orange").draggable();
-  } else {
-    purpleID++;
-    $("main").append("<div class='post-it-purple' id='purple-"+purpleID+"'><p></p></div>");
-    $(".post-it-purple").draggable();
-  }
+    $(document).on("click", ".delete-post-it-button", function(){
+      postIiIdentificator = $(this).parent().parent().attr("id");
+      console.log(postIiIdentificator);
+      $("#delete-post-it-dialog").dialog("open");
+    });
+    
+    $("#delete-post-it-dialog").dialog({
+      autoOpen: false,
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      buttons: {
+        "Delete post-it": function() {
+          $("#"+postIiIdentificator).remove();
+          console.log("Post-it with "+postIiIdentificator+" id was removed");
+          $(this).dialog("close");
+        },
+        Cancel: function() {
+          console.log("Delete of the post-it canceled");
+          $(this).dialog("close");
+        }
+      },
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+
+    $("#post-it-generator").on("click", function() {
+      randomPostIt = Math.floor((Math.random() * 2) + 1);
+      if(randomPostIt === 1) {
+        orangeID++;
+        $("main").append("<div class='post-it-orange' id='orange-'"+orangeID+"><p><button class='minimize-post-it'>_</button> <button class='maximize-post-it'>※</button> <button class='delete-post-it-button'>X</button></p><textarea></textarea></div>");
+        $(".post-it-orange").draggable();
+      } else {
+        purpleID++;
+        $("main").append("<div class='post-it-purple' id='purple-'"+purpleID+"><p><button class='minimize-post-it'>_</button> <button class='maximize-post-it'>※</button> <button class='delete-post-it-button'>X</button></p><textarea></textarea></div>");
+        $(".post-it-purple").draggable();
+      }
+    });
 });
