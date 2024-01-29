@@ -51,6 +51,31 @@ header div h2 {
     color: #FFFFFF;
 }
 
+
+
+/* When the post is maximized (hidding the maximize button)*/
+.post-it-orange p button.maximize-post-it, .post-it-purple p button.maximize-post-it{
+    display: none;
+}
+
+/* When the post-it is minimized*/
+.post-it-orange.minimized, .post-it-purple.minimized {
+    width: 150px;
+    height: 20px;
+}
+
+.post-it-orange.minimized textarea, .post-it-purple.minimized textarea {
+    display: none;
+}
+
+.post-it-orange.minimized p button.minimize-post-it, .post-it-purple.minimized p button.minimize-post-it{
+    display: none;
+}
+
+.post-it-orange.minimized p button.maximize-post-it, .post-it-purple.minimized p button.maximize-post-it{
+    display: inline;
+}
+
 .post-it-orange textarea{
     width: 90%;
     height: 80%;
@@ -84,6 +109,11 @@ header div h2 {
     padding-right: 5px;
     margin: 2px;
     cursor: pointer;
+}
+
+.post-it-orange p button.delete-post-it-button:disabled, .post-it-purple p button.delete-post-it-button:disabled {
+    background-color: #EFEFEF;
+    cursor: not-allowed;
 }
 
 .delete-post-it-button {
