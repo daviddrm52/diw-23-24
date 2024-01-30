@@ -56,12 +56,14 @@ $(document).ready( function() {
     
     $(document).on("click", ".minimize-post-it", function(){
       postItIdentificator = $(this).parent().parent().attr("id");
+      $("div#"+postItIdentificator).removeClass("maximized");
       $("div#"+postItIdentificator).addClass("minimized");
     });
 
     $(document).on("click", ".maximize-post-it", function(){
       postItIdentificator = $(this).parent().parent().attr("id");
       $("div#"+postItIdentificator).removeClass("minimized");
+      $("div#"+postItIdentificator).addClass("maximized");
     });
 
     $("#delete-post-it-dialog").dialog({
@@ -105,11 +107,11 @@ $(document).ready( function() {
       randomPostIt = Math.floor((Math.random() * 2) + 1);
       if(randomPostIt === 1) {
         orangeID++;
-        $("main").append("<div class='post-it-orange' id='orange-"+orangeID+"'><p><button class='minimize-post-it'>_</button> <button class='maximize-post-it'>※</button> <button class='delete-post-it-button'>X</button></p><textarea maxlength='140'></textarea></div>");
+        $("main").append("<div class='post-it-orange maximized' id='orange-"+orangeID+"'><p><button class='minimize-post-it'><span class='material-symbols-outlined'>minimize</span></button><button class='maximize-post-it'><span class='material-symbols-outlined'>maximize</span></button><button class='delete-post-it-button'><span class='material-symbols-outlined'>close</span></button></p><textarea maxlength='140'></textarea></div>");
         $(".post-it-orange").draggable();
       } else {
         purpleID++;
-        $("main").append("<div class='post-it-purple' id='purple-"+purpleID+"'><p><button class='minimize-post-it'>_</button> <button class='maximize-post-it'>※</button> <button class='delete-post-it-button'>X</button></p><textarea maxlength='140'></textarea></div>");
+        $("main").append("<div class='post-it-purple maximized' id='purple-"+purpleID+"'><p><button class='minimize-post-it'><span class='material-symbols-outlined'>minimize</span></button><button class='maximize-post-it'><span class='material-symbols-outlined'>maximize</span></button><button class='delete-post-it-button'><span class='material-symbols-outlined'>close</span></button></p><textarea maxlength='140'></textarea></div>");
         $(".post-it-purple").draggable();
       }
     });

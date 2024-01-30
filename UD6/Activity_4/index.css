@@ -51,17 +51,35 @@ header div h2 {
     color: #FFFFFF;
 }
 
-
-
 /* When the post is maximized (hidding the maximize button)*/
 .post-it-orange p button.maximize-post-it, .post-it-purple p button.maximize-post-it{
     display: none;
 }
 
 /* When the post-it is minimized*/
+.post-it-orange.maximized, .post-it-purple.maximized {
+    width: 150px;
+    height: 150px;
+    animation-name: maximize-post-it;
+    animation-duration: 1s;
+}
+
+@keyframes maximize-post-it {
+    from {height: 20px;}
+    to {height: 150px;}
+}
+
+/* When the post-it is minimized*/
 .post-it-orange.minimized, .post-it-purple.minimized {
     width: 150px;
     height: 20px;
+    animation-name: minimize-post-it;
+    animation-duration: 1s;
+}
+
+@keyframes minimize-post-it {
+    from {height: 150px;}
+    to {height: 20px;}
 }
 
 .post-it-orange.minimized textarea, .post-it-purple.minimized textarea {
@@ -133,4 +151,8 @@ header div h2 {
     height: 96vh;
     background-color: rgba(128, 0, 128, 0.50);
     float: right;
+}
+
+.material-symbols-outlined{
+    font-size: 14px !important;
 }
