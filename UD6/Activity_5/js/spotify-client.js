@@ -1,5 +1,5 @@
-var client_id = '';
-var client_secret = '';
+var client_id = 'x';
+var client_secret = 'x';
 var access_token = '';
 
 //We create the Spotify class with the API to make the call to
@@ -18,7 +18,17 @@ Spotify.prototype.getArtist = function (artist) {
     },
   }).done( function(response){
     console.log(response);
-    
+    let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
+    $("#results").empty();
+    $.each(response.artists.items, function(index) {
+      $("#results").append('<h2 class="artist_name"> '+ response.artists.items[index].name+' </h2>');
+      $("#results").append('<h3 class="artist_popularity"> Popularity of the artist: '+response.artists.items[index].popularity+'</h3> <br>');
+      if($.isEmptyObject(response.artists.items[index].images)){
+        $("#results").append('<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+placeholder+'"> </img> </a>');
+      } else {
+        $("#results").append('<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+response.artists.items[index].images[1].url+'"> </img> </a>');
+      }
+    });
   });
 };
 
