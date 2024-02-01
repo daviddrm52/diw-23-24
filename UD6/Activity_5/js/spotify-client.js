@@ -1,6 +1,7 @@
-var client_id = 'x';
-var client_secret = 'x';
+var client_id= '';
+var client_secret = '';
 var access_token = '';
+
 
 //We create the Spotify class with the API to make the call to
 function Spotify() {
@@ -9,7 +10,6 @@ function Spotify() {
 
 //Search for information on an artist, adding the possibility of obtaining their albums.
 Spotify.prototype.getArtist = function (artist) {
-
   $.ajax({
     type: "GET",
     url: this.apiUrl + 'v1/search?type=artist&q=' + artist,
@@ -17,17 +17,18 @@ Spotify.prototype.getArtist = function (artist) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
+    console.log(response.artists.items[0].uri);
     console.log(response);
     let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
     $("#results").empty();
+    $("#results").append("<div id='artists'> </div>");
     $.each(response.artists.items, function(index) {
-      $("#results").append('<h2 class="artist_name"> '+ response.artists.items[index].name+' </h2>');
-      $("#results").append('<h3 class="artist_popularity"> Popularity of the artist: '+response.artists.items[index].popularity+'</h3> <br>');
       if($.isEmptyObject(response.artists.items[index].images)){
-        $("#results").append('<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+placeholder+'"> </img> </a>');
+        var artistImage = '<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+placeholder+'"> </img> </a>';
       } else {
-        $("#results").append('<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+response.artists.items[index].images[1].url+'"> </img> </a>');
+        var artistImage = '<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+response.artists.items[index].images[1].url+'"> </img> </a>';
       }
+      $("#artists").append("<div class='artist'> <button id='artist_name'> <h2> "+ response.artists.items[index].name+" </h2> </button> <h3 class='artist_popularity'> Popularity of the artist: "+response.artists.items[index].popularity+" </h3> "+artistImage+" </div>");
     });
   });
 };
@@ -59,15 +60,16 @@ $(function () {
   }).done( function(response) {    
     access_token = response.access_token;    
   });
-
+  
   var spotify = new Spotify();
 
   $('#bgetArtist').on('click', function () {
     spotify.getArtist($('#artistName').val());
   });
 
-  $('#results').on('click', '.artistId', function () {
+  $('#artist-name').on('click', function () {
     spotify.getArtistById($(this).attr("data-id"));
+    console.log("pressed");
   });
 
 });
