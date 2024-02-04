@@ -1,5 +1,5 @@
-var client_id= 'be6e01e8304449ce9046c615d8a5a57d';
-var client_secret = 'c97b065446164965881b98ae75457e50';
+var client_id= '';
+var client_secret = '';
 var access_token = '';
 
 
