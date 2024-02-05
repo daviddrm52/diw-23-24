@@ -1,5 +1,5 @@
-var client_id= 'be6e01e8304449ce9046c615d8a5a57d';
-var client_secret = 'c97b065446164965881b98ae75457e50';
+var client_id= '';
+var client_secret = '';
 var access_token = '';
 
 
@@ -21,7 +21,7 @@ Spotify.prototype.getArtist = function (artist) {
     console.log(response);
     let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
     $("#results").empty();
-    $("#results").append("<div id='artists'> </div>");
+    $("#results").append("<div id='artists'> <h2> Artists </h2> </div>");
     $.each(response.artists.items, function(index) {
       if($.isEmptyObject(response.artists.items[index].images)){
         var artistImage = '<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+placeholder+'"> </img> </a>';
@@ -45,7 +45,7 @@ Spotify.prototype.getArtistById = function (artistId) {
     console.log(response);
     let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
     $("#results").empty();
-    $("#results").append("<div id='artist-albums'> </div>");
+    $("#results").append("<div id='artist-albums'> <h2> Albums </h2> </div>");
     $.each(response.items, function(index) {
       if($.isEmptyObject(response.items[index].images)){
         var albumImage = '<a href="'+response.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+placeholder+'"> </img> </a>';
