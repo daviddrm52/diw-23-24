@@ -97,11 +97,17 @@ Spotify.prototype.getTracksfromAlbumId = function (albumId) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    // console.log(response);
+    console.log(response);
     $("#results").empty();
     $("#results").append("<div id='albums-tracks'> <h2> Songs in the album </h2> </div>");
     $.each(response.items, function(index) {
-      $("#albums-tracks").append("<div class='track'> <h2> "+ response.items[index].name+"</h2> </div>");
+      if(response.items[index].preview_url != null){
+        var trackPreview = "<p> Preview of the song </p> <audio controls> <source src='"+response.items[index].preview_url+"' type='audio/mp3'> </audio>";
+      } else {
+        var trackPreview = "<p> There is no preview of the track available.</p>"
+      }
+      $("#albums-tracks").append("<div class='track'> <h2> "+ response.items[index].name+"</h2> "+trackPreview+" </div>");
+
     });
   });
 };
