@@ -1,14 +1,15 @@
 var client_id= '';
 var client_secret = '';
 var access_token = '';
-
+// The placeholder image is a Boeing 777-246 of Japan Airlines (JA773J, Tokyo 2020 special livery) (now retired)
+let placeholder = "https://cdn.jetphotos.com/full/5/28562_1578762989.jpg";
 
 //We create the Spotify class with the API to make the call to
 function Spotify() {
   this.apiUrl = 'https://api.spotify.com/';
 }
 
-//Search for information on an artist, adding the possibility of obtaining their albums.
+//Search for information on an artist and the songs.
 Spotify.prototype.getArtist = function (artist) {
   $.ajax({
     type: "GET",
@@ -17,8 +18,7 @@ Spotify.prototype.getArtist = function (artist) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    console.log(response);
-    let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
+    // console.log(response);
     $("#results").empty();
     $("#results").append("<div id='artists'> <h2> Artists </h2> </div>");
     $.each(response.artists.items, function(index) {
@@ -27,7 +27,7 @@ Spotify.prototype.getArtist = function (artist) {
       } else {
         var artistImage = '<a href="'+response.artists.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+response.artists.items[index].images[1].url+'"> </img> </a>';
       }
-      $("#artists").append("<div class='artist'> <h2> <a href='javascript:void(0)' class='artist-name' data-id='"+response.artists.items[index].id+"'> "+ response.artists.items[index].name+" </a> </h2> <h3 class='artist_popularity'> Popularity of the artist: "+response.artists.items[index].popularity+" </h3> "+artistImage+" </div>");
+      $("#artists").append("<div class='artist'> <h2> <a href='javascript:void(0)' class='artist-name' data-id='"+response.artists.items[index].id+"'> "+ response.artists.items[index].name+" </a> </h2> "+artistImage+" <h3 class='artist_popularity'> Popularity of the artist: "+response.artists.items[index].popularity+" </h3> </div>");
     });
     $("#results").append("<div id='songs'> <h2> Songs </h2> </div>");
     $.each(response.tracks.items, function(index) {
@@ -36,7 +36,7 @@ Spotify.prototype.getArtist = function (artist) {
       } else {
         var trackImage = '<a href="'+response.tracks.items[index].external_urls.spotify+'"> <img class="artist-img" src="'+response.tracks.items[index].album.images[1].url+'"> </img> </a>';
       }
-      $("#songs").append("<div class='track'> <h2> <a href='javascript:void(0)' class='track-name' data-id='"+response.tracks.items[index].id+"'> "+ response.tracks.items[index].name+" </a> </h2> <h3 class='track_popularity'> Popularity of the song: "+response.tracks.items[index].popularity+" </h3> "+trackImage+" </div>");
+      $("#songs").append("<div class='tracks'> <h2> <a href='javascript:void(0)' class='track-name' data-id='"+response.tracks.items[index].id+"'> "+ response.tracks.items[index].name+" </a> </h2> "+trackImage+" <h3 class='track_popularity'> Popularity of the song: "+response.tracks.items[index].popularity+" </h3> </div>");
     });
   });
 };
@@ -50,8 +50,7 @@ Spotify.prototype.getArtistById = function (artistId) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    console.log(response);
-    let placeholder = "https://www.scdn.co/i/_global/open-graph-default.png";
+    // console.log(response);
     $("#results").empty();
     $("#results").append("<div id='artist-albums'> <h2> Albums </h2> </div>");
     $.each(response.items, function(index) {
@@ -82,9 +81,9 @@ Spotify.prototype.getTrackInfo = function (trackId) {
     } else {
       var trackImage = '<a href="'+response.external_urls.spotify+'"> <img class="artist-img" src="'+response.album.images[1].url+'"> </img> </a>';
     }
-    $("#track-info").append("<div class='track'> "+trackImage+" <h2> "+ response.name+"</h2> <h3> Popularity of the track: "+response.popularity+" </h3> <h3> Album: "+response.album.name+" </h3> <h3> Artist: "+response.artists[0].name+" </h3> </div>");
+    $("#track-info").append("<div class='track-information'> <h2> "+ response.name+"</h2> "+trackImage+" <h3> Popularity of the track: "+response.popularity+" </h3> <h3> Album: "+response.album.name+" </h3> <h3> Artist: "+response.artists[0].name+" </h3> </div>");
     if(response.preview_url != null){
-      $(".track").append("<audio controls autoplay> <source src='"+response.preview_url+"' type='audio/mp3'> </audio>")
+      $(".track-information").append("<p> Preview of the song </p> <audio controls autoplay> <source src='"+response.preview_url+"' type='audio/mp3'> </audio>")
     };
   });
 };
@@ -98,7 +97,7 @@ Spotify.prototype.getTracksfromAlbumId = function (albumId) {
       'Authorization' : 'Bearer ' + access_token
     },
   }).done( function(response){
-    console.log(response);
+    // console.log(response);
     $("#results").empty();
     $("#results").append("<div id='albums-tracks'> <h2> Songs in the album </h2> </div>");
     $.each(response.items, function(index) {
@@ -109,12 +108,14 @@ Spotify.prototype.getTracksfromAlbumId = function (albumId) {
 
 //This fragment is the first thing that is loaded, when the $(document).ready
 $(function () {
+  //AJAX function to load the client_id & client_secret credentials (for security reasons there are outside this file)
   $.ajax({
     url: 'keys.json',
     dataType: 'json',
     success: function (data) {
       client_id = data.client_id;
       client_secret = data.client_secret;
+      //This function will get the access token
       $.ajax({
         type: "POST",
         url: "https://accounts.spotify.com/api/token",
@@ -131,6 +132,7 @@ $(function () {
   
   var spotify = new Spotify();
 
+  //Button when clicked, will search for artists and tracks with the value of the input
   $('#bgetArtist').on('click', function () {
     if ($('#artistName').val().trim() === ''){
       displayError();
@@ -139,19 +141,23 @@ $(function () {
     }
   });
 
+  //When the user clicks the track name, will display basic info about the track
   $(document).on('click', '.track-name', function() {
     spotify.getTrackInfo($(this).attr("data-id"));
   })
 
+  //When the user clicks the artist name, will display the artists albums
   $(document).on('click', '.artist-name', function () {
     spotify.getArtistById($(this).attr("data-id"));
   });
 
+  //When the user clicks the album name, will display all the songs that belong to that album
   $(document).on('click', '.album-name', function () {
     spotify.getTracksfromAlbumId($(this).attr("data-id"));
   })
 });
 
+//Function in case there is nothing in the input
 function displayError() {
   $("#results").empty();
   $("#results").append("<div class='search-error'> <h2> No artist or song was founded! </h2> </div>");

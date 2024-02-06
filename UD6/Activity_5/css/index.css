@@ -65,11 +65,10 @@ body {
 }
 
 #artists h2, #songs h2 {
-  font-size:xx-large;
   text-align: center;
 }
 
-.artist, .track {
+.artist, .tracks {
   background-color: rgba(239, 239, 239, 0.70);
   padding: 20px;
   margin: 0 auto;
@@ -79,21 +78,21 @@ body {
   margin-bottom: 20px;
 }
 
-.artist h2, track h2 {
+.artist h2, .tracks h2 {
   text-align: center;
 }
 
-.artist h2 a, .track h2 a{
+.artist h2 a, .tracks h2 a{
   text-decoration: none;
   color: blueviolet;
 }
 
-.artist .artist_popularity, .track .track_popularity {
+.artist .artist_popularity, .tracks .track_popularity {
   text-align: center;
   padding: 5px;
 }
 
-.artist img, .track img {
+.artist img, .tracks img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -104,6 +103,8 @@ body {
 /* Albums */
 #artist-albums {
   background-color: rgb(253, 194, 224);
+  width: 900px;
+  display: inline-block;
 }
 
 #artist-albums h2 {
@@ -117,8 +118,9 @@ body {
   margin: 0 auto;
   width: 350px;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .album h2 {
@@ -134,13 +136,15 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 350px;
+  width: 90%;
   border-radius: 10px;
 }
 
 /* Tracks inside an album */
 #albums-tracks {
   background-color: rgb(253, 194, 224);
+  width: 1050px;
+  display: inline-block;
 }
 
 #albums-tracks h2 {
@@ -152,12 +156,49 @@ body {
   background-color: rgba(239, 239, 239, 0.70);
   padding: 20px;
   margin: 0 auto;
+  width: 400px;
+  border-radius: 5px;
+  margin: 20px;
+  display: inline-block;
+
+}
+
+.track h2 {
+  text-align: center;
+}
+
+/* Track information */
+
+.track-information {
+  background-color: rgba(239, 239, 239, 0.70);
+  padding: 20px;
+  margin: 0 auto;
   width: 350px;
   border-radius: 5px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-.track h2 {
+.track-information h2 {
   text-align: center;
+}
+
+.track-information img {
+  border-radius: 5px;
+  width: 250px;
+}
+
+@media (max-width: 950px) {
+  #artist-albums {
+    width: 450px;
+  } 
+  #albums-tracks {
+    width: 480px;
+  }
+}
+
+@media (min-width: 1450px) {
+  #artist-albums {
+    width: 1300px;
+  }  
 }
