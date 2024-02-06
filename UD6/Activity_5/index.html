@@ -5,13 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Spotify API data</title>
-  <link rel="stylesheet" href="./css/site.css" />
+  <link rel="stylesheet" href="./css/index.css" />
 </head>
 <body>
-  <h1>Search by artist:</h1>
-  <input type="text" placeholder="Search artist" id="artistName"/>
-  <button id="bgetArtist">Info</button>
-
+  <div class="searchBar">
+    <h1>Search by artist & song:</h1>
+    <input type="text" placeholder="Search artist or song..." id="artistName"/>
+    <button id="bgetArtist">Search...</button>
+  </div>
   <div id="results">
     <div id="artists"></div>
     <div id="songs"></div>
