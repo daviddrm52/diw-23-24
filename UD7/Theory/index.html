@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS Example</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <p>Registration: {{plane.reg}}</p>
+        <p>Model: {{plane.model}}</p>
+        <p v-html="messageHTML"></p>
+        <!-- v-if & v-else -->
+        <p v-if="show">Hola</p>
+        <p v-if="num > 3">Approaching decision height</p>
+        <p v-else="show">Hola linda</p>
+        <!-- v-bind -->
+        <img v-bind:src="img" alt="JA773J" width="600px">
+
+        <!-- v-for -->
+        <ul v-if="items.length">
+            <li v-for="{item, index} in items" :key="index">{{index}} - {{item}}</li>
+        </ul>
+
+        <button v-on:click="boton">Click on me!</button>
+
+        <form>
+          <input v-model="form.name" type="text" name="name">
+          <input v-model="form.email" type="email" name="email">
+        </form>
+
+        <div>{{form.name}}</div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+      
+        let app = createApp({
+          data() {
+            return {
+              form: {
+                name: '',
+                email: ''
+              },
+              message: 'Hello world!',
+              messageHTML: '<span> Vueling </span>',
+              show: false,
+              num: 5,
+              img: './28562_1578762989.jpg',
+              plane: {
+                reg: 'JA771J',
+                model: 'Boeing 777-246'
+              },
+              
+              items: ["JA008D", "Boeing 777-289", "Japan Airlines", 23],
+            }
+          },
+          methods:{
+            boton: function(e){
+                this.num += 1;
+                console.log(items);
+                console.log(this.num + 1);
+                return this.num + 1;
+            }
+          },
+
+        }).mount('#app') //Important
+      </script>
+</body>
+</html>
