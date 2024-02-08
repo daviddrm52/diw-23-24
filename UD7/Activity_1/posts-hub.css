@@ -7,18 +7,3 @@ body {
     background-position: center;
     background-size: cover; */
 }
-
-/* For the buttons in the header and footer*/
-.btn, .navbar-toggler{
-    background-color: #F7A500 !important;
-}
-
-footer{
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.material-symbols-outlined.md-18 {
-    font-size: 18px;
-}
