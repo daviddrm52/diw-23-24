@@ -2,8 +2,96 @@
 
 body {
     font-family: "Ubuntu", sans-serif;
-    /* background-image: url(./../img/CHN861AC_C608_AC.png);
+    background-image: url(./img/S-28-02_CE60_ROChAF.png);
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover; */
+    background-size: cover;
+}
+
+/* For the buttons in the header and footer*/
+.btn, .navbar-toggler{
+    background-color: #F7A500 !important;
+}
+
+/* Viewing posts, and delete & publish area*/
+#createdPosts, #newPosts, .backgroundImageInfo {
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.70);
+    border-radius: 10px;
+    width: 700px;
+}
+
+.summaryButtons{
+    width: 100%;
+}
+
+.summaryButtons button{
+    border: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    width: 150px;
+    margin: 5px;
+    background-color: #F7A500;
+}
+
+.postInfo {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+
+/* Posts creation and edition area*/
+.postForm{
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.30);
+    border-radius: 10px;
+    width: 520px;
+}
+
+.formTitle {
+    text-shadow: 4px 4px 4px #EBEBEB;
+    text-align: center;
+}
+
+.labelInput{
+    width: 100%;
+    background-color: rgba(180, 0, 29, 0.90);
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 4px #FFF;
+}
+
+.labelInput input, .labelInput select{
+    border: transparent;
+    border-radius: 5px;
+    width: 80%;
+    padding: 5px;
+}
+
+.labelInput textarea{
+    border: transparent;
+    border-radius: 5px;
+    width: 90%;
+    padding: 5px;
+    resize: none;
+}
+
+.labelInput button{
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+    margin: 5px;
+    background-color: #F7A500;
 }
