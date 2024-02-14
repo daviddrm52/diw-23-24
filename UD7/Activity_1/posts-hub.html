@@ -67,12 +67,12 @@
         <div id="createdPosts">
             <h1>Your posts</h1>
             <div class="postSummary" v-if="posts.length">
-                <div class="postInfo" v-for="{title, briefSummary, author} in posts">Title: {{title}} - Summary: {{briefSummary}} - Author: {{author}}<p class="summaryButtons"> <button v-on:click="editPost">Edit post</button> <button v-on:click="deletePost">Delete post</button> </p></div>
+                <div class="postInfo" v-for="{id, title, author} in posts" :key="posts.id"><b>Id: </b>{{id}} <b>Title:</b>{{title}} - <b>Author:</b> {{author}}<p class="summaryButtons"> <button @click="editPost(id)">Edit post</button> <button v-on:click="deletePost(id)">Delete post</button> </p></div>
             </div>
         </div>
         <div id="newPosts">
             <div class="postForm">
-                <h1 class="formTitle">Create a post</h1>
+                <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
                 <div class="labelInput">
                     <label for="title">Title of the post</label>
                     <input v-model="title" type="text" name="title">
@@ -94,11 +94,10 @@
                         <option value="A20N">Airbus A320-271N</option>
                     </select>
                 </div>
-                <!-- <div class="labelInput">
+                <div class="labelInput">
                     <label for="postImage">Upload an image for the post</label>
-                    <input id="postImage" v:on:change="getFileInputValue" accept="image/*" type="file" name="postImage">
-                    <div id="image-preview"></div>
-                </div> -->
+                    <input id="postImage" accept="image/*" type="file" name="postImage">
+                </div>
                 <div class="labelInput">
                     <button v-on:click="publishPost">Publish post now</button>
                     <button v-on:click="saveDraft">Leave post as a draft</button>
