@@ -95,8 +95,12 @@
                     </select>
                 </div>
                 <div class="labelInput">
+                    <div class="previewImage">
+                        <p>Image preview</p>
+                        <img v-if="url" :src="url" alt="user-image-preview">
+                    </div>
                     <label for="postImage">Upload an image for the post</label>
-                    <input id="postImage" accept="image/*" type="file" name="postImage">
+                    <input id="postImage" accept="image/*" type="file" @change="onFileChange">
                 </div>
                 <div class="labelInput">
                     <button v-on:click="publishPost">Publish post now</button>

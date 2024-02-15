@@ -95,3 +95,7 @@ body {
     margin: 5px;
     background-color: #F7A500;
 }
+
+.previewImage img{
+    width: 300px;
+}

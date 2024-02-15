@@ -11,19 +11,24 @@ createApp({
       author: '',
       image: '',
       editing: false,
+      url: null,
     }
   },
   methods: {
     publishPost: function(e){
-      var creationDate = new Date();      
+      var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
+      console.log(this.image.value);
+      var imageInput = document.getElementById("postImage");
+      this.image = "./stored_img/"+imageInput.files[0].name;
+      console.log(this.image);
       var post = {
-        "id": this.id,
-        "title": this.title,
-        "briefSummary": this.briefSummary,
-        "postContent": this.postContent,
-        "author": this.author,
-        "image": "./stored_img/JA773J_B772_JL.jpg",
-        "creationDate": creationDate
+        id: this.id,
+        title: this.title,
+        briefSummary: this.briefSummary,
+        postContent: this.postContent,
+        author: this.author,
+        image: this.image,
+        creationDate: creationDate
       }
       this.posts.push(post);
       this.id = this.id + 1;
@@ -31,21 +36,30 @@ createApp({
       this.briefSummary = "";
       this.postContent = "";
       this.author = "";
+      this.url = null;
+      imageInput.value = "";
+      console.log(this.posts);
     },
-    editPost: function(id){
+    editPost: function(postId){
       console.log("Editing post...");
       this.editing = true;
-      var postId = 1 - id;
-      this.title = this.posts[postId].title;
-      this.briefSummary = this.posts[postId].briefSummary;
-      this.postContent = this.posts[postId].postContent;
-      this.author = this.posts[postId].author;
+      console.log(postId);
+
+      const result = this.posts.find(({id}) => id === postId);
+      console.log(result);
+      console.log(result.author);
+      console.log(result.image);
+
+      // this.title = this.posts[id].title;
+      // this.briefSummary = this.posts[id].briefSummary;
+      // this.postContent = this.posts[id].postContent;
+      // this.author = this.posts[id].author;
+      // this.url = this.posts[id].image;
 
     },
     deletePost: function(id){
       console.log("Deleting post...");
-      var postId = 1 - id;
-      this.posts.splice(postId);
+      this.posts.splice(id);
       console.log(this.posts);
     },
     updatePost: function(e){
@@ -53,8 +67,14 @@ createApp({
     },
     saveDraft: function(e){
 
+    },
+    onFileChange: function(e){
+      const file = e.target.files[0];
+      this.url = URL.createObjectURL(file);
+      console.log(file);
     }
   }
 }).mount('#app');
 
 // {{editing ? "edit" : "create"}}
+
