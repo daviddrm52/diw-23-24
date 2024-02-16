@@ -88,10 +88,11 @@
                 <div class="labelInput">
                     <label for="author">Author of the post</label>
                     <select v-model="author" name="author">
-                        <option value="B772">Boeing 777-2AC</option>
-                        <option value="A346">Airbus A340-642</option>
-                        <option value="B752">Boeing 757-2ACER</option>
-                        <option value="A20N">Airbus A320-271N</option>
+                        <option value="David Rueda">David Rueda</option>
+                        <option value="Aquamarine Oshino">Aquamarine Oshino</option>
+                        <option value="Akane Kurokawa">Akane Kurokawa</option>
+                        <option value="Kana Arima">Kana Arima</option>
+                        <!-- Names making references to a popular manga in Japan kekw -->
                     </select>
                 </div>
                 <div class="labelInput">
@@ -104,7 +105,7 @@
                 </div>
                 <div class="labelInput">
                     <button ref="publishPostButton" v-on:click="publishPost">Publish post now</button>
-                    <button ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
+                    <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
                     <button disabled ref="saveDraftButton" v-on:click="saveDraft">Leave post as a draft</button>
                 </div>
             </div>

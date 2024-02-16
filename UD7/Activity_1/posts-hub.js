@@ -15,12 +15,14 @@ createApp({
       postStatus: '',
       editing: false,
       url: null,
-      //Where the results of a search will be stored
+      //Where the results of a search will be stored (to edit the post and other things)
       result: []
     }
   },
   methods: {
     publishPost: function(e){
+      //This is to save the post and publish it, and will appear in the "Your posts" div
+      console.log("Publishing post...");
       var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
@@ -46,6 +48,7 @@ createApp({
       console.log(this.posts);
     },
     editPost: function(postId){
+      //editPost will put the values of the post that we want to modify into the values of the form, and store the info in the result variable that is in the return
       console.log("Editing post...");
       this.editing = true;
       this.result = this.posts.find(({id}) => id === postId);
@@ -58,14 +61,19 @@ createApp({
       this.$refs.publishPostButton.style.display = "none";
       this.$refs.saveDraftButton.style.display = "none";
     },
-    deletePost: function(postId){
+    deletePost: function(postId){       //deletePost has some problems that will be need fixing in the future
       console.log("Deleting post...");
       this.result = this.posts.find(({id}) => id === postId);
-      console.log(this.result.id);
-      this.posts.splice(postId);
+      var postPosition = this.posts.indexOf(this.result)
+      if(postPosition !== -1){
+        this.posts.splice(postPosition);
+      } else {
+        console.log("The post is in another world, try again...");
+      };
       console.log(this.posts);
     },
-    saveEditPost: function(postId){
+    saveEditPost: function(){
+      //saveEditPost will save the modifications of the post that we want to edit
       this.editing = false;
       if(this.$refs.postImage.value === ''){
         console.log(this.result.title);
@@ -85,19 +93,29 @@ createApp({
         publicationDate: this.result.publicationDate
       }
       console.log(postEdit);
-      // this.posts()
+      var postPosition = this.posts.indexOf(this.result)
+      console.log(postPosition);
+      if(postPosition !== -1){
+        this.posts[postPosition] = postEdit;
+      } else {
+        console.log("The post is in another world, try again...");
+      }
       this.title = "";
       this.briefSummary = "";
       this.postContent = "";
       this.author = "";
       this.url = null;
       this.$refs.postImage.value = "";
+      this.$refs.saveEditPostButton.style.display = "none";
+      this.$refs.publishPostButton.style.display = "block";
+      this.$refs.saveDraftButton.style.display = "block";
     },
     //Will be implemented in the near future
     saveDraft: function(e){
 
     },
     onFileChange: function(e){
+      //This gets the name of the file to display it in the form, and to store it in the post
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
       console.log(file);
