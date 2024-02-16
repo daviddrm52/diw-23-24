@@ -67,7 +67,7 @@
         <div id="createdPosts">
             <h1>Your posts</h1>
             <div class="postSummary" v-if="posts.length">
-                <div class="postInfo" v-for="{id, title, author} in posts" :key="posts.id"><b>Id: </b>{{id}} <b>Title:</b>{{title}} - <b>Author:</b> {{author}}<p class="summaryButtons"> <button @click="editPost(id)">Edit post</button> <button v-on:click="deletePost(id)">Delete post</button> </p></div>
+                <div class="postInfo" v-for="{id, title, author} in posts" :key="posts.id"><b>Id: </b>{{id}} <b>Title:</b>{{title}} - <b>Author:</b> {{author}} <p class="summaryButtons"> <button @click="editPost(id)">Edit post</button> <button v-on:click="deletePost(id)">Delete post</button> </p></div>
             </div>
         </div>
         <div id="newPosts">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="labelInput">
                     <label for="postContent">Content of the post</label>
-                    <textarea v-model="postContent" name="postContent" cols="30" rows="10"></textarea>
+                    <textarea v-model="postContent" name="postContent" cols="30" rows="10" maxlength="500"></textarea>
                 </div>
                 <div class="labelInput">
                     <label for="author">Author of the post</label>
@@ -100,11 +100,12 @@
                         <img v-if="url" :src="url" alt="user-image-preview">
                     </div>
                     <label for="postImage">Upload an image for the post</label>
-                    <input id="postImage" accept="image/*" type="file" @change="onFileChange">
+                    <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
                 </div>
                 <div class="labelInput">
-                    <button v-on:click="publishPost">Publish post now</button>
-                    <button v-on:click="saveDraft">Leave post as a draft</button>
+                    <button ref="publishPostButton" v-on:click="publishPost">Publish post now</button>
+                    <button ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
+                    <button disabled ref="saveDraftButton" v-on:click="saveDraft">Leave post as a draft</button>
                 </div>
             </div>
         </div>
