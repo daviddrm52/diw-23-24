@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 2 - UD7 - David Rueda Madrid</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="app">
+        <h2>Enter an integer: </h2>
+        <input v-model="num" type="number">
+        <input type="button" value="Submit" @click="send">
+        <p v-if="error">
+            <small >{{ error }}</small>
+        </p>
+        <Number v-for="n in numbers" :numero="n" :key="n" v:on:clicked-number="numberSelected"></Number>
+        <p v-if="selectedItem">
+            <span>The number pressed is {{ selectedItem }}</span>
+        </p>
+    </div>
+    <script type="module">
+        import Number from "./Number.js";
+
+        const {createApp} = Vue;
+        const app = createApp({
+            data: function() {
+                return {
+                    num: null,
+                    numbers: [],
+                    error: "",
+                    selectedItem: null,
+                }
+            },
+            components: {
+                Number,
+            },
+            methods: {
+                send: function (e){
+                    //Por si acaso, limpiamos el error
+                    this.error = "";
+                    this.selectedItem = "";
+                    //Elimina los decimales y comprueba si es igual al valor entrado
+                    //Si entra un string devuelve 0
+                    if(~~this.num === this.num){
+                        //Comprobando si el numero esta dentro de la lista
+                        if(this.numbers.indexOf(this.num) == -1){
+                            this.numbers.push(this.num);
+                            this.num = "";
+                        } else {
+                            this.error = "You can't repeat numbers that already are in the list!"
+                        }
+                    } else {
+                        this.error = "You need to enter a correct value!"
+                    };
+                },
+                numberSelected: function (item){
+                    this.selectedItem = item;
+                }
+            },
+        }).mount("#app");
+    </script>
+</body>
+</html>
