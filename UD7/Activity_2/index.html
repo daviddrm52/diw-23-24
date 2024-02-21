@@ -15,7 +15,7 @@
         <p v-if="error">
             <small >{{ error }}</small>
         </p>
-        <Number v-for="n in numbers" :numero="n" :key="n" v:on:clicked-number="numberSelected"></Number>
+        <Number v-for="n in numbers" :numero="n" :key="n" v-on:clicked-number="numberSelected"></Number>
         <p v-if="selectedItem">
             <span>The number pressed is {{ selectedItem }}</span>
         </p>
