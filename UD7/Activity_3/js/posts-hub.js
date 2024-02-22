@@ -10,13 +10,13 @@ createApp({
       //posts array
       posts: [],
       //Information inside the posts array
-      id: 1,
-      title: '',
-      briefSummary: '',
-      postContent: '',
-      author: '',
-      image: '',
-      postStatus: '',
+      id: 0,
+      title: null,
+      briefSummary: null,
+      postContent: null,
+      author: null,
+      image: null,
+      postStatus: null,
       editing: false,
       url: null,
       //Where the results of a search will be stored (to edit the post and other things)
@@ -48,7 +48,7 @@ createApp({
       }
       //Save the data to the localStorage
       localStorage.setItem(this.id, JSON.stringify(post));
-      // this.posts.push(post);
+      this.posts.push(post);
       this.id = this.id + 1;
       this.title = "";
       this.briefSummary = "";
@@ -56,12 +56,6 @@ createApp({
       this.author = "";
       this.url = null;
       this.$refs.postImage.value = "";
-
-      //Retrieve the data from the localStorage
-      var keys = Object.keys(localStorage), i = keys.length;
-      while(i--){
-        this.posts.push(JSON.parse(localStorage.getItem(keys[i])));
-      };
       console.log(this.posts);
     },
     editPost: function(postId){
@@ -78,14 +72,23 @@ createApp({
       this.$refs.publishPostButton.style.display = "none";
       this.$refs.saveDraftButton.style.display = "none";
     },
-    deletePost: function(postId){       //deletePost has some problems that will be need fixing in the future
+    deletePost: function(postId){
       console.log("Deleting post...");
-      this.result = this.posts.find(({id}) => id === postId);
-      var postPosition = this.posts.indexOf(this.result)
-      if(postPosition !== -1){
-        this.posts.splice(postPosition);
-      } else {
-        console.log("The post is in another world, try again...");
+      for (let k = 0; k < this.posts.length; k++){
+        console.log(this.posts[k].id);
+        if(this.posts[k].id == postId){
+          if(k == 0){
+            console.log("pop");
+            this.posts.pop();
+            // localStorage.removeItem(postId)
+          } else {
+            console.log("splice");
+            console.log(k);
+            this.posts.splice(k, k);
+            // localStorage.removeItem(postId)
+          };
+          break;
+        };
       };
       console.log(this.posts);
     },
@@ -136,7 +139,30 @@ createApp({
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
       console.log(file);
-    }
+    },
+  },
+  mounted() {
+    console.log("mounted");
+    //Retrieve the data from the localStorage
+    var keys = Object.keys(localStorage);
+    var i = keys.length;
+    //Add the stored posts in the localStorage in to the posts array
+    while(i--){
+      this.posts.push(JSON.parse(localStorage.getItem(keys[i])));
+    };
+    //Sort the posts stored in the array by its "id"
+    var c = "id";
+    this.posts.sort((a, b) => {
+      if(a[c] === b[c]){
+        return 0;
+      } else {
+        return (a[c] < b[c]) ? -1 : 1;
+      };
+    });
+    //If there are posts stored, this will increment the id value to match the stored posts
+    for(let k = 0; k < this.posts.length; k++){
+      this.id = this.posts[k].id + 1;
+    };
   }
 }).mount('#app');
 
