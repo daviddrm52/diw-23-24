@@ -1,16 +1,17 @@
+//Import components
 import headerPosts from "./components/Header.js";
 import footerPosts from "./components/Footer.js";
 import postDisplay from "./components/PostDisplay.js";
 
-const { createApp } = Vue
+const { createApp } = Vue;
 
 createApp({
   data() {
     return {
-      //posts array
+      //posts array (this is for displaying the data in the page)
       posts: [],
       //Information inside the posts array
-      id: 0,
+      id: 1,
       title: null,
       briefSummary: null,
       postContent: null,
@@ -24,17 +25,23 @@ createApp({
     }
   },
   components: {
+    //Components for the header, footer & post
     headerPosts,
     footerPosts,
     postDisplay,
   },
   methods: {
-    publishPost: function(e){
+    publishPost: function(e){ /* Works */
       //This is to save the post and publish it, and will appear in the "Your posts" div
       console.log("Publishing post...");
       var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
+      //Validation of the form
+      
+      /* Will be created in a short period of time */
+
+      //Array with all the information of the post
       var post = {
         id: this.id,
         title: this.title,
@@ -45,9 +52,10 @@ createApp({
         postStatus: 'published',
         creationDate: creationDate,
         publicationDate: publicationDate
-      }
+      };
       //Save the data to the localStorage
       localStorage.setItem(this.id, JSON.stringify(post));
+      //Save the data to the array
       this.posts.push(post);
       this.id = this.id + 1;
       this.title = "";
@@ -58,7 +66,7 @@ createApp({
       this.$refs.postImage.value = "";
       console.log(this.posts);
     },
-    editPost: function(postId){
+    editPost: function(postId){ /* Works */
       //editPost will put the values of the post that we want to modify into the values of the form, and store the info in the result variable that is in the return
       console.log("Editing post...");
       this.editing = true;
@@ -72,35 +80,29 @@ createApp({
       this.$refs.publishPostButton.style.display = "none";
       this.$refs.saveDraftButton.style.display = "none";
     },
-    deletePost: function(postId){
+    deletePost: function(postId){ /* Works deleting the post in the array & localStorage */
       console.log("Deleting post...");
       for (let k = 0; k < this.posts.length; k++){
         console.log(this.posts[k].id);
         if(this.posts[k].id == postId){
-          if(k == 0){
-            console.log("pop");
-            this.posts.pop();
-            // localStorage.removeItem(postId)
-          } else {
-            console.log("splice");
-            console.log(k);
-            this.posts.splice(k, k);
-            // localStorage.removeItem(postId)
-          };
+          this.posts.splice(k, 1);
+          localStorage.removeItem(postId);
           break;
         };
       };
       console.log(this.posts);
     },
-    saveEditPost: function(){
+    saveEditPost: function(){ /* Works saving the changes in the array & localStorage */
       //saveEditPost will save the modifications of the post that we want to edit
       this.editing = false;
+      //In case the image has not been edited
       if(this.$refs.postImage.value === ''){
         console.log(this.result.title);
         this.image = this.result.image;
       } else {
         this.image = "./stored_img/"+$refs.postImage.files[0].name;
       }
+      //The post modified
       var postEdit = {
         id: this.result.id,
         title: this.title,
@@ -112,14 +114,16 @@ createApp({
         creationDate: this.result.creationDate,
         publicationDate: this.result.publicationDate
       }
-      console.log(postEdit);
-      var postPosition = this.posts.indexOf(this.result)
-      console.log(postPosition);
+      //Get the position of the post in the "posts" array
+      var postPosition = this.posts.indexOf(this.result);
       if(postPosition !== -1){
         this.posts[postPosition] = postEdit;
+        //Set a new item with the old key and the new values
+        localStorage.setItem(this.result.id, JSON.stringify(postEdit));
       } else {
         console.log("The post is in another world, try again...");
       }
+      //Reset the form
       this.title = "";
       this.briefSummary = "";
       this.postContent = "";
@@ -135,6 +139,9 @@ createApp({
 
     },
     onFileChange: function(e){
+      /*  
+        WARNING: To use images that will store good in the page, place the images in the "stored_img" folder!
+      */
       //This gets the name of the file to display it in the form, and to store it in the post
       const file = e.target.files[0];
       this.url = URL.createObjectURL(file);
@@ -163,8 +170,10 @@ createApp({
     for(let k = 0; k < this.posts.length; k++){
       this.id = this.posts[k].id + 1;
     };
+    console.log("All data is available in display");
   }
 }).mount('#app');
 
 // {{editing ? "edit" : "create"}}
 
+// Everything works except saveDraft, that will be worked in the next days

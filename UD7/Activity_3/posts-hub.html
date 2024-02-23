@@ -13,49 +13,53 @@
 <body>
     <div id="app">
         <header-posts></header-posts>
-        <div id="createdPosts">
-            <h1>Your posts</h1>
-            <div class="postSummary" v-if="posts.length">
-                <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ></post-display>
-            </div>
-        </div>
-        <div id="newPosts">
-            <div class="postForm">
-                <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
-                <div class="labelInput">
-                    <label for="title">Title of the post</label>
-                    <input v-model="title" type="text" name="title">
-                </div>
-                <div class="labelInput">
-                    <label for="briefSummary">Brief summary of the post</label>
-                    <input v-model="briefSummary" type="text" name="briefSummary">
-                </div>
-                <div class="labelInput">
-                    <label for="postContent">Content of the post</label>
-                    <textarea v-model="postContent" name="postContent" cols="30" rows="10" maxlength="500"></textarea>
-                </div>
-                <div class="labelInput">
-                    <label for="author">Author of the post</label>
-                    <select v-model="author" name="author">
-                        <option value="David Rueda">David Rueda</option>
-                        <option value="Aquamarine Oshino">Aquamarine Oshino</option>
-                        <option value="Akane Kurokawa">Akane Kurokawa</option>
-                        <option value="Kana Arima">Kana Arima</option>
-                        <!-- Names making references to a popular manga in Japan kekw -->
-                    </select>
-                </div>
-                <div class="labelInput">
-                    <div class="previewImage">
-                        <p>Image preview</p>
-                        <img v-if="url" :src="url" alt="user-image-preview">
+        <div class="row">
+            <div class="column" id="newPosts">
+                <div class="postForm">
+                    <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
+                    <div class="labelInput">
+                        <label for="title">Title of the post</label>
+                        <input v-model="title" type="text" name="title">
                     </div>
-                    <label for="postImage">Upload an image for the post</label>
-                    <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
+                    <div class="labelInput">
+                        <label for="briefSummary">Brief summary of the post</label>
+                        <input v-model="briefSummary" type="text" name="briefSummary">
+                    </div>
+                    <div class="labelInput">
+                        <label for="postContent">Content of the post</label>
+                        <textarea v-model="postContent" name="postContent" cols="30" rows="10" maxlength="500"></textarea>
+                    </div>
+                    <div class="labelInput">
+                        <label for="author">Author of the post</label>
+                        <select v-model="author" name="author">
+                            <option value="David Rueda">David Rueda</option>
+                            <option value="Ruby Oshino">Ruby Oshino</option>
+                            <option value="Aquamarine Oshino">Aquamarine Oshino</option>
+                            <option value="Akane Kurokawa">Akane Kurokawa</option>
+                            <option value="Kana Arima">Kana Arima</option>
+                            <!-- Some names are making references to a popular manga in Japan kekw -->
+                        </select>
+                    </div>
+                    <div class="labelInput">
+                        <div class="previewImage">
+                            <p>Image preview</p>
+                            <img v-if="url" :src="url" alt="user-image-preview">
+                        </div>
+                        <label for="postImage">Upload an image for the post</label>
+                        <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
+                    </div>
+                    <div class="labelInput">
+                        <button ref="publishPostButton" v-on:click="publishPost">Publish post now</button>
+                        <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
+                        <button disabled ref="saveDraftButton" v-on:click="saveDraft">Leave post as a draft</button>
+                    </div>
                 </div>
-                <div class="labelInput">
-                    <button ref="publishPostButton" v-on:click="publishPost">Publish post now</button>
-                    <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
-                    <button disabled ref="saveDraftButton" v-on:click="saveDraft">Leave post as a draft</button>
+            </div>
+            <div class="column" id="createdPosts">
+                <h2 v-if="posts.length == 0">There are no created posts</h2>
+                <h1 v-else>Your posts</h1>
+                <div class="postSummary" v-if="posts.length">
+                    <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ></post-display>
                 </div>
             </div>
         </div>
