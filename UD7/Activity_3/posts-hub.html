@@ -20,6 +20,7 @@
                     <div class="labelInput">
                         <label for="title">Title of the post</label>
                         <input v-model="title" type="text" name="title">
+                        <p><small>{{titleError}}</small></p>
                     </div>
                     <div class="labelInput">
                         <label for="briefSummary">Brief summary of the post</label>
@@ -39,6 +40,7 @@
                             <option value="Kana Arima">Kana Arima</option>
                             <!-- Some names are making references to a popular manga in Japan kekw -->
                         </select>
+                        <p><small>{{authorError}}</small></p>
                     </div>
                     <div class="labelInput">
                         <div class="previewImage">
@@ -47,6 +49,7 @@
                         </div>
                         <label for="postImage">Upload an image for the post</label>
                         <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
+                        <p><small>{{imageError}}</small></p>
                     </div>
                     <div class="labelInput">
                         <button ref="publishPostButton" v-on:click="publishPost">Publish post now</button>

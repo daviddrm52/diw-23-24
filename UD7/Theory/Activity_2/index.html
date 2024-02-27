@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity 2 - UD7 - David Rueda Madrid</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="app">
+        <h3>Index</h3>
+        <!-- Router link -->
+        <p><router-link to="/"> Go home </router-link></p>
+        <p><router-link to="/hello"> Hello </router-link></p>
+        <p><router-link to="/hello?message=world1"> Hello + param</router-link></p>
+        <p><router-link to="/bye"> Hello + param 2</router-link></p>
+        <p><router-link :to="{ name: 'Hello', params: { message: 'world3' } }"> Hello + amogus</router-link></p>
+
+        <router-view></router-view>
+    </div>
+    <script type="module">
+        import router from "./router.js";
+        // import Hello from "./Hello.js";
+
+        const {createApp} = Vue;
+        const app = createApp({
+            data: function() {
+                return {
+                    test: "Hola"
+                }
+            },
+            methods: {
+                
+            },
+        }).use(router).mount("#app");
+    </script>
+</body>
+</html>

@@ -10,6 +10,10 @@ createApp({
     return {
       //posts array (this is for displaying the data in the page)
       posts: [],
+      //For the mandatory inputs
+      titleError: '',
+      authorError: '',
+      imageError: '',
       //Information inside the posts array
       id: 1,
       title: null,
@@ -34,13 +38,34 @@ createApp({
     publishPost: function(e){ /* Works */
       //This is to save the post and publish it, and will appear in the "Your posts" div
       console.log("Publishing post...");
+      //Validation of the form
+      if (this.title == null){
+        this.titleError = "The title input is empty!";
+      } else {
+        this.titleError = "";
+      };
+      if(this.author == null){
+        this.authorError = "You need to select an author!";
+      } else {
+        this.authorError = "";
+      };
+      if(this.image === null){
+        this.imageError = "You need to upload an image!";
+      } else {
+        this.imageError = "";
+      };
+      if (this.titleError !== "" && this.authorError !== "" && this.imageError !== ""){
+        console.log("No errors in the form");
+      } else {
+        console.log("Errors in the form");
+        return null;
+      };
+      /* Will be created in a short period of time */
       var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
+      console.log(this.image);
+      console.log(this.$refs.postImage.files[0].name);
       this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
-      //Validation of the form
-      
-      /* Will be created in a short period of time */
-
       //Array with all the information of the post
       var post = {
         id: this.id,
