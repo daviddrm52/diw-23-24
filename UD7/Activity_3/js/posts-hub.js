@@ -49,23 +49,24 @@ createApp({
       } else {
         this.authorError = "";
       };
-      if(this.image === null){
-        this.imageError = "You need to upload an image!";
+      if(this.url === null){
+        this.imageError = "No image uploaded, putting a placeholder";
+        this.image = "./stored_img/placeholder.jpg";
+        console.log(this.url);
       } else {
         this.imageError = "";
+        console.log(this.$refs.postImage.files[0].name);
+        this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
       };
-      if (this.titleError !== "" && this.authorError !== "" && this.imageError !== ""){
-        console.log("No errors in the form");
-      } else {
+      if (this.title == null || this.author == null){
         console.log("Errors in the form");
         return null;
+      } else {
+        console.log("No errors in the form");
       };
       /* Will be created in a short period of time */
       var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
       var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
-      console.log(this.image);
-      console.log(this.$refs.postImage.files[0].name);
-      this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
       //Array with all the information of the post
       var post = {
         id: this.id,
