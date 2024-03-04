@@ -25,7 +25,7 @@
                 <h2 v-if="posts.length == 0">There are no created posts</h2>
                 <h1 v-else>Your posts</h1>
                 <div class="postSummary" v-if="posts.length">
-                    <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ></post-display>
+                    <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ref="editPostFormRef"></post-display>
                 </div>
             </div>
         </div>

@@ -67,16 +67,18 @@ createApp({
       //editPost will put the values of the post that we want to modify into the values of the form, and store the info in the result variable that is in the return
       console.log("Editing post...");
       console.log(postId);
-      this.editing = true;
       this.result = this.posts.find(({id}) => id === postId);
-      this.title = this.result.title;
-      this.briefSummary = this.result.briefSummary;
-      this.postContent = this.result.postContent;
-      this.author = this.result.author;
-      this.url = this.result.image;
-      this.$refs.saveEditPostButton.style.display = "block";
-      this.$refs.publishPostButton.style.display = "none";
-      this.$refs.saveDraftButton.style.display = "none";
+      this.$refs.editPostForm.updateEditPostForm(this.result); 
+
+      // this.editing = true;
+      // this.title = this.result.title;
+      // this.briefSummary = this.result.briefSummary;
+      // this.postContent = this.result.postContent;
+      // this.author = this.result.author;
+      // this.url = this.result.image;
+      // this.$refs.saveEditPostButton.style.display = "block";
+      // this.$refs.publishPostButton.style.display = "none";
+      // this.$refs.saveDraftButton.style.display = "none";
     },
     deletePost: function(postId){ /* Works deleting the post in the array & localStorage */
       console.log("Deleting post...");

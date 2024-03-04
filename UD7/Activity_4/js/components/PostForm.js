@@ -1,6 +1,6 @@
 export default {
     name: "post-form",
-    props: ['title', 'briefSummary', 'postContent', 'author', 'url'],
+    props: ['post'],
     data() {
         return {
             //For the mandatory inputs
@@ -76,8 +76,17 @@ export default {
             this.$emit("clicked-publish-post", post);
 
         },
-        editPost: function(){
-
+        updateEditPostForm: function(){
+            this.editing = true;
+            this.result = this.posts.find(({id}) => id === postId);
+            this.title = this.result.title;
+            this.briefSummary = this.result.briefSummary;
+            this.postContent = this.result.postContent;
+            this.author = this.result.author;
+            this.url = this.result.image;
+            this.$refs.saveEditPostButton.style.display = "block";
+            this.$refs.publishPostButton.style.display = "none";
+            this.$refs.saveDraftButton.style.display = "none";
         },
         onFileChange: function(e){
             /*  
