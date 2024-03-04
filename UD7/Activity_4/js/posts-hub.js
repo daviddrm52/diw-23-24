@@ -4,6 +4,8 @@ import footerPosts from "./components/Footer.js";
 import postDisplay from "./components/PostDisplay.js";
 import postForm from "./components/PostForm.js";
 
+// import router from "./router.js";
+
 const { createApp } = Vue;
 
 createApp({
@@ -38,65 +40,33 @@ createApp({
 
   },
   methods: {
-    publishPost: function(post){ /* Works */
-      //This is to save the post and publish it, and will appear in the "Your posts" div
-      console.log("Publishing post...");
-      //Validation of the form
-      if (post.title == null){
-        post.titleError = "The title input is empty!";
-      } else {
-        post.titleError = "";
+    updatePostDisplay: function(){
+      //Retrieve the data from the localStorage
+      var keys = Object.keys(localStorage);
+      var i = keys.length;
+      //Add the stored posts in the localStorage in to the posts array
+      while(i--){
+        this.posts.push(JSON.parse(localStorage.getItem(keys[i])));
       };
-      if(this.author == null){
-        this.authorError = "You need to select an author!";
-      } else {
-        this.authorError = "";
+      //Sort the posts stored in the array by its "id"
+      var c = "id";
+      this.posts.sort((a, b) => {
+        if(a[c] === b[c]){
+          return 0;
+        } else {
+          return (a[c] < b[c]) ? -1 : 1;
+        };
+      });
+      //If there are posts stored, this will increment the id value to match the stored posts
+      for(let k = 0; k < this.posts.length; k++){
+        this.id = this.posts[k].id + 1;
       };
-      if(this.url === null){
-        this.imageError = "No image uploaded, putting a placeholder";
-        this.image = "./stored_img/placeholder.jpg";
-        console.log(this.url);
-      } else {
-        this.imageError = "";
-        this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
-      };
-      if (this.title == null || this.author == null){
-        console.log("Errors in the form");
-        return null;
-      } else {
-        console.log("No errors in the form");
-      };
-      /* Will be created in a short period of time */
-      var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
-      var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
-      //Array with all the information of the post
-      var post = {
-        id: this.id,
-        title: this.title,
-        briefSummary: this.briefSummary,
-        postContent: this.postContent,
-        author: this.author,
-        image: this.image,
-        postStatus: 'published',
-        creationDate: creationDate,
-        publicationDate: publicationDate
-      };
-      //Save the data to the localStorage
-      localStorage.setItem(this.id, JSON.stringify(post));
-      //Save the data to the array
-      this.posts.push(post);
-      this.id = this.id + 1;
-      this.title = "";
-      this.briefSummary = "";
-      this.postContent = "";
-      this.author = "";
-      this.url = null;
-      this.$refs.postImage.value = "";
-      console.log(this.posts);
+      console.log("All data was updated successfully");
     },
     editPost: function(postId){ /* Works */
       //editPost will put the values of the post that we want to modify into the values of the form, and store the info in the result variable that is in the return
       console.log("Editing post...");
+      console.log(postId);
       this.editing = true;
       this.result = this.posts.find(({id}) => id === postId);
       this.title = this.result.title;
@@ -195,9 +165,5 @@ createApp({
       this.id = this.posts[k].id + 1;
     };
     console.log("All data is available in display");
-  }
+  },
 }).mount('#app');
-
-// {{editing ? "edit" : "create"}}
-
-// Everything works except saveDraft, that will be worked in the next days

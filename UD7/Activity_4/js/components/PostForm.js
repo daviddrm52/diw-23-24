@@ -1,5 +1,6 @@
 export default {
     name: "post-form",
+    props: ['title', 'briefSummary', 'postContent', 'author', 'url'],
     data() {
         return {
             //For the mandatory inputs
@@ -19,9 +20,38 @@ export default {
         };
     },
     methods: {
-        publishPostComponent: function (){
+        publishPost: function (post){
+            //This is to save the post and publish it, and will appear in the "Your posts" div
+            console.log("Publishing post...");
+            //Validation of the form
+            if (this.title == null){
+                this.titleError = "The title input is empty!";
+            } else {
+                this.titleError = "";
+            };
+            if(this.author == null){
+                this.authorError = "You need to select an author!";
+            } else {
+                this.authorError = "";
+            };
+            if(this.url === null){
+                this.imageError = "No image uploaded, putting a placeholder";
+                this.image = "./stored_img/placeholder.jpg";
+                console.log(this.url);
+            } else {
+                this.imageError = "";
+                this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
+            };
+            if (this.title == null || this.author == null){
+                console.log("Errors in the form");
+                return null;
+            } else {
+                console.log("No errors in the form");
+            };
+            /* Will be created in a short period of time */
             var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
-            var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});
+            var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
+            //Array with all the information of the post
             var post = {
                 id: this.id,
                 title: this.title,
@@ -33,11 +63,21 @@ export default {
                 creationDate: creationDate,
                 publicationDate: publicationDate
             };
-            console.log(post);
-            this.$emit("published-post", post);
+            //Save the data to the localStorage
+            localStorage.setItem(this.id, JSON.stringify(post));
+            this.id = this.id + 1;
+            this.title = "";
+            this.briefSummary = "";
+            this.postContent = "";
+            this.author = "";
+            this.url = null;
+            this.$refs.postImage.value = "";
+            //Save the data to the array
+            this.$emit("clicked-publish-post", post);
+
         },
-        savePostEditComponent: function () {
-            this.$emit("saved-post-modification", post)
+        editPost: function(){
+
         },
         onFileChange: function(e){
             /*  
@@ -69,11 +109,10 @@ export default {
                 <label for="author">Author of the post</label>
                 <select v-model="author" name="author">
                     <option value="David Rueda">David Rueda</option>
-                    <option value="Ruby Oshino">Ruby Oshino</option>
-                    <option value="Aquamarine Oshino">Aquamarine Oshino</option>
+                    <option value="Ruby Hoshino">Ruby Hoshino</option>
+                    <option value="Aquamarine Hoshino">Aquamarine Hoshino</option>
                     <option value="Akane Kurokawa">Akane Kurokawa</option>
                     <option value="Kana Arima">Kana Arima</option>
-                    <!-- Some names are making references to a popular manga in Japan kekw -->
                 </select>
                 <p><small>{{authorError}}</small></p>
             </div>
@@ -87,7 +126,7 @@ export default {
                 <p><small>{{imageError}}</small></p>
             </div>
             <div class="labelInput">
-                <button ref="publishPostButton" v-on:click="publishPostComponent">Publish post now</button>
+                <button ref="publishPostButton" v-on:click="publishPost(post)">Publish post now</button>
                 <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPostComponent(id)">Save post modifications</button>
                 <button disabled >Leave post as a draft</button>
             </div>

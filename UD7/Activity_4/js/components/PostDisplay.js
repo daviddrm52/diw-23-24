@@ -11,13 +11,16 @@ export default {
         },
     },
     template: `
-        <div class="postInfo">
-            <p><b>Identificator: </b>{{post.id}}</p>
-            <p><b>Title: </b>{{post.title}}</p>
-            <p><b>Author: </b>{{post.author}}</p>
-            <p><b>Status of the post: </b>{{post.postStatus}}</p>
-            <p><img v-bind:src="post.image" width="300px"></p>
-            <p class="summaryButtons"> <button @click="clickEditPost(post.id)">Edit post</button> <button @click="clickDeletePost(post.id)">Delete post</button> </p>
+        <div>
+            <div class="postInfo">
+                <p><b>Identificator: </b>{{post.id}}</p>
+                <p><b>Title: </b>{{post.title}}</p>
+                <p><b>Author: </b>{{post.author}}</p>
+                <p><b>Status of the post: </b>{{post.postStatus}}</p>
+                <p><img v-bind:src="post.image" width="300px"></p>
+                <p class="summaryButtons"> <button @click="clickEditPost(post.id)">Edit post</button> <button @click="clickDeletePost(post.id)">Delete post</button> </p>
+            </div>
         </div>
+
     `,
 };
