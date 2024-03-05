@@ -2,7 +2,7 @@ import PostDisplay from "./PostDisplay.js";
 
 export default {
     name: "post-list",
-    props: ["posts"],
+    props: ["posts", "post"],
     components: {
         PostDisplay,
     },
@@ -11,9 +11,11 @@ export default {
             //editPost will put the values of the post that we want to modify into the values of the form, and store the info in the result variable that is in the return
             console.log("Editing post...");
             console.log(postId);
-            this.result = this.posts.find(({id}) => id === postId);
-            this.$emit("clicked-edit-post-list", this.result); 
-            this.$router.push("/postForm");
+            console.log(this.posts);
+            var result = this.posts.find(({id}) => id === postId);
+            console.log(result);
+            this.$router.push({name: 'PostForm', params: {result}});
+
         },
         deletePost: function(postId){ /* Works deleting the post in the array & localStorage */
         console.log("Deleting post...");
@@ -27,9 +29,6 @@ export default {
         };
         console.log(this.posts);
         },
-    },
-    created() {
-
     },
     template: `
         <div class="postsList">

@@ -1,6 +1,6 @@
 export default {
     name: "post-form",
-    props: ['posts'],
+    props: ['post'],
     data() {
         return {
             //For the mandatory inputs
@@ -142,6 +142,31 @@ export default {
             this.url = URL.createObjectURL(file);
             console.log(file);
         },
+    },
+    mounted() {
+        //Retrieve the data from the localStorage
+        var keys = Object.keys(localStorage);
+        var i = keys.length;
+        var counter = [];
+        //Add the stored posts in the localStorage in to the posts array
+        while(i--){
+          counter.push(JSON.parse(localStorage.getItem(keys[i])));
+        };
+        //Sort the posts stored in the array by its "id"
+        var c = "id";
+        counter.sort((a, b) => {
+          if(a[c] === b[c]){
+            return 0;
+          } else {
+            return (a[c] < b[c]) ? -1 : 1;
+          };
+        });
+        //If there are posts stored, this will increment the id value to match the stored posts
+        for(let k = 0; k < counter.length; k++){
+          this.id = counter[k].id + 1;
+        };
+        console.log("ID pushed to avoid errors...");
+        console.log(this.id);
     },
     template: `
         <div id="newPosts">

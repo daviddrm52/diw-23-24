@@ -12,6 +12,7 @@ const App = Vue.createApp({
     return {
       //posts array (this is for displaying the data in the page)
       posts: [],
+      post: [],
     }
   },
   components: {
@@ -23,9 +24,12 @@ const App = Vue.createApp({
     postForm
   },
   methods: {
-
+    updateEditPostForm: function(postResult){
+      console.log(postResult);
+      this.$refs.PostForm.updateEditPostForm(postResult);
+    },
   },
-  mounted() {
+  created() {
     console.log("mounted");
     //Retrieve the data from the localStorage
     var keys = Object.keys(localStorage);
@@ -49,6 +53,6 @@ const App = Vue.createApp({
     };
     console.log("All data is available in display");
     console.log(this.posts);
-    // this.$router.push("/postList");
+    this.$router.push("/postList");
   },
 }).use(router).mount('#app');
