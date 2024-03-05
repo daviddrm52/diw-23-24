@@ -19,6 +19,8 @@ export default {
             url: null,
             //Where the results of a search will be stored (to edit the post and other things)
             result: [],
+            //
+            posts: []
         };
     },
     methods: {
@@ -38,11 +40,11 @@ export default {
             };
             if(this.url === null){
                 this.imageError = "No image uploaded, putting a placeholder";
-                this.image = "./stored_img/placeholder.jpg";
+                this.image = "./diw-23-24/UD7/Activity_4/stored_img/placeholder.jpg";
                 console.log(this.url);
             } else {
                 this.imageError = "";
-                this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
+                this.image = "/diw-23-24/UD7/Activity_4/stored_img/"+this.$refs.postImage.files[0].name;
             };
             if (this.title == null || this.author == null){
                 console.log("Errors in the form");
@@ -54,7 +56,7 @@ export default {
             var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
             var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
             //Array with all the information of the post
-            var post = {
+            var localPost = {
                 id: this.id,
                 title: this.title,
                 briefSummary: this.briefSummary,
@@ -66,7 +68,8 @@ export default {
                 publicationDate: publicationDate
             };
             //Save the data to the localStorage
-            localStorage.setItem(this.id, JSON.stringify(post));
+            localStorage.setItem(this.id, JSON.stringify(localPost));
+            this.posts.push(localPost);
             this.id = this.id + 1;
             this.title = "";
             this.briefSummary = "";
@@ -76,6 +79,7 @@ export default {
             this.$refs.postImage.value = "";
             //Save the data to the array
             this.$emit("clicked-publish-post", post);
+            this.$router.push('/postDisplay');
 
         },
         updateEditPostForm: function(postResult){
@@ -99,7 +103,7 @@ export default {
                 console.log(this.result.title);
                 this.image = this.result.image;
             } else {
-                this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
+                this.image = "/diw-23-24/UD7/Activity_4/stored_img/"+this.$refs.postImage.files[0].name;
             }
             //The post modified
             var postEdit = {
@@ -114,15 +118,7 @@ export default {
                 publicationDate: this.result.publicationDate
             }
             console.log(this.result.id);
-            //Get the position of the post in the "posts" array
-            // var postPosition = this.posts.indexOf(this.result);
-            // if(postPosition !== -1){
-                // this.posts[postPosition] = postEdit;
-                //Set a new item with the old key and the new values
-                localStorage.setItem(this.result.id, JSON.stringify(postEdit));
-            //     } else {
-            //     console.log("The post is in another world, try again...");
-            // }
+            localStorage.setItem(this.result.id, JSON.stringify(postEdit));
             //Reset the form
             this.title = "";
             this.briefSummary = "";
@@ -133,6 +129,7 @@ export default {
             this.$refs.saveEditPostButton.style.display = "none";
             this.$refs.publishPostButton.style.display = "block";
             this.$refs.saveDraftButton.style.display = "block";
+            this.$router.push('/postList');
         },
         onFileChange: function(e){
             /*  
@@ -145,45 +142,47 @@ export default {
         },
     },
     template: `
-        <div class="postForm">
-            <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
-            <div class="labelInput">
-                <label for="title">Title of the post</label>
-                <input v-model="title" type="text" name="title">
-                <p><small>{{titleError}}</small></p>
-            </div>
-            <div class="labelInput">
-                <label for="briefSummary">Brief summary of the post</label>
-                <input v-model="briefSummary" type="text" name="briefSummary">
-            </div>
-            <div class="labelInput">
-                <label for="postContent">Content of the post</label>
-                <textarea v-model="postContent" name="postContent" cols="30" rows="10" maxlength="500"></textarea>
-            </div>
-            <div class="labelInput">
-                <label for="author">Author of the post</label>
-                <select v-model="author" name="author">
-                    <option value="David Rueda">David Rueda</option>
-                    <option value="Ruby Hoshino">Ruby Hoshino</option>
-                    <option value="Aquamarine Hoshino">Aquamarine Hoshino</option>
-                    <option value="Akane Kurokawa">Akane Kurokawa</option>
-                    <option value="Kana Arima">Kana Arima</option>
-                </select>
-                <p><small>{{authorError}}</small></p>
-            </div>
-            <div class="labelInput">
-                <div class="previewImage">
-                    <p>Image preview</p>
-                    <img v-if="url" :src="url" alt="user-image-preview">
+        <div id="newPosts">
+            <div class="postForm">
+                <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
+                <div class="labelInput">
+                    <label for="title">Title of the post</label>
+                    <input v-model="title" type="text" name="title">
+                    <p><small>{{titleError}}</small></p>
                 </div>
-                <label for="postImage">Upload an image for the post</label>
-                <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
-                <p><small>{{imageError}}</small></p>
-            </div>
-            <div class="labelInput">
-                <button ref="publishPostButton" v-on:click="publishPost(post)">Publish post now</button>
-                <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
-                <button disabled ref="saveDraftButton">Leave post as a draft</button>
+                <div class="labelInput">
+                    <label for="briefSummary">Brief summary of the post</label>
+                    <input v-model="briefSummary" type="text" name="briefSummary">
+                </div>
+                <div class="labelInput">
+                    <label for="postContent">Content of the post</label>
+                    <textarea v-model="postContent" name="postContent" cols="30" rows="10" maxlength="500"></textarea>
+                </div>
+                <div class="labelInput">
+                    <label for="author">Author of the post</label>
+                    <select v-model="author" name="author">
+                        <option value="David Rueda">David Rueda</option>
+                        <option value="Ruby Hoshino">Ruby Hoshino</option>
+                        <option value="Aquamarine Hoshino">Aquamarine Hoshino</option>
+                        <option value="Akane Kurokawa">Akane Kurokawa</option>
+                        <option value="Kana Arima">Kana Arima</option>
+                    </select>
+                    <p><small>{{authorError}}</small></p>
+                </div>
+                <div class="labelInput">
+                    <div class="previewImage">
+                        <p>Image preview</p>
+                        <img v-if="url" :src="url" alt="user-image-preview">
+                    </div>
+                    <label for="postImage">Upload an image for the post</label>
+                    <input ref="postImage" accept="image/*" type="file" @change="onFileChange">
+                    <p><small>{{imageError}}</small></p>
+                </div>
+                <div class="labelInput">
+                    <button ref="publishPostButton" v-on:click="publishPost(post)">Publish post now</button>
+                    <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
+                    <button disabled ref="saveDraftButton">Leave post as a draft</button>
+                </div>
             </div>
         </div>
     `,

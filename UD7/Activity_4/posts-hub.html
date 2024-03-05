@@ -14,23 +14,18 @@
 <body>
     <div id="app">
         <header-posts></header-posts>
-        <!-- <div>
-            <router-link to="/"></router-link>
-        </div> -->
         <div>
-            <div id="newPosts">
-                <post-form v-on:clicked-publish-post="updatePostDisplay" ref="PostForm"></post-form>
-            </div>
-            <div id="createdPosts">
-                <h2 v-if="posts.length == 0">There are no created posts</h2>
-                <h1 v-else>Your posts</h1>
-                <div class="postSummary" v-if="posts.length">
-                    <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ref="editPostFormRef"></post-display>
-                </div>
-            </div>
+            <router-link to="/postForm">Post Form</router-link>
+            <router-link to="/postList">Post List</router-link>
         </div>
 
-        <!-- <router-view></router-view> -->
+        <router-view v-bind:posts="posts"></router-view>
+
+        <!-- <div id="createdPosts">
+            <div class="postSummary" v-if="posts.length">
+                <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ref="editPostFormRef"></post-display>
+            </div>
+        </div> -->
 
         <footer-posts></footer-posts>
     </div>
