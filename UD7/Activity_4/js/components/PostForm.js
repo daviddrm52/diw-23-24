@@ -67,6 +67,7 @@ export default {
                 creationDate: creationDate,
                 publicationDate: publicationDate
             };
+            
             //Save the data to the localStorage
             localStorage.setItem(this.id, JSON.stringify(localPost));
             this.posts.push(localPost);
@@ -79,7 +80,8 @@ export default {
             this.$refs.postImage.value = "";
             //Save the data to the array
             this.$emit("clicked-publish-post", post);
-            this.$router.push('/postDisplay');
+            console.log(this.id);
+            this.$router.push('/postList');
 
         },
         updateEditPostForm: function(postResult){

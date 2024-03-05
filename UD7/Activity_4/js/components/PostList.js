@@ -3,7 +3,6 @@ import PostDisplay from "./PostDisplay.js";
 export default {
     name: "post-list",
     props: ["posts"],
-   
     components: {
         PostDisplay,
     },
@@ -13,7 +12,8 @@ export default {
             console.log("Editing post...");
             console.log(postId);
             this.result = this.posts.find(({id}) => id === postId);
-            this.$refs.PostForm.updateEditPostForm(this.result); 
+            this.$emit("clicked-edit-post-list", this.result); 
+            this.$router.push("/postForm");
         },
         deletePost: function(postId){ /* Works deleting the post in the array & localStorage */
         console.log("Deleting post...");
@@ -32,9 +32,12 @@ export default {
 
     },
     template: `
+        <div class="postsList">
+            <router-link to="/postForm"><button>Create a new post</button></router-link>
+        </div>
         <div id="createdPosts">
             <div class="postSummary">
-                <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ref="editPostFormRef"></post-display>
+                <post-display v-for="post in posts" :key="post.id" v-on:clicked-edit-post="editPost" v-on:clicked-delete-post="deletePost" v-bind:post="post" ref="clickEditPost"></post-display>
             </div>    
         </div>
     `,

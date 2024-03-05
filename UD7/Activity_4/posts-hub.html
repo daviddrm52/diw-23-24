@@ -15,11 +15,10 @@
     <div id="app">
         <header-posts></header-posts>
         <div>
-            <router-link to="/postForm">Post Form</router-link>
             <router-link to="/postList">Post List</router-link>
         </div>
 
-        <router-view v-bind:posts="posts"></router-view>
+        <router-view v-bind:posts="posts" v-on:clicked-edit-post-list="updateEditPostForm"></router-view>
 
         <!-- <div id="createdPosts">
             <div class="postSummary" v-if="posts.length">
