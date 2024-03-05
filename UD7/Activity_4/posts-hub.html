@@ -19,7 +19,7 @@
         </div> -->
         <div>
             <div id="newPosts">
-                <post-form v-on:clicked-publish-post="updatePostDisplay"></post-form>
+                <post-form v-on:clicked-publish-post="updatePostDisplay" ref="PostForm"></post-form>
             </div>
             <div id="createdPosts">
                 <h2 v-if="posts.length == 0">There are no created posts</h2>

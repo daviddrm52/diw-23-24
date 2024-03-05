@@ -1,6 +1,6 @@
 export default {
     name: "post-form",
-    props: ['post'],
+    props: ['posts'],
     data() {
         return {
             //For the mandatory inputs
@@ -17,6 +17,8 @@ export default {
             postStatus: null,
             editing: false,
             url: null,
+            //Where the results of a search will be stored (to edit the post and other things)
+            result: [],
         };
     },
     methods: {
@@ -76,9 +78,10 @@ export default {
             this.$emit("clicked-publish-post", post);
 
         },
-        updateEditPostForm: function(){
+        updateEditPostForm: function(postResult){
             this.editing = true;
-            this.result = this.posts.find(({id}) => id === postId);
+            this.result = postResult;
+            console.log(this.result);
             this.title = this.result.title;
             this.briefSummary = this.result.briefSummary;
             this.postContent = this.result.postContent;
@@ -87,6 +90,49 @@ export default {
             this.$refs.saveEditPostButton.style.display = "block";
             this.$refs.publishPostButton.style.display = "none";
             this.$refs.saveDraftButton.style.display = "none";
+        },
+        saveEditPost: function(){ /* Works saving the changes in the array & localStorage */
+            //saveEditPost will save the modifications of the post that we want to edit
+            this.editing = false;
+            //In case the image has not been edited
+            if(this.$refs.postImage.value === ''){
+                console.log(this.result.title);
+                this.image = this.result.image;
+            } else {
+                this.image = "./stored_img/"+this.$refs.postImage.files[0].name;
+            }
+            //The post modified
+            var postEdit = {
+                id: this.result.id,
+                title: this.title,
+                briefSummary: this.briefSummary,
+                postContent: this.postContent,
+                author: this.author,
+                image: this.image,
+                postStatus: this.result.postStatus,
+                creationDate: this.result.creationDate,
+                publicationDate: this.result.publicationDate
+            }
+            console.log(this.result.id);
+            //Get the position of the post in the "posts" array
+            // var postPosition = this.posts.indexOf(this.result);
+            // if(postPosition !== -1){
+                // this.posts[postPosition] = postEdit;
+                //Set a new item with the old key and the new values
+                localStorage.setItem(this.result.id, JSON.stringify(postEdit));
+            //     } else {
+            //     console.log("The post is in another world, try again...");
+            // }
+            //Reset the form
+            this.title = "";
+            this.briefSummary = "";
+            this.postContent = "";
+            this.author = "";
+            this.url = null;
+            this.$refs.postImage.value = "";
+            this.$refs.saveEditPostButton.style.display = "none";
+            this.$refs.publishPostButton.style.display = "block";
+            this.$refs.saveDraftButton.style.display = "block";
         },
         onFileChange: function(e){
             /*  
@@ -136,8 +182,8 @@ export default {
             </div>
             <div class="labelInput">
                 <button ref="publishPostButton" v-on:click="publishPost(post)">Publish post now</button>
-                <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPostComponent(id)">Save post modifications</button>
-                <button disabled >Leave post as a draft</button>
+                <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
+                <button disabled ref="saveDraftButton">Leave post as a draft</button>
             </div>
         </div>
     `,
