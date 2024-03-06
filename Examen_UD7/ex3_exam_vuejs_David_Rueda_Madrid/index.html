@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam UD7 - David Rueda Madrid</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>  
+  <script src="https://unpkg.com/vue-router@4.0.15/dist/vue-router.global.js"></script>
+  <!-- <link rel="stylesheet" href="style.css"> (CSS not in use) -->
+</head>
+<body>
+
+  <div id="app">
+    <!-- Router view to view the components -->
+    <router-view v-on:clicked-login-user-button="checkcredentials" v-bind:errors="errors" v-bind:userData="userData"></router-view>
+  </div>
+
+  <script type="module">
+    const { createApp } = Vue;
+    //Import components
+    import Login from "./Login.js";
+    import User from "./User.js";
+    //Import router
+    import router from "./router.js";
+     
+    createApp({
+      data: function(){
+        return {
+          //Variables that store the data that we need
+          users: [],
+          userChecked: [],
+          //Errors
+          errors: {
+            usernameError: "",
+            passwordError: ""
+          },
+          //userdata
+          userData: {
+            usernameLR: "",
+            firstNameLR: "",
+            lastNameLR: "",
+            emailLR: "",
+          }
+        }
+      },
+      components: {
+        Login,
+        User
+      },
+      methods: {
+        checkcredentials (user, pass){
+          //You need to implement this method in order to check user credentials entered in the Login component.
+          //You can filter users with this method: login is the username of the localstorage (users) and user.user the one you are passing to check 
+          // this.users.filter(u => u.login === user.user);
+          this.userChecked = this.users.filter(u => u.login === user);
+          if(this.userChecked.length === 0){
+            this.errors.usernameError = "The username was not found!";
+          } else {
+            if(pass === this.userChecked[0].password){
+              console.log("The password matches");
+              //This feels awful to watch, but i didn't get the data passed to the other view
+              this.userData.usernameLR = this.userChecked[0].username;
+              this.userData.firstNameLR = this.userChecked[0].firstName;
+              this.userData.lastNameLR = this.userChecked[0].lastName;
+              this.userData.emailLR = this.userChecked[0].email;
+              this.$router.push("/user");
+            } else {
+              this.errors.passwordError = "The password is not correct";
+            };
+          };
+        }
+      },
+      mounted () {
+        //Check if the index of add-users.js is open (that makes to add a lot of users), we don't want 900 users
+        //This will add the users stored at the localStorage to the users array
+        this.users = JSON.parse(localStorage.getItem("users"));
+        console.log(this.users);
+        this.$router.push("/login");
+      }
+     }).use(router).mount("#app"); 
+
+  </script>
+  
+</body>
+</html>
