@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Ubuntu:wght@300&display=swap');
+
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-image: url(./../img/S-28-02_CE60_ROChAF.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+/* For the buttons in the header and footer*/
+.btn, .navbar-toggler{
+    background-color: #F7A500 !important;
+}
+
+.column{
+    float: left;
+    width: 600px;
+    height: 100%;
+}
+
+.row {
+    margin: 0;
+}
+
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Viewing posts, and delete & publish area*/
+#createdPosts, #newPosts, .postsList {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.70);
+    border-radius: 10px;
+    width: 650px;
+}
+
+.summaryButtons{
+    width: 100%;
+}
+
+.summaryButtons button, .postsList button{
+    border: transparent;
+    border-radius: 5px;
+    padding: 5px;
+    width: 150px;
+    margin: 5px;
+    background-color: #F7A500;
+}
+
+.postInfo {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 440px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.postInfo p {
+    margin-bottom: 0px;
+    margin: 2px;
+}
+
+/* Posts creation and edition area*/
+.postForm{
+    padding: 20px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: rgba(235, 235, 238, 0.30);
+    border-radius: 10px;
+    width: 520px;
+}
+
+.formTitle {
+    text-shadow: 4px 4px 4px #EBEBEB;
+    text-align: center;
+}
+
+.labelInput{
+    width: 100%;
+    background-color: rgba(180, 0, 29, 0.90);
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 4px #FFF;
+}
+
+.labelInput input, .labelInput select{
+    border: transparent;
+    border-radius: 5px;
+    width: 80%;
+    padding: 5px;
+}
+
+.labelInput textarea{
+    border: transparent;
+    border-radius: 5px;
+    width: 90%;
+    padding: 5px;
+    resize: none;
+}
+
+.labelInput button{
+    border: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
+    margin: 5px;
+    background-color: #F7A500;
+}
+
+.previewImage img{
+    width: 300px;
+}
+
+.backgroundImageInfo p {
+    margin: 0;
+}
+
+button:disabled{
+    background-color: #EBEBEB;
+}
+
+#saveEditPostButton{
+    display: none;
+}
