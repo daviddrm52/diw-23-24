@@ -1,6 +1,7 @@
 export default {
     name: "post-form",
     props: ['post'],
+    emits: ['clicked-publish-post'],
     data() {
         return {
             //For the mandatory inputs
@@ -19,12 +20,10 @@ export default {
             url: null,
             //Where the results of a search will be stored (to edit the post and other things)
             result: [],
-            //
-            posts: []
         };
     },
     methods: {
-        publishPost: function (post){
+        publishPost: function (){ //Works with the modified array
             //This is to save the post and publish it, and will appear in the "Your posts" div
             console.log("Publishing post...");
             //Validation of the form
@@ -52,37 +51,40 @@ export default {
             } else {
                 console.log("No errors in the form");
             };
-            /* Will be created in a short period of time */
+            //Dates of the posts
             var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
             var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
-            //Array with all the information of the post
-            var localPost = {
-                id: this.id,
-                title: this.title,
-                briefSummary: this.briefSummary,
-                postContent: this.postContent,
-                author: this.author,
-                image: this.image,
-                postStatus: 'published',
-                creationDate: creationDate,
-                publicationDate: publicationDate
+            //Call the function to add the post to the localStorage, and the posts array
+            this.addPost(this.id, this.title, this.briefSummary, this.postContent, this.author, this.image, "published", creationDate, publicationDate);
+            //To clear the form
+            this.clearForm();
+            this.$router.push('/');
+
+        },
+        addPost: function (id, title, briefSummary, postContent, author, image, postStatus, creationDate, publicationDate) {
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            const newPost = {
+                id,
+                title,
+                briefSummary,
+                postContent,
+                author,
+                image,
+                postStatus,
+                creationDate,
+                publicationDate
             };
-            
-            //Save the data to the localStorage
-            localStorage.setItem(this.id, JSON.stringify(localPost));
-            this.posts.push(localPost);
+            posts.push(newPost);
+            localStorage.setItem('posts', JSON.stringify(posts));
             this.id = this.id + 1;
+        },
+        clearForm: function(){
             this.title = "";
             this.briefSummary = "";
             this.postContent = "";
             this.author = "";
             this.url = null;
             this.$refs.postImage.value = "";
-            //Save the data to the array
-            this.$emit("clicked-publish-post", post);
-            console.log(this.id);
-            this.$router.push('/postList');
-
         },
         updateEditPostForm: function(postResult){
             this.editing = true;
@@ -144,28 +146,12 @@ export default {
         },
     },
     mounted() {
-        //Retrieve the data from the localStorage
-        var keys = Object.keys(localStorage);
-        var i = keys.length;
-        var counter = [];
-        //Add the stored posts in the localStorage in to the posts array
-        while(i--){
-          counter.push(JSON.parse(localStorage.getItem(keys[i])));
-        };
-        //Sort the posts stored in the array by its "id"
-        var c = "id";
-        counter.sort((a, b) => {
-          if(a[c] === b[c]){
-            return 0;
-          } else {
-            return (a[c] < b[c]) ? -1 : 1;
-          };
-        });
+        this.posts = JSON.parse(localStorage.getItem('posts')) || {};
+        console.log(this.posts);
         //If there are posts stored, this will increment the id value to match the stored posts
-        for(let k = 0; k < counter.length; k++){
-          this.id = counter[k].id + 1;
+        for(let k = 0; k < this.posts.length; k++){
+          this.id = this.posts[k].id + 1;
         };
-        console.log("ID pushed to avoid errors...");
         console.log(this.id);
     },
     template: `
@@ -206,7 +192,7 @@ export default {
                     <p><small>{{imageError}}</small></p>
                 </div>
                 <div class="labelInput">
-                    <button ref="publishPostButton" v-on:click="publishPost(post)">Publish post now</button>
+                    <button v-on:click="publishPost(post)">Publish post now</button>
                     <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
                     <button disabled ref="saveDraftButton">Leave post as a draft</button>
                 </div>

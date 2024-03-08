@@ -13,6 +13,7 @@ const App = Vue.createApp({
       //posts array (this is for displaying the data in the page)
       posts: [],
       post: [],
+      id: null,
     }
   },
   components: {
@@ -24,35 +25,17 @@ const App = Vue.createApp({
     postForm
   },
   methods: {
-    updateEditPostForm: function(postResult){
-      console.log(postResult);
-      this.$refs.PostForm.updateEditPostForm(postResult);
-    },
+    getDataFromLocalStorage: function() {
+      this.posts = JSON.parse(localStorage.getItem('posts')) || {};
+      console.log(this.posts);
+      //If there are posts stored, this will increment the id value to match the stored posts
+      for(let k = 0; k < this.posts.length; k++){
+        this.id = this.posts[k].id + 1;
+      };
+      this.$router.push("/");
+    } 
   },
   created() {
-    console.log("mounted");
-    //Retrieve the data from the localStorage
-    var keys = Object.keys(localStorage);
-    var i = keys.length;
-    //Add the stored posts in the localStorage in to the posts array
-    while(i--){
-      this.posts.push(JSON.parse(localStorage.getItem(keys[i])));
-    };
-    //Sort the posts stored in the array by its "id"
-    var c = "id";
-    this.posts.sort((a, b) => {
-      if(a[c] === b[c]){
-        return 0;
-      } else {
-        return (a[c] < b[c]) ? -1 : 1;
-      };
-    });
-    //If there are posts stored, this will increment the id value to match the stored posts
-    for(let k = 0; k < this.posts.length; k++){
-      this.id = this.posts[k].id + 1;
-    };
-    console.log("All data is available in display");
-    console.log(this.posts);
-    this.$router.push("/postList");
+    this.getDataFromLocalStorage();
   },
 }).use(router).mount('#app');

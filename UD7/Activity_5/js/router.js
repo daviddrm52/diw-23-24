@@ -4,8 +4,9 @@ import PostForm from "./components/PostForm.js";
 let router = VueRouter.createRouter({
     history: VueRouter.createWebHistory(),
     routes: [
-        {path: '/postList', name: "PostList", component: PostList},
-        {path: '/postForm', name: "PostForm", component: PostForm}
+        {path: '/', name: "postlist", component: PostList},
+        {path: '/newpost', name: "newpost", component: PostForm},
+        {path: '/editpost', name: "editpost", component: PostForm}
     ]
 });
 
