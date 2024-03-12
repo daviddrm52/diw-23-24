@@ -30,7 +30,7 @@ body {
 }
 
 /* Viewing posts, and delete & publish area*/
-#createdPosts, #newPosts, .postsList {
+.createdPosts, .newPosts, .postsList {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 0;
@@ -130,12 +130,4 @@ body {
 
 .backgroundImageInfo p {
     margin: 0;
-}
-
-button:disabled{
-    background-color: #EBEBEB;
-}
-
-#saveEditPostButton{
-    display: none;
 }

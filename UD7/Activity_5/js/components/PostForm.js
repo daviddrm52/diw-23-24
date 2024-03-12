@@ -1,6 +1,6 @@
 export default {
     name: "post-form",
-    props: ['post'],
+    props: ['post', 'editing', 'id'],
     emits: ['clicked-publish-post'],
     data() {
         return {
@@ -9,14 +9,12 @@ export default {
             authorError: '',
             imageError: '',
             //Information inside the posts array
-            id: 1,
             title: null,
             briefSummary: null,
             postContent: null,
             author: null,
             image: null,
             postStatus: null,
-            editing: false,
             url: null,
             //Where the results of a search will be stored (to edit the post and other things)
             result: [],
@@ -86,22 +84,8 @@ export default {
             this.url = null;
             this.$refs.postImage.value = "";
         },
-        updateEditPostForm: function(postResult){
-            this.editing = true;
-            this.result = postResult;
-            console.log(this.result);
-            this.title = this.result.title;
-            this.briefSummary = this.result.briefSummary;
-            this.postContent = this.result.postContent;
-            this.author = this.result.author;
-            this.url = this.result.image;
-            this.$refs.saveEditPostButton.style.display = "block";
-            this.$refs.publishPostButton.style.display = "none";
-            this.$refs.saveDraftButton.style.display = "none";
-        },
         saveEditPost: function(){ /* Works saving the changes in the array & localStorage */
             //saveEditPost will save the modifications of the post that we want to edit
-            this.editing = false;
             //In case the image has not been edited
             if(this.$refs.postImage.value === ''){
                 console.log(this.result.title);
@@ -109,8 +93,13 @@ export default {
             } else {
                 this.image = "/diw-23-24/UD7/Activity_4/stored_img/"+this.$refs.postImage.files[0].name;
             }
+            let posts = JSON.parse(localStorage.getItem('posts')) || [];
+            // posts.splice(
+            //     posts.indexOf(this.result.id)
+            // );
+            console.log(this.result.edit);
             //The post modified
-            var postEdit = {
+            const postEdit = {
                 id: this.result.id,
                 title: this.title,
                 briefSummary: this.briefSummary,
@@ -121,19 +110,11 @@ export default {
                 creationDate: this.result.creationDate,
                 publicationDate: this.result.publicationDate
             }
-            console.log(this.result.id);
-            localStorage.setItem(this.result.id, JSON.stringify(postEdit));
+            posts.push(postEdit);
+            localStorage.setItem('posts', JSON.stringify(posts));
             //Reset the form
-            this.title = "";
-            this.briefSummary = "";
-            this.postContent = "";
-            this.author = "";
-            this.url = null;
-            this.$refs.postImage.value = "";
-            this.$refs.saveEditPostButton.style.display = "none";
-            this.$refs.publishPostButton.style.display = "block";
-            this.$refs.saveDraftButton.style.display = "block";
-            this.$router.push('/postList');
+            this.clearForm();
+            this.$router.push('/');
         },
         onFileChange: function(e){
             /*  
@@ -148,14 +129,25 @@ export default {
     mounted() {
         this.posts = JSON.parse(localStorage.getItem('posts')) || {};
         console.log(this.posts);
-        //If there are posts stored, this will increment the id value to match the stored posts
-        for(let k = 0; k < this.posts.length; k++){
-          this.id = this.posts[k].id + 1;
-        };
+        console.log(this.editing);
         console.log(this.id);
+        if(this.editing){
+            this.result = this.posts.find(({id}) => id === this.id);
+            this.title = this.result.title;
+            this.briefSummary = this.result.briefSummary;
+            this.postContent = this.result.postContent;
+            this.author = this.result.author;
+            this.url = this.result.image;
+        } else {
+            //If there are posts stored, this will increment the id value to match the stored posts
+            for(let k = 0; k < this.posts.length; k++){
+              this.id = this.posts[k].id + 1;
+            };
+            console.log(this.id);
+        }
     },
     template: `
-        <div id="newPosts">
+        <div class="newPosts">
             <div class="postForm">
                 <h1 class="formTitle">{{editing ? "Edit a post" : "Create a new post"}}</h1>
                 <div class="labelInput">
@@ -192,9 +184,12 @@ export default {
                     <p><small>{{imageError}}</small></p>
                 </div>
                 <div class="labelInput">
-                    <button v-on:click="publishPost(post)">Publish post now</button>
-                    <button id="saveEditPostButton" ref="saveEditPostButton" v-on:click="saveEditPost(id)">Save post modifications</button>
-                    <button disabled ref="saveDraftButton">Leave post as a draft</button>
+                    <div v-if="editing == true">
+                        <button v-on:click="saveEditPost(id)">Save post modifications</button>
+                    </div>
+                    <div v-else>
+                        <button v-on:click="publishPost(post)">Publish post now</button>
+                    </div>
                 </div>
             </div>
         </div>

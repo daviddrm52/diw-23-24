@@ -14,6 +14,7 @@ const App = Vue.createApp({
       posts: [],
       post: [],
       id: null,
+      editing: false,
     }
   },
   components: {
@@ -33,6 +34,12 @@ const App = Vue.createApp({
         this.id = this.posts[k].id + 1;
       };
       this.$router.push("/");
+    },
+    editpost: function(postId){
+      console.log(postId);
+      this.editing = true;
+      this.id = postId;
+      this.$router.push("/editpost");
     } 
   },
   created() {
