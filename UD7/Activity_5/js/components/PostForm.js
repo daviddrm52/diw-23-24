@@ -9,6 +9,7 @@ export default {
             authorError: '',
             imageError: '',
             //Information inside the posts array
+            postid: 1,
             title: null,
             briefSummary: null,
             postContent: null,
@@ -53,7 +54,7 @@ export default {
             var creationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
             var publicationDate = new Date().toLocaleDateString("es-ES", {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',});      
             //Call the function to add the post to the localStorage, and the posts array
-            this.addPost(this.id, this.title, this.briefSummary, this.postContent, this.author, this.image, "published", creationDate, publicationDate);
+            this.addPost(this.postid, this.title, this.briefSummary, this.postContent, this.author, this.image, "published", creationDate, publicationDate);
             //To clear the form
             this.clearForm();
             this.$router.push('/');
@@ -74,7 +75,7 @@ export default {
             };
             posts.push(newPost);
             localStorage.setItem('posts', JSON.stringify(posts));
-            this.id = this.id + 1;
+            this.postid = this.postid + 1;
         },
         clearForm: function(){
             this.title = "";
@@ -84,7 +85,7 @@ export default {
             this.url = null;
             this.$refs.postImage.value = "";
         },
-        saveEditPost: function(){ /* Works saving the changes in the array & localStorage */
+        saveEditPost: function(postId){ /* Works saving the changes in the array & localStorage */
             //saveEditPost will save the modifications of the post that we want to edit
             //In case the image has not been edited
             if(this.$refs.postImage.value === ''){
@@ -94,9 +95,10 @@ export default {
                 this.image = "/diw-23-24/UD7/Activity_4/stored_img/"+this.$refs.postImage.files[0].name;
             }
             let posts = JSON.parse(localStorage.getItem('posts')) || [];
-            // posts.splice(
-            //     posts.indexOf(this.result.id)
-            // );
+            console.log(postId);
+            this.posts.splice(
+                posts.indexOf(postId)
+            );
             console.log(this.result.edit);
             //The post modified
             const postEdit = {
@@ -141,9 +143,9 @@ export default {
         } else {
             //If there are posts stored, this will increment the id value to match the stored posts
             for(let k = 0; k < this.posts.length; k++){
-              this.id = this.posts[k].id + 1;
+              this.postid = this.posts[k].id + 1;
             };
-            console.log(this.id);
+            console.log(this.postid);
         }
     },
     template: `
